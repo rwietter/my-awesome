@@ -21,13 +21,13 @@ const Languages = () => {
       <S.Section>
         <S.PageIndice>Índice</S.PageIndice>
         <ul>
-          {db_index.map((item: DbProps) => {
-            return (
+          {db_index.map((item: DbProps, idx) => (
+            <span key={idx}>
               <S.PageIndiceRef>
                 <a href={`#${item.name}`}>{item.name}</a>
               </S.PageIndiceRef>
-            );
-          })}
+            </span>
+          ))}
         </ul>
       </S.Section>
       <S.Section>
@@ -37,8 +37,8 @@ const Languages = () => {
               <h3 id={value}>{value}</h3>
               <ul>
                 {items[value].map(({ name, url }: LinkProps) => (
-                  <li>
-                    <S.PageLink key={url} href={url} target="_blank">
+                  <li key={url}>
+                    <S.PageLink href={url} target="_blank">
                       {name}
                     </S.PageLink>
                   </li>
