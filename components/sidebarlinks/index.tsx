@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Links } from "./@types";
 import * as S from './styled';
 import { links } from "./content";
@@ -13,4 +12,4 @@ const SidebarLinks = () => (
   </S.Container>
 );
 
-export { SidebarLinks };
+export default SidebarLinks;

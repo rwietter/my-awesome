@@ -1,4 +1,4 @@
-import * as S from './styled'
+import * as S from '../../components/languages/styled'
 const Languages = () => {
   return (
     <S.Container>

@@ -9,4 +9,4 @@ const HeadContent = () => {
   );
 }
 
-export { HeadContent };
+export default HeadContent;

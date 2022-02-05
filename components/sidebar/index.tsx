@@ -1,11 +1,11 @@
-import { SidebarLinks } from "../sidebarlinks";
+import SidebarLinks from "../sidebarlinks";
 import * as S from "./styled";
 const Sidebar = () => {
   return (
     <S.Container>
-      <SidebarLinks/>
+      <SidebarLinks />
     </S.Container>
   );
 };
 
-export { Sidebar };
+export default Sidebar;

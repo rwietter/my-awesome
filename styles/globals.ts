@@ -20,4 +20,4 @@ const GlobalStyles = globalCss({
   },
 });
 
-export { GlobalStyles };
+export default GlobalStyles;
