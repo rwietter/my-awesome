@@ -1,6 +1,6 @@
-import * as S from './styled'
-import { blockchain, bitcoin, defi, tools, db_index } from './db/config'
-import { DbProps, LinkProps } from './db/@types';
+import * as S from "./styled";
+import { db_index, items, keys, Keys, KeysExtract } from "./db/config";
+import { DbProps, LinkProps } from "./db/@types";
 
 const Languages = () => {
   return (
@@ -19,72 +19,37 @@ const Languages = () => {
       </S.Section>
 
       <S.Section>
-        <h3>Índice</h3>
+        <S.PageIndice>Índice</S.PageIndice>
         <ul>
           {db_index.map((item: DbProps) => {
             return (
-              <li>
+              <S.PageIndiceRef>
                 <a href={`#${item.name}`}>{item.name}</a>
-              </li>
+              </S.PageIndiceRef>
             );
           })}
         </ul>
       </S.Section>
       <S.Section>
-        <section>
-          <h3 id="Blockchain">Blockchain</h3>
-          <ul>
-            {blockchain.map(({ name, url }: LinkProps) => (
-              <li>
-                <a key={url} href={url} target="_blank">
-                  {name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
-          <h3 id="Bitcoin">Bitcoin</h3>
-          <ul>
-            {bitcoin.map(({ name, url }: LinkProps) => (
-              <li>
-                <a key={url} href={url} target="_blank">
-                  {name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
-          <h3 id="Defi">DeFi</h3>
-          <ul>
-            {defi.map(({ name, url }: LinkProps) => (
-              <li>
-                <a key={url} href={url} target="_blank">
-                  {name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
-          <h3 id="Ferramentas">Ferramentas</h3>
-          <ul>
-            {defi.map(({ name, url }: LinkProps) => (
-              <li>
-                <a key={url} href={url} target="_blank">
-                  {name}
-                </a>
-              z</li>
-            ))}
-          </ul>
-        </section>
+        {keys.map((value: KeysExtract, idx: number, arr: string[]) => {
+          return (
+            <S.PageSectionItem key={value}>
+              <h3 id={value}>{value}</h3>
+              <ul>
+                {items[value].map(({ name, url }: LinkProps) => (
+                  <li>
+                    <S.PageLink key={url} href={url} target="_blank">
+                      {name}
+                    </S.PageLink>
+                  </li>
+                ))}
+              </ul>
+            </S.PageSectionItem>
+          );
+        })}
       </S.Section>
     </S.Container>
   );
-}
+};
 
 export default Languages;

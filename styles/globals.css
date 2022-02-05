@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;500&display=swap');
+
 html,
 body {
   padding: 0;
   background: '#0000';
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: 200;
 }
 
 a {
@@ -16,13 +19,6 @@ a {
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Untitled Sans";
-  src: url("../public/fonts/UntitledSansWeb-Regular.woff2");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
 
 @font-face {
   font-family: 'Poppins';
@@ -31,6 +27,7 @@ a {
         url('../public/fonts/Poppins-Medium.ttf'),
         url('../public/fonts/Poppins-Black.ttf');
 }
+
 
 ::-webkit-scrollbar {
   width: 3px;

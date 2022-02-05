@@ -56,3 +56,74 @@ export const news = [
     url: "https://www.coindesk.com/",
   },
 ];
+
+// ========================================================
+
+export const items = {
+  blockchain: [
+    {
+      name: "Tradingview",
+      url: "https://br.tradingview.com/chart/",
+    },
+  ],
+
+  bitcoin: [
+    {
+      name: "Bitcoin Market Cycle Charts",
+      url: "https://www.lookintobitcoin.com/charts/",
+    },
+    {
+      name: "Bitcoin Monthly Return",
+      url: "https://bitcoinmonthlyreturn.com/",
+    },
+    {
+      name: "Social Intelligence for Crypto",
+      url: "https://lunarcrush.com/markets?col=1&metric=social_dominance",
+    },
+  ],
+
+  defi: [
+    {
+      name: "DeFil Lama",
+      url: "https://defillama.com/",
+    },
+  ],
+
+  tools: [
+    {
+      name: "Tradingview",
+      url: "https://br.tradingview.com/chart/",
+    },
+  ],
+
+  news: [
+    {
+      name: "Coindesk",
+      url: "https://www.coindesk.com/",
+    },
+  ],
+};
+
+type TItems = {
+  [T in keyof typeof items]: Array<{
+    name: string;
+    url?: string;
+  }>;
+};
+
+export type Keys = {
+  [key: string]: any
+}
+
+export type KeysExtract = "blockchain" | "bitcoin" | "defi" | "tools" | "news";
+
+const color: { [key: string]: any } = {
+  blockchain: null,
+  bitcoin: null,
+  defi: null,
+  tools: null,
+  news: null,
+};
+
+export const keys: Keys = Object.keys(items);
+export const values = Object.values(items);
