@@ -1,15 +1,18 @@
 export const db_index = [
   {
-    name: "Blockchain",
+    name: "blockchain",
   },
   {
-    name: "Bitcoin",
+    name: "bitcoin",
   },
   {
-    name: "DeFi",
+    name: "defi",
   },
   {
-    name: "Ferramentas",
+    name: "tools",
+  },
+  {
+    name: "news",
   },
 ];
 
@@ -116,14 +119,6 @@ export type Keys = {
 }
 
 export type KeysExtract = "blockchain" | "bitcoin" | "defi" | "tools" | "news";
-
-const color: { [key: string]: any } = {
-  blockchain: null,
-  bitcoin: null,
-  defi: null,
-  tools: null,
-  news: null,
-};
 
 export const keys: Keys = Object.keys(items);
 export const values = Object.values(items);

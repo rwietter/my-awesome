@@ -2,7 +2,7 @@ import * as S from "../../components/crypto/styled";
 import { db_index, items, keys, Keys, KeysExtract } from "../../db/config";
 import { DbProps, LinkProps } from "../../db/@types";
 
-const Languages = () => {
+const Crypto = () => {
   return (
     <S.Container>
       <S.Section>
@@ -52,4 +52,4 @@ const Languages = () => {
   );
 };
 
-export default Languages;
+export default Crypto;
