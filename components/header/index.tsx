@@ -1,10 +1,24 @@
-import * as S from './styled'
+import Link from 'next/link';
+
+import { TextCSS } from '../styles/Text';
+import { Switch } from '../switch';
+import { ContainerCSS, NavCSS, TitleCSS } from './styled';
+
 const Header = () => {
   return (
-    <S.Container>
-      <h1>Hello</h1>
-    </S.Container>
+    <ContainerCSS>
+      <TitleCSS>
+        <TextCSS>MyAwesome</TextCSS>
+      </TitleCSS>
+      <NavCSS>
+        <Link href="/home">Início</Link>
+        <span> • </span>
+        <Link href="/create-awesome">Criar Awesome</Link>
+        <span> | </span>
+        <Switch />
+      </NavCSS>
+    </ContainerCSS>
   );
-}
+};
 
 export default Header;

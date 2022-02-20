@@ -1,20 +1,46 @@
-import { styled } from "@stitches/react";
-import Head from "next/head";
+import { styled } from '../../styles/theme';
 
-const Container = styled("div", {
-  background: `radial-gradient(circle at top right,
-    #07303b, rgba(255, 255, 255, 0) 40%),
-    radial-gradient(circle at 80% 20%, #07303b,
-    rgba(255, 255, 255, 0) 30%)`,
+const ContainerCSS = styled("header", {
+  background: "$gray200",
   backgroundSize: `cover`,
   backgroundPosition: `center`,
-  boxShadow: `0px 10px 28px -7px rgba(0,0,0,0.1)`,
-  position: "relative",
+  position: "fixed",
   top: 0,
   padding: `0.5rem`,
   zIndex: 1,
   width: `100%`,
   height: `3rem`,
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)',
 });
 
-export { Container };
+const NavCSS = styled("nav", {
+  width: 'fit-content',
+  color: '$gray50',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  "a": {
+    fontFamily: '$secondary',
+    fontWeight: 400,
+    padding: '0 0.5rem',
+    fontSize: '1rem',
+    textGradient: '$highlight30'
+  }
+});
+
+const TitleCSS = styled("div", {
+  width: 'fit-content',
+  color: '$gray50',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  fontWeight: 400,
+  fontFamily: '$secondary',
+  padding: '0 0.5rem 0 2rem',
+});
+
+
+export { ContainerCSS, NavCSS, TitleCSS };
