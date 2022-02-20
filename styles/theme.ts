@@ -21,6 +21,9 @@ const { theme: dark_theme, styled } = createStitches({
       separator: "#1B1B1E",
       tooltip: "#ff006e",
       buttonThumb: '#F4F4F6',
+      white: "#F4F4F6",
+      dark: '#0c0c0e',
+      green: "#74ebd5",
     },
     space: {},
     fonts: {
@@ -29,7 +32,18 @@ const { theme: dark_theme, styled } = createStitches({
       secondary: `'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;`,
     },
-
+    fontSizes: {
+      1: "0.8rem",
+      2: "1rem",
+      3: "1.2rem",
+      4: "1.4rem",
+      5: "1.6rem",
+      6: "1.8rem",
+      7: "2rem",
+      8: "2.2rem",
+      9: "2.5rem",
+      10: "3rem",
+    }
   },
   utils: {
     linearGradient: (value: string) => ({
@@ -55,8 +69,8 @@ const { theme: light_theme } = createStitches({
       highlight30: "linear-gradient(43deg, #8257e5, #2575fc);",
       gray50: "#121214",
       gray100: "#F4F4F6",
-      gray200: "#F4F4F6",
-      gray300: "#F4F4F6",
+      gray200: "#E1E1E4",
+      gray300: "#D7D7DB",
       gray400: "#C9C9CF",
       primary: "#ff006e",
       secondary: "#8257e5",
@@ -64,8 +78,23 @@ const { theme: light_theme } = createStitches({
       separator: "#C9C9CF",
       tooltip: "#8257e5",
       buttonThumb: '#121214',
+      white: "#F4F4F6",
+      dark: '#0c0c0e',
+      green: "#74ebd5",
     },
     space: {},
+    fontSizes: {
+      1: "0.8rem",
+      2: "1rem",
+      3: "1.2rem",
+      4: "1.4rem",
+      5: "1.6rem",
+      6: "1.8rem",
+      7: "2rem",
+      8: "2.2rem",
+      9: "2.5rem",
+      10: "3rem",
+    }
   },
 });
 

@@ -14,20 +14,20 @@ interface ContentProps {
 const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent }) => {
   return (
     <>
-      {pageIndex.map((value: string) => {
+      {pageIndex?.map((value: string) => {
         return (
           <PageSectionItem key={value}>
             <Heading id={value.toLowerCase()} type="h3" weight={400}>{value}</Heading>
             <ul>
               {pageContent ? (
-                pageContent[value]?.map(({ name, url }: LinkProps) => {
+                pageContent[value]?.map(({ name, url }: LinkProps, idx: number) => {
                   return (
-                    <li key={url}>
+                    <li key={idx}>
                       <Tooltip message={url}>
-                      <PageLink href={url} target="_blank">
-                        {name}
+                        <PageLink href={url} target="_blank">
+                          {name}
                         </PageLink>
-                        </Tooltip>
+                      </Tooltip>
                     </li>
                   );
                 })
@@ -42,4 +42,4 @@ const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent }) => {
   );
 };
 
-export { ContentItem }
+export { ContentItem };

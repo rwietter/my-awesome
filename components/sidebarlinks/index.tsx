@@ -1,19 +1,24 @@
-import { Links } from "./@types";
-import * as S from "./styled";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useTitleStore } from "../../pages/api/context/page";
-import { useRouter } from "next/router";
-import { titleActions } from "../../pages/api/context/page/actions";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+import useAuthStore from '../../pages/api/context/auth';
+import { titleActions } from '../../pages/api/context/page/actions';
+import { Links } from './@types';
+import * as S from './styled';
 
 const SidebarLinks = () => {
   const [pageLinks, setPageLinks] = useState([]);
   const { addContentItem } = titleActions();
-  
+  const { user_id } = useAuthStore();
+
 
   useEffect(() => {
     const fetchLinks = async () => {
-      const response = await axios.get("/api/sidebarpages/");
+      const response = await axios.get("/api/sidebarpages/", {
+        headers: {
+          'X-user-id': user_id
+        }
+      });
 
       if (response.status != 200) {
         throw new Error(`Error: ${response.status}`);
@@ -22,7 +27,7 @@ const SidebarLinks = () => {
       setPageLinks(response.data);
     };
     fetchLinks();
-  }, []);
+  }, [user_id]);
 
   const handleClick = (label: string) => {
     return addContentItem({ href: label });
@@ -31,9 +36,9 @@ const SidebarLinks = () => {
   return (
     <S.Container>
       {pageLinks ? (
-        pageLinks.map((link: Links) => {
+        pageLinks.map((link: Links, idx: number) => {
           return (
-            <S.Page href={`/home`} key={link.title}>
+            <S.Page href={`/home`} key={idx}>
               <S.TextLink
                 onClick={() => handleClick(link.title)}
               >

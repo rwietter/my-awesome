@@ -1,23 +1,27 @@
-import { styled } from '@stitches/react';
 import Link from 'next/link';
+
+import { styled } from '../../styles/theme';
 
 export const Container = styled("nav", {
   alignItems: "center",
   display: "flex",
-  justifyContent: "space-evenly",
-  flexFlow: "column",
+  justifyContent: "space-around",
+  flexFlow: "row wrap",
   padding: "1.5rem 0.3rem 0 0.3rem",
+  '@media (min-width: 720px)': {
+    flexFlow: "column",
+  }
 });
 
 export const Page = styled(Link, {});
 
 export const TextLink = styled("span", {
-  fontSize: "clamp(1em, 2vw, 1.3em)",
+  fontSize: "$5",
   margin: "0.5rem 0",
   cursor: "pointer",
   color: "$primary",
   fontWeight: 600,
-  fontFamily: "$primary",
+  fontFamily: "$secondary",
   transition: "color .3s ease",
   "&:hover": {
     color: "$secondary",
@@ -25,4 +29,7 @@ export const TextLink = styled("span", {
   "&.active": {
     color: "$secondary",
   },
+  '@media (min-width: 720px)': {
+    fontSize: "$6",
+  }
 });

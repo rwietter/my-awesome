@@ -9,11 +9,14 @@ import Header from '../components/header';
 import Sidebar from '../components/sidebar';
 import { queryClient } from '../services/queryClient';
 import { dark_theme, light_theme } from '../styles/theme';
+import useAuthStore from './api/context/auth';
 import { useThemeStore } from './api/context/theme';
 
 import type { AppProps } from 'next/app';
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
+  const { isLoggedIn } = useAuthStore();
+
   const paths = ["/user/signin", "/user/signup", "/create-awesome"];
 
   const { theme } = useThemeStore();
@@ -28,9 +31,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient} >
       <div id="class-theme">
-        {!paths.includes(pathname) && <Sidebar />}
+        {!paths.includes(pathname) && isLoggedIn && <Sidebar />}
         <HeadContent />
-        <Header />
+        { isLoggedIn && <Header /> }
         <Component {...pageProps} />
       </div>
     </QueryClientProvider>

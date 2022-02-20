@@ -1,4 +1,4 @@
-import { styled } from '@stitches/react';
+import { styled } from '../../styles/theme';
 
 const Wrapper = styled("div", {
   display: "flex",
@@ -6,9 +6,7 @@ const Wrapper = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   minHeight: "100vh",
-  background: "#000000",
-  backgroundImage:
-    "radial-gradient(circle at bottom left, #07303b, rgba(255, 255, 255, 0) 40%), radial-gradient(circle at 80% 20%, #07303b, rgba(255, 255, 255, 0) 30%)",
+  background: '$background',
 });
 
 const Form = styled("form", {
@@ -17,22 +15,33 @@ const Form = styled("form", {
   alignItems: "center",
   justifyContent: "center",
   width: "fit-content",
+  background: '$gray100',
+  padding: "1rem 1rem",
+
+  '@media (min-width: 520px)': {
+    padding: "3rem 5rem",
+  },
+  
+  '@media (min-width: 720px)': {
+    padding: "3rem 5rem",
+  }
 });
 
 const Title = styled("h1", {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1.5rem, 3vw, 2rem)",
+  fontFamily: '$secondary',
+  fontSize: "$9",
+  margin: '0 0 2rem 0',
   fontWeight: 900,
-  color: "#fff",
+  color: "$gray50",
 });
 
 const Label = styled("label", {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1rem)",
+  fontFamily: '$secondary',
+  fontSize: "$5",
   alignSelf: "flex-start",
   padding: '0.2rem 0',
   fontWeight: 500,
-  color: "#fff",
+  color: "$gray50",
 
   "&:not(:last-child)": {
     marginTop: "1rem",
@@ -40,40 +49,45 @@ const Label = styled("label", {
 });
 
 const Input = styled("input", {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1rem)",
+  fontFamily: '$secondary',
+  fontSize: "$4",
   fontWeight: 400,
+  background: '$gray200',
+  color: "$gray50",
   border: "none",
   outline: "none",
-  padding: "0.3rem",
+  padding: "1.3rem",
+  width: "100%",
 });
 
 const Submit = styled("button", {
   fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1.2rem)",
+  fontSize: "$4",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   position: "relative",
-  width: "10rem",
-  height: "3rem",
-  marginTop: '2rem',
+  maxWidth: "20rem",
+  width: "100%",
+  height: "4.5rem",
+  marginTop: "3rem",
   borderRadius: "4px",
   outline: "none",
   overflow: "hidden",
   cursor: "pointer",
   fontWeight: "500",
-  background: "rgba(255, 255, 255, 0)",
-  color: "rgb(250, 250, 250)",
-  border: "1px solid rgb(228, 42, 123)",
+  background: "$highlight145",
+  color: "$white",
+  border: "1px solid $gray400",
 
   transition:
-    "background 0.6s, color .6s, border .2s cubic-bezier(.55,.055,.675,.19)",
+    "background 0.3s, box-shadow .3s, color .3s, border .2s cubic-bezier(.55,.055,.675,.19)",
 
   "&:hover": {
-    background: "rgb(250, 250, 250)",
-    color: "rgb(230, 53, 130)",
-    border: "1px solid rgb(250, 250, 250)",
+    background: "$highlight145",
+    color: "$white",
+    boxShadow: '0 5px 7px -3px rgba(0,0,0,0.3)',
+    outline: "1px solid $green",
   },
 });
 

@@ -1,17 +1,17 @@
-import { styled } from '@stitches/react';
+import { styled } from '../../styles/theme';
 
 export const Container = styled("div", {
-  padding: "2rem 2rem 5rem 2rem",
   background: "$background",
   fontFamily: "Poppins",
   minHeight: "100vh",
-
-  "@media (min-width: 460px)": {
-    padding: "5rem",
-  },
-
+  padding: "7rem 1rem 0 1rem",
+  
   "@media (min-width: 720px)": {
-    padding: "5rem 5rem 2rem 20rem",
+    padding: "8rem 1rem 2rem 24rem",
+  },
+  
+  "@media (min-width: 970px)": {
+    padding: "7.5rem 4rem 2rem 25rem",
   },
 });
 
@@ -27,11 +27,11 @@ export const Separator = styled("div", {
 
 export const PageTitle = styled("h1", {
   fontWeight: 900,
-  fontSize: 'clamp(1em, 2vw, 1.5em)'
+  fontSize: '$5'
 });
 
 export const PageDescription = styled("p", {
-  fontSize: "clamp(1em, 2.5vw, 2.6em)",
+  fontSize: "$10",
   color: "$secondary",
   margin: 0,
   fontWeight: 700,
@@ -43,14 +43,14 @@ export const PageDescription = styled("p", {
 export const PageIndice = styled("h3", {
   fontWeight: 800,
   paddingTop: "3rem",
-  fontSize: "clamp(1em, 2vw, 1.3em)",
+  fontSize: "$7",
   fontFamily: "$secondary",
   color: "$gray50",
 });
 
 export const PageIndiceRef = styled("li", {
   fontWeight: 400,
-  fontSize: "clamp(0.8em, 2vw, 1em)",
+  fontSize: "$5",
   fontFamily: "$secondary",
   padding: "0.2rem 0",
   transition: "all 0.3s ease",
@@ -66,4 +66,5 @@ export const PageContent = styled("main", {
   marginTop: "1rem",
   borderRadius: "0.5rem",
   fontFamily: "$primary",
+  minHeight: "100vh",
 });

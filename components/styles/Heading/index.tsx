@@ -10,16 +10,16 @@ interface Props {
   color?: string;
 }
 
-const getStyle = ({ weight = 600, fontsize = '1.3', fontfamily = '$secondary', color = '$gray50' }: Props) => {
+const getStyle = ({ weight = 600, fontsize = '$5', fontfamily = '$secondary', color = '$gray50' }: Props) => {
   return css({
-    color,
+    color: color,
     fontFamily: fontfamily,
     fontWeight: weight,
-    fontSize: `clamp(1em, 2vw, ${fontsize}em)`,
+    fontSize: `${fontsize}`,
   });
 };
 
-const Heading: FC<Props> = ({ children, type = "h1", weight = 300, fontsize = '1.1', fontfamily, color, id }, ...props) => {
+const Heading: FC<Props> = ({ children, type = "h1", weight, fontsize, fontfamily, color, id }, ...props) => {
   const Title = styled(type, getStyle({ weight, fontsize, fontfamily, color }));
   return (
     <Title {...props} id={id}>

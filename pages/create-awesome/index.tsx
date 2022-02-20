@@ -75,9 +75,9 @@ const CreateAwesome: NextPage = () => {
                 <h3 id={value}>{value}</h3>
                 <ul>
                   {contentItem ? (
-                    contentItem[value]?.map(({ name, url }: LinkProps) => {
+                    contentItem[value]?.map(({ name, url }: LinkProps, idx: number) => {
                       return (
-                        <li key={url}>
+                        <li key={idx}>
                           <PageLink href={url} target="_blank" rel="noreferrer">
                             {name}
                           </PageLink>

@@ -70,12 +70,11 @@ export const content2 = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { page } = req.body;
-  const user_id = req.headers['x-user-id']?.toString();
-
+  const user_id = req.headers['x-user-id'] as string;
+  
   if (!user_id) return;
 
   const respTitle = await Prisma.title.findFirst({ where: { AND: { title: page, user_id } } });
-
   const respContent = await Prisma.content.findFirst({ where: { AND: { id: respTitle?.content_id, user_id } } });
 
   const data = {

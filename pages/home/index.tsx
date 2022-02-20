@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -11,17 +12,25 @@ import { api } from '../../services/api';
 import useAuthStore from '../api/context/auth';
 import { useTitleStore } from '../api/context/page';
 
-const Home = () => {
+const HomePage = () => {
   const [title, setTitle] = useState("");
   const [pageIndex, setPageIndex] = useState([]);
   const [pageContent, setPageContent] = useState<IContent | null>(null);
   const { href } = useTitleStore();
-  const { user_id } = useAuthStore();
+  const { user_id, isLoggedIn } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/user/signin");
+    }
+    console.log(isLoggedIn);
+  }, [isLoggedIn, router]);
 
   const { isLoading, refetch } = useQuery("home-query", async () => {
     const response = await api.post("/page/", { page: href }, {
       headers: {
-        'x-user-id': user_id
+        'X-user-id': user_id
       }
     });
 
@@ -30,8 +39,7 @@ const Home = () => {
     }
 
     const { content, title } = response.data;
-
-    const index = content.match(/([A-Z])\w+/g);
+    const index = content?.match(/([A-Z])\w+/g);
 
     setPageIndex(index);
     setTitle(title);
@@ -76,4 +84,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

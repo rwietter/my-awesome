@@ -1,16 +1,16 @@
-import { styled } from '@stitches/react';
+import { styled } from '../../styles/theme';
 
 const Container = styled(`section`, {
   position: `relative`,
   width: `100%`,
   display: "grid",
-  padding: `3rem 0.5rem 0 0.5rem`,
+  padding: `8rem 0.5rem 0 0.5rem`,
   gridTemplateColumns: "1fr",
   gridTemplateRows: "1fr 1fr",
   justifyContent: "center",
   alignItems: "start",
   minHeight: `100vh`,
-  color: "#fff",
+  color: "$gray50",
   background: '$background',
   "@media(min-width: 720px)": {
     gridTemplateColumns: "1fr 1fr",
@@ -29,11 +29,11 @@ const Form = styled(`form`, {
 
 const Label = styled("label", {
   fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1rem)",
+  fontSize: "$4",
   alignSelf: "flex-start",
   padding: "0.2rem 0",
   fontWeight: 500,
-  color: "#fff",
+  color: "$gray50",
 
   "&:not(:last-child)": {
     marginTop: "1rem",
@@ -41,60 +41,75 @@ const Label = styled("label", {
 });
 
 const Input = styled("input", {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1rem)",
+  fontFamily: '$secondary',
+  fontSize: "$4",
   fontWeight: 400,
   border: "none",
   outline: "none",
-  padding: "0.3rem",
+  padding: "1.3rem",
+  background: '$gray100',
+  color: "$gray50",
+  marginBottom: "2rem",
   width: "100%",
 });
 
 const TextArea = styled("textarea", {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1rem)",
+  fontFamily: '$secondary',
+  fontSize: "$4",
   fontWeight: 400,
   border: "none",
   outline: "none",
-  padding: "0.3rem",
+  padding: "1.3rem",
   width: "100%",
+  background: '$gray100',
+  color: "$gray50",
 });
 
 const Submit = styled("button", {
   fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1rem, 2vw, 1.2rem)",
+  fontSize: "$4",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   position: "relative",
-  maxWidth: "14rem",
-  height: "3rem",
-  marginTop: "2rem",
+  maxWidth: "20rem",
+  height: "4.5rem",
+  marginTop: "3rem",
   borderRadius: "4px",
   outline: "none",
   overflow: "hidden",
   cursor: "pointer",
   fontWeight: "500",
-  background: "rgba(255, 255, 255, 0)",
-  color: "rgb(250, 250, 250)",
-  border: "1px solid rgb(228, 42, 123)",
+  background: "$highlight145",
+  color: "$white",
+  border: "1px solid $gray400",
 
   transition:
-    "background 0.6s, color .6s, border .2s cubic-bezier(.55,.055,.675,.19)",
+    "background 0.3s, box-shadow .3s, color .3s, border .2s cubic-bezier(.55,.055,.675,.19)",
 
   "&:hover": {
-    background: "rgb(250, 250, 250)",
-    color: "rgb(230, 53, 130)",
-    border: "1px solid rgb(250, 250, 250)",
+    background: "$highlight145",
+    color: "$white",
+    boxShadow: '0 5px 7px -3px rgba(0,0,0,0.3)',
+    outline: "1px solid $green",
   },
 });
 
 const Title = styled("h1", {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: "clamp(1.5rem, 3vw, 2rem)",
+  fontFamily: '$primary',
+  fontSize: "$9",
   fontWeight: 700,
   margin: 0,
-  color: "#fff",
+  textGradient: "$highlight30",
+  paddingBottom: "2rem",
+  
+  '@media (min-width: 720px)': {
+    fontSize: "$10",
+  },
+  
+  '@media (min-width: 1100px)': {
+    fontSize: "3.5rem",
+  }
 });
 
 const FlexButton = styled("div", {

@@ -10,7 +10,7 @@ const IndexTitle: FC<IndexTitleProps> = ({ pageIndex }) => {
   return (
     <ul>
       {pageIndex ? (
-        pageIndex.map((item: string, idx) => (
+        pageIndex?.map((item: string, idx) => (
           <span key={idx}>
             <PageIndiceRef>
               <a href={`#${item.toLowerCase()}`}>{item}</a>

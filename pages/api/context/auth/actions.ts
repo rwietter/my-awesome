@@ -3,11 +3,11 @@ import { ActionType as Types } from './types';
 
 type IPayload = {
   isLoggedIn: boolean;
-  token: string;
-  user_id: string,
+  token?: string;
+  user_id?: string,
 }
 
-const actions = () => ({
+const authActions = () => ({
   signin: (payload: IPayload) => {
     store.getState().dispatch({ type: Types.LOGGED_IN, payload });
   },
@@ -16,4 +16,4 @@ const actions = () => ({
   },
 });
 
-export { actions };
+export { authActions };
