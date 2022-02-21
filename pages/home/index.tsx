@@ -7,10 +7,16 @@ import { ContentItem } from '../../components/contentItem/contentItem';
 import * as S from '../../components/homepage/styled';
 import { IndexTitle } from '../../components/indexTitle';
 import { Loading } from '../../components/loading';
-import { IContent } from '../../db/config';
 import { adapter } from '../../services/api';
 import useAuthStore from '../api/context/auth';
 import { useTitleStore } from '../api/context/page';
+
+export type IContent = {
+	[key in string]: {
+		name: string;
+		url: string;
+	}[];
+};
 
 const HomePage = () => {
 	const [title, setTitle] = useState('');
