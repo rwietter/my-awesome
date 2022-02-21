@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import '../styles/globals.css';
 
 import { useRouter } from 'next/router';
@@ -13,31 +14,32 @@ import useAuthStore from './api/context/auth';
 import { useThemeStore } from './api/context/theme';
 
 import type { AppProps } from 'next/app';
-function MyApp({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter();
-  const { isLoggedIn } = useAuthStore();
 
-  const paths = ["/user/signin", "/user/signup", "/create-awesome"];
+const MyApp = ({ Component, pageProps }: AppProps) => {
+	const { pathname } = useRouter();
+	const { isLoggedIn } = useAuthStore();
 
-  const { theme } = useThemeStore();
-  const themeMode = theme === 'light' ? light_theme : dark_theme;
+	const paths = ['/user/signin', '/user/signup', '/create-awesome'];
 
-  useEffect(() => {
-    const classTheme = document.querySelector("#class-theme");
-    if (!classTheme) return;
-    classTheme.className = themeMode;
-  }, [themeMode]);
+	const { theme } = useThemeStore();
+	const themeMode = theme === 'light' ? light_theme : dark_theme;
 
-  return (
-    <QueryClientProvider client={queryClient} >
-      <div id="class-theme">
-        {!paths.includes(pathname) && isLoggedIn && <Sidebar />}
-        <HeadContent />
-        { isLoggedIn && <Header /> }
-        <Component {...pageProps} />
-      </div>
-    </QueryClientProvider>
-  );
-}
+	useEffect(() => {
+		const classTheme = document.querySelector('#class-theme');
+		if (!classTheme) return;
+		classTheme.className = themeMode;
+	}, [themeMode]);
+
+	return (
+		<QueryClientProvider client={queryClient}>
+			<div id="class-theme">
+				{!paths.includes(pathname) && isLoggedIn && <Sidebar />}
+				<HeadContent />
+				{isLoggedIn && <Header />}
+				<Component {...pageProps} />
+			</div>
+		</QueryClientProvider>
+	);
+};
 
 export default MyApp;

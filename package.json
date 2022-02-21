@@ -1,36 +1,47 @@
 {
-  "name": "awesome",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@prisma/client": "^2.28.0",
-    "@radix-ui/react-switch": "^0.1.4",
-    "@radix-ui/react-tooltip": "^0.1.6",
-    "@stitches/react": "^1.2.6",
-    "axios": "^0.25.0",
-    "bcrypt": "^5.0.1",
-    "jsonwebtoken": "^8.5.1",
-    "next": "12.0.9",
-    "prisma": "2.28.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-portal": "^4.2.1",
-    "react-query": "^3.34.15",
-    "zustand": "^3.7.0"
-  },
-  "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/jsonwebtoken": "^8.5.8",
-    "@types/node": "17.0.13",
-    "@types/react": "17.0.38",
-    "@types/react-portal": "^4.0.4",
-    "eslint": "8.8.0",
-    "eslint-config-next": "12.0.9",
-    "typescript": "4.5.5"
-  }
+	"name": "awesome",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@prisma/client": "^2.28.0",
+		"@radix-ui/react-switch": "^0.1.4",
+		"@radix-ui/react-tooltip": "^0.1.6",
+		"@stitches/react": "^1.2.6",
+		"axios": "^0.25.0",
+		"bcrypt": "^5.0.1",
+		"debug": "^4.3.3",
+		"jsonwebtoken": "^8.5.1",
+		"next": "12.0.9",
+		"prisma": "2.28.0",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-portal": "^4.2.1",
+		"react-query": "^3.34.15",
+		"react-toastify": "^8.2.0",
+		"zustand": "^3.7.0"
+	},
+	"devDependencies": {
+		"@types/bcrypt": "^5.0.0",
+		"@types/debug": "^4.1.7",
+		"@types/jsonwebtoken": "^8.5.8",
+		"@types/node": "17.0.13",
+		"@types/react": "17.0.38",
+		"@types/react-portal": "^4.0.4",
+		"@typescript-eslint/eslint-plugin": "^5.12.0",
+		"@typescript-eslint/parser": "^5.12.0",
+		"eslint": "^8.9.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-next": "12.0.9",
+		"eslint-plugin-import": "^2.25.4",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-react": "^7.28.0",
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"prettier": "^2.5.1",
+		"typescript": "4.5.5"
+	}
 }

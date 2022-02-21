@@ -9,7 +9,7 @@ const state: Theme = {
 };
 
 const useThemeStore = create(
-  persist(redux(reducer, state), { name: "theme-store" })
+  persist(redux(reducer, state), { name: 'theme-store' }),
 );
 
 export { useThemeStore };

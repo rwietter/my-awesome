@@ -11,7 +11,7 @@ const state: IAuth = {
 };
 
 const useAuthStore = create(
-  persist(redux(reducer, state), { name: "auth-store" })
+  persist(redux(reducer, state), { name: 'auth-store' }),
 );
 
 export default useAuthStore;

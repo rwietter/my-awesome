@@ -5,6 +5,6 @@ export type IAuth = {
 };
 
 export enum ActionType {
-  LOGGED_IN = "LOGGED_IN",
-  LOGOUT = "LOGOUT",
+  LOGGED_IN = 'LOGGED_IN',
+  LOGOUT = 'LOGOUT',
 }

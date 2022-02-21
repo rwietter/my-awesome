@@ -3,51 +3,64 @@ import { FormEvent } from 'react';
 
 import * as S from '../../../components/login/style';
 import { TextCSS } from '../../../components/styles/Text';
-import { api } from '../../../services/api';
+import { notify, Toastfy } from '../../../components/toastfy';
+import { httpError } from '../../../helpers/http-error';
+import { adapter } from '../../../services/api';
 import { authActions } from '../../api/context/auth/actions';
 
 const Login = () => {
-  const router = useRouter();
-  const { signin } = authActions();
+	const router = useRouter();
+	const { signin } = authActions();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		try {
+			e.preventDefault();
 
-    const response = await api.post("/signin/", {
-      pass: e.currentTarget.password.value,
-      email: e.currentTarget.email.value,
-    });
+			const response = await adapter.post('/signin/', {
+				pass: e.currentTarget.password.value,
+				email: e.currentTarget.email.value,
+			});
 
-    if (response.status !== 200) {
-      return alert(response.data.message);
-    }
+			console.log(response);
 
-    const { token, user_id } = response.data;
+			if (response.status !== 200) {
+				throw response;
+			}
 
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    api.defaults.headers.common['X-user-id'] = `${user_id}`;
+			const { token, userId } = response.data.body;
 
+			adapter.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-    signin({ isLoggedIn: true, token, user_id });
-    return router.push("/home");
-  };
+			signin({ isLoggedIn: true, token, user_id: userId });
 
+			return router.push('/home');
+		} catch (err: any) {
+			const { statusCode, name, message } = httpError(err);
+			notify.error(`${name} (${statusCode}) : ${message}`, {
+				position: 'top-right',
+				toastId: name,
+			});
+		}
+	};
 
-  return (
-    <S.Wrapper>
-      <S.Form onSubmit={handleSubmit}>
-        <TextCSS fontWeight={400} size={'$5'}>Já tem conta ?</TextCSS>
-        <S.Title>Faça login aqui</S.Title>
-        <S.Label htmlFor="email">E-mail</S.Label>
-        <S.Input name="email" type="email"></S.Input>
-        <S.Label htmlFor="password">Password</S.Label>
-        <S.Input name="password" type="password"></S.Input>
-        <S.Submit type="submit">
-          <p>Enviar</p>
-        </S.Submit>
-      </S.Form>
-    </S.Wrapper>
-  );
+	return (
+		<S.Wrapper>
+			<S.Form onSubmit={handleSubmit}>
+				<TextCSS fontWeight={400} size="$5">
+					Já tem conta ?
+				</TextCSS>
+				<S.Title>Faça login aqui</S.Title>
+				<S.Label htmlFor="email">E-mail</S.Label>
+				<S.Input name="email" type="email" />
+				<S.Label htmlFor="password">Password</S.Label>
+				<S.Input name="password" type="password" />
+				<S.Submit type="submit">
+					<p>Enviar</p>
+				</S.Submit>
+			</S.Form>
+			<Toastfy />
+		</S.Wrapper>
+	);
 };
 
 export default Login;

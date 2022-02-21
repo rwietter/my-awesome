@@ -1,6 +1,5 @@
 import * as S from './styled';
-const Background = ({ children }: any) => {
-  return <S.Container>{children}</S.Container>;
-};
 
-export default Background;
+const Background = ({ children }: any) => <S.Container>{children}</S.Container>;
+
+export { Background };

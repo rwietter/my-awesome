@@ -1,9 +1,9 @@
-import { ActionType as Types } from "./types";
-import { useTitleStore as useStore } from "./index";
+import { useTitleStore as useStore } from '.';
+import { ActionType as Types } from './types';
 
 const titleActions = () => ({
   addContentItem: (payload: { href: string }) => {
-    useStore.getState().dispatch({type: Types.SAVE_PAGE, payload });
+    useStore.getState().dispatch({ type: Types.SAVE_PAGE, payload });
   },
 });
 

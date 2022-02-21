@@ -1,12 +1,9 @@
-import Background from '../components/background';
+import { Background } from '../components/background';
 
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
-  return (
-    <Background>
-    </Background>
-  );
-};
+const Home: NextPage = () => (
+  <Background />
+);
 
 export default Home;

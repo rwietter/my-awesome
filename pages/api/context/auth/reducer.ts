@@ -7,12 +7,12 @@ const reducer = (state: any, { type, payload }: any) => {
         ...state,
         isLoggedIn: payload.isLoggedIn,
         token: payload.token,
-        user_id: payload.user_id
+        user_id: payload.user_id,
       };
     case Type.LOGOUT:
       return {
         isLoggedIn: payload.isLoggedIn,
-        token: "",
+        token: '',
         user_id: '',
       };
   }
