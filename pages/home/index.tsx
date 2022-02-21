@@ -34,7 +34,6 @@ const HomePage = () => {
 				{ page: href },
 				{
 					headers: {
-						'X-user-id': user_id,
 						Authorization: `Bearer ${token}`,
 					},
 				},

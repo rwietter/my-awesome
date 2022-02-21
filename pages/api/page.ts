@@ -74,7 +74,7 @@ const homepage = async (
 ): Promise<void> => {
 	try {
 		const { page } = req.body;
-		const user_id = req.headers['x-user-id'] as string;
+		const user_id = req.user.id;
 
 		log({
 			path: 'api:homepage',
