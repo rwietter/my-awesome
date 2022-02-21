@@ -49,29 +49,26 @@ const StyledArrow = styled(TooltipPrimitive.Arrow, {
 });
 
 // Exports
-export const Provider = TooltipPrimitive.Provider;
+export const { Provider } = TooltipPrimitive;
 export const TooltipCSS = TooltipPrimitive.Root;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 export const TooltipContent = StyledContent;
-
 
 interface Props {
   message: string;
 }
 
-const Tooltip: FC<Props> = ({ children, message }) => {
-  return (
-    <TooltipCSS delayDuration={200}>
-      <TooltipTrigger asChild>
-        {children}
-      </TooltipTrigger>
-      <StyledContent sideOffset={5}>
-        {message}
-        <StyledArrow />
-      </StyledContent>
+const Tooltip: FC<Props> = ({ children, message }) => (
+	<TooltipCSS delayDuration={200}>
+		<TooltipTrigger asChild>
+			{children}
+		</TooltipTrigger>
+		<StyledContent sideOffset={5}>
+			{message}
+			<StyledArrow />
+		</StyledContent>
 
-    </TooltipCSS>
+	</TooltipCSS>
   );
-};
 
 export { Tooltip };

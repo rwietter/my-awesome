@@ -1,32 +1,32 @@
 import { styled } from '../../styles/theme';
 
-const ContainerCSS = styled("header", {
-  background: "$gray200",
-  backgroundSize: `cover`,
-  backgroundPosition: `center`,
-  position: "fixed",
+const ContainerCSS = styled('header', {
+  background: '$gray200',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  position: 'fixed',
   top: 0,
-  padding: `0.5rem 0.2rem`,
+  padding: '0.5rem 0.2rem',
   zIndex: 1,
-  width: `100%`,
-  height: `4.5rem`,
+  width: '100%',
+  height: '4.5rem',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)',
 
   '@media (min-width: 720px)': {
-    padding: `0.5rem`,
-  }
+    padding: '0.5rem',
+  },
 });
 
-const NavCSS = styled("nav", {
+const NavCSS = styled('nav', {
   width: 'fit-content',
   color: '$gray50',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  "a": {
+  a: {
     fontFamily: '$secondary',
     fontWeight: 400,
     padding: '0 0.5rem',
@@ -37,13 +37,13 @@ const NavCSS = styled("nav", {
       fontSize: '$5',
     },
   },
-  
+
   'a[data-type="logout"]': {
     cursor: 'pointer',
   },
 });
 
-const TitleCSS = styled("div", {
+const TitleCSS = styled('div', {
   width: 'fit-content',
   color: '$gray50',
   display: 'flex',
@@ -57,8 +57,7 @@ const TitleCSS = styled("div", {
   '@media (min-width: 720px)': {
     padding: '0 0.5rem 0 2rem',
     fontSize: '$5',
-  }
+  },
 });
-
 
 export { ContainerCSS, NavCSS, TitleCSS };

@@ -8,7 +8,7 @@ import { httpError } from '../../../helpers/http-error';
 import { adapter } from '../../../services/api';
 import { authActions } from '../../api/context/auth/actions';
 
-const Login = () => {
+const Login = (props) => {
 	const router = useRouter();
 	const { signin } = authActions();
 
@@ -20,8 +20,6 @@ const Login = () => {
 				pass: e.currentTarget.password.value,
 				email: e.currentTarget.email.value,
 			});
-
-			console.log(response);
 
 			if (response.status !== 200) {
 				throw response;

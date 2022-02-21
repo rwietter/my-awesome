@@ -6,22 +6,20 @@ interface IndexTitleProps {
   pageIndex: string[]
 }
 
-const IndexTitle: FC<IndexTitleProps> = ({ pageIndex }) => {
-  return (
-    <ul>
-      {pageIndex ? (
+const IndexTitle: FC<IndexTitleProps> = ({ pageIndex }) => (
+	<ul>
+		{pageIndex ? (
         pageIndex?.map((item: string, idx) => (
-          <span key={idx}>
-            <PageIndiceRef>
-              <a href={`#${item.toLowerCase()}`}>{item}</a>
-            </PageIndiceRef>
-          </span>
+	<span key={idx}>
+		<PageIndiceRef>
+			<a href={`#${item.toLowerCase()}`}>{item}</a>
+		</PageIndiceRef>
+	</span>
         ))
       ) : (
-        <div />
+	<div />
       )}
-    </ul>
+	</ul>
   );
-};
 
-export { IndexTitle }
+export { IndexTitle };
