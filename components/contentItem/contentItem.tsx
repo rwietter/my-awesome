@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import TextLoader from '../skeleton';
 
 import { Heading } from '../styles/Heading';
 import { PageLink } from '../styles/PageLink';
@@ -17,16 +16,24 @@ export type LinkProps = {
 	url: string;
 };
 
-const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent = [], isLoading }) => (
+const ContentItem: FC<ContentProps> = ({
+  pageIndex,
+  pageContent = [],
+  isLoading,
+}) => (
 	<div>
 		{pageIndex?.map((value: string) => (
 			<PageSectionItem key={value}>
 				<Heading id={value.toLowerCase()} type="h3" weight={400}>
-					{value}
+					{!isLoading ? (
+					  value
+					) : (
+						<div />
+					)}
 				</Heading>
 				<ul>
-					{pageContent
-						&& pageContent[value]?.map(({ name, url }: LinkProps, idx: number) => (
+					{!isLoading && pageContent ? (
+					  pageContent[value]?.map(({ name, url }: LinkProps, idx: number) => (
 							<li key={idx.toString()}>
 								<Tooltip message={url}>
 									<PageLink href={url} target="_blank">
@@ -34,7 +41,10 @@ const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent = [], isLoading 
 									</PageLink>
 								</Tooltip>
 							</li>
-						))}
+					  ))
+					) : (
+							<div />
+					)}
 				</ul>
 			</PageSectionItem>
 		))}

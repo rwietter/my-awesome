@@ -9,7 +9,6 @@ export const ssrAdapter = (ctx: AdapterContext) => {
 
   const adapter = axios.create({
     baseURL: '/api',
-    timeout: 1000,
   });
 
   if (token) {

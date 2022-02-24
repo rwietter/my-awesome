@@ -35,6 +35,9 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-mixed-spaces-and-tabs': 'off',
     'react/jsx-indent': 'off',
+    'react/jsx-indent-props': [2, 'tab'],
     'react/jsx-one-expression-per-line': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };
