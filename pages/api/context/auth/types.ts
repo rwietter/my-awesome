@@ -1,7 +1,7 @@
 export type IAuth = {
-  isLoggedIn: false,
-  token: string,
-  user_id: string
+	isLoggedIn: false;
+	token: string;
+	userId: string;
 };
 
 export enum ActionType {

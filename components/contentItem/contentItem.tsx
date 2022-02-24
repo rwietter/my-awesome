@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import TextLoader from '../skeleton';
 
 import { Heading } from '../styles/Heading';
 import { PageLink } from '../styles/PageLink';
@@ -8,6 +9,7 @@ import { Tooltip } from '../tooltip';
 interface ContentProps {
 	pageIndex: string[];
 	pageContent: any;
+	isLoading: boolean;
 }
 
 export type LinkProps = {
@@ -15,7 +17,7 @@ export type LinkProps = {
 	url: string;
 };
 
-const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent }) => (
+const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent = [], isLoading }) => (
 	<div>
 		{pageIndex?.map((value: string) => (
 			<PageSectionItem key={value}>
@@ -23,21 +25,16 @@ const ContentItem: FC<ContentProps> = ({ pageIndex, pageContent }) => (
 					{value}
 				</Heading>
 				<ul>
-					{pageContent ? (
-						pageContent[value]?.map(
-							({ name, url }: LinkProps, idx: number) => (
-								<li key={idx}>
-									<Tooltip message={url}>
-										<PageLink href={url} target="_blank">
-											{name}
-										</PageLink>
-									</Tooltip>
-								</li>
-							),
-						)
-					) : (
-						<div />
-					)}
+					{pageContent
+						&& pageContent[value]?.map(({ name, url }: LinkProps, idx: number) => (
+							<li key={idx.toString()}>
+								<Tooltip message={url}>
+									<PageLink href={url} target="_blank">
+										{name}
+									</PageLink>
+								</Tooltip>
+							</li>
+						))}
 				</ul>
 			</PageSectionItem>
 		))}

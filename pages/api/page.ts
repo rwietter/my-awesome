@@ -1,6 +1,10 @@
+/* eslint-disable no-tabs */
 import { ExtendedApiRequest, ExtendedApiResponse } from '../../@types/next';
 import { Prisma } from './db/db';
 import { withProtect } from './middlewares/auth/auth-jwt';
+import { badRequest } from './utils/http/http-helper';
+import { httpStatus } from './utils/http/status-code';
+import { success } from './utils/http/successful-types';
 import { log } from './utils/log';
 
 /* eslint-disable consistent-return */
@@ -69,41 +73,50 @@ export const index2 = ['Typescript', 'Javascript'];
 // };
 
 const homepage = async (
-	req: ExtendedApiRequest,
-	res: ExtendedApiResponse,
+  req: ExtendedApiRequest,
+  res: ExtendedApiResponse,
 ): Promise<void> => {
-	try {
-		const { page } = req.body;
-		const user_id = req.user.id;
+  try {
+    const { page } = req.body;
+    const user_id = req.user.id;
 
-		log({
-			path: 'api:homepage',
-			message: `params: page:${page} and user_id:${user_id}`,
-		});
+    log({
+      path: 'api:homepage',
+      message: `params: page : ${page} and user_id : ${req.url}`,
+    });
 
-		if (!user_id) return;
+    if (!user_id) return;
 
-		const title = await Prisma.title.findFirst({
-			where: { AND: { title: page, user_id } },
-		});
+    const title = await Prisma.title.findFirst({
+      where: { AND: { title: page, user_id } },
+    });
 
-		const content = await Prisma.content.findFirst({
-			where: { AND: { id: title?.content_id, user_id } },
-		});
+    const content = await Prisma.content.findFirst({
+      where: { AND: { id: title?.content_id, user_id } },
+    });
 
-		if (!title || !content) {
-			throw new Error('Title or content not found');
-		}
+    if (!title || !content) {
+      throw badRequest({
+        name: 'Bad Request',
+        message: 'Page not found',
+      });
+    }
 
-		const data = {
-			title: title.title,
-			content: content.content_item,
-		};
+    const data = {
+      title: title.title,
+      content: content.content_item,
+    };
 
-		return res.status(200).json({ message: '', ...data });
-	} catch (error) {
-		return res.status(400).json({ message: '', error });
-	}
+    return res.status(200).json({
+      message: success.SUCCESS_SIGNIN,
+      status: httpStatus.ok,
+      body: {
+        ...data,
+      },
+    });
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
 };
 
 export default withProtect(homepage);

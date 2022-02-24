@@ -1,50 +1,58 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { httpError } from '../../helpers/http-error';
 
-import useAuthStore from '../../pages/api/context/auth';
 import { titleActions } from '../../pages/api/context/page/actions';
+import { adapter } from '../../services/api';
+import { notifyError, Toastfy } from '../toastfy';
 import { Links } from './@types';
 import * as S from './styled';
 
-const SidebarLinks = () => {
-	const [pageLinks, setPageLinks] = useState([]);
-	const { addContentItem } = titleActions();
-	const { user_id } = useAuthStore();
+function SidebarLinks() {
+  const [pageLinks, setPageLinks] = useState([]);
+  const { addContentItem } = titleActions();
 
-	useEffect(() => {
-		const fetchLinks = async () => {
-			const response = await axios.get('/api/sidebarpages/', {
-				headers: {
-					'X-user-id': user_id,
-				},
-			});
+  useEffect(() => {
+    const fetchTitle = async () => {
+      try {
+        const response = await adapter.get('/sidebarpages');
 
-			if (response.status !== 200) {
-				throw new Error(`Error: ${response.status}`);
-			}
+        if (response.status !== 200) {
+          throw response;
+        }
 
-			setPageLinks(response.data);
-		};
-		fetchLinks();
-	}, [user_id]);
+        const data = response?.data?.body;
+        const [title] = data.title;
 
-	const handleClick = (label: string) => addContentItem({ href: label });
+        setPageLinks(data?.title);
+        addContentItem({ href: title.title });
+      } catch (error) {
+        const { name, message, statusCode } = httpError(error, 'sidebar');
+        notifyError({
+          id: name, message, name, statusCode,
+        });
+      }
+    };
+    fetchTitle();
+  }, []);
 
-	return (
-		<S.Container>
-			{pageLinks ? (
-				pageLinks.map((link: Links, idx: number) => (
-					<S.Page href="/home" key={idx}>
-						<S.TextLink onClick={() => handleClick(link.title)}>
+  const handleClick = (label: string) => addContentItem({ href: label });
+
+  return (
+	<S.Container>
+		{pageLinks[0] ? (
+			  pageLinks?.map((link: Links, idx: number) => (
+				<S.Page href="/v1/home" key={idx.toString()}>
+					<S.TextLink onClick={() => handleClick(link.title)}>
 							{link.title}
-						</S.TextLink>
-					</S.Page>
-				))
-			) : (
-				<div />
-			)}
-		</S.Container>
-	);
-};
+					</S.TextLink>
+				</S.Page>
+			  ))
+		) : (
+			<div />
+		)}
+		<Toastfy />
+	</S.Container>
+  );
+}
 
 export default SidebarLinks;

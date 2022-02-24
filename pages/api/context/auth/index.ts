@@ -7,7 +7,7 @@ import { IAuth } from './types';
 const state: IAuth = {
   isLoggedIn: false,
   token: '',
-  user_id: '',
+  userId: '',
 };
 
 const useAuthStore = create(

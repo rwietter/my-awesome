@@ -1,18 +1,21 @@
 export interface HttpResponse {
-	statusCode: number;
-	body: string | Error | null;
+	status: number;
+	error: string | Error | null;
 }
 
-export interface ErrorMessage {
-	ERR_EMAIL_NOT_FOUND: string;
-	ERR_INVALID_PASSWORD: string;
-	ERR_INVALID_TOKEN: string;
-	ERR_USER_OR_PASSWORD_NOT_FOUND: string;
-	ERR_USER_NOT_FOUND: string;
+export interface ErrorMessage<T> {
+	ERR_EMAIL_NOT_FOUND: T;
+	ERR_INVALID_PASSWORD: T;
+	ERR_INVALID_TOKEN: T;
+	ERR_USER_OR_PASSWORD_NOT_FOUND: T;
+	ERR_USER_NOT_FOUND: T;
+	ERR_INVALID_PARAMETER: T;
+	ERR_EMAIL_ALREADY_EXISTS: T;
 }
 
-export interface SuccessfulMessage {
-	SUCCESS_SIGNIN: string;
+export interface SuccessfulMessage<T> {
+	SUCCESS_SIGNIN: T;
+	SUCCESS_SIGNUP: T;
 }
 
 export interface HttpStatus {
