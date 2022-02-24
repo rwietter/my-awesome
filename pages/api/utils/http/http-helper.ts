@@ -1,36 +1,36 @@
 import { HttpResponse } from './types';
 
-export const badRequest = (error: Error): HttpResponse => ({
-	statusCode: 400,
-	body: error,
+export const badRequest = (error: any): HttpResponse => ({
+  status: 400,
+  ...error,
 });
 
-export const forbidden = (error: Error): HttpResponse => ({
-	statusCode: 403,
-	body: error,
+export const forbidden = (error: any): HttpResponse => ({
+  status: 403,
+  ...error,
 });
 
-export const unauthorized = (error: Error): HttpResponse => ({
-	statusCode: 401,
-	body: error,
+export const unauthorized = (error: any): HttpResponse => ({
+  status: 401,
+  ...error,
 });
 
-export const serverError = (error: Error): HttpResponse => ({
-	statusCode: 500,
-	body: error,
+export const serverError = (error: any): HttpResponse => ({
+  status: 500,
+  ...error,
 });
 
-export const ok = (data: Error): HttpResponse => ({
-	statusCode: 200,
-	body: data,
+export const ok = (error: any): HttpResponse => ({
+  status: 200,
+  ...error,
 });
 
-export const created = (data: Error): HttpResponse => ({
-	statusCode: 200,
-	body: data,
+export const created = (error: any): HttpResponse => ({
+  status: 200,
+  ...error,
 });
 
-export const noContent = (): HttpResponse => ({
-	statusCode: 204,
-	body: null,
+export const noContent = (error: any): HttpResponse => ({
+  status: 204,
+  ...error,
 });

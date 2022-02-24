@@ -1,9 +1,9 @@
-import { InfinityChrome } from './style';
+import { InfinityChrome, Load } from './style';
 
 export const Loading = () => (
-	<InfinityChrome className="infinityChrome">
-		<div />
-		<div />
-		<div />
-	</InfinityChrome>
-  );
+  <InfinityChrome className="infinityChrome">
+    <Load />
+    <Load />
+    <Load />
+  </InfinityChrome>
+);

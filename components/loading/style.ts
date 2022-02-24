@@ -73,3 +73,5 @@ export const InfinityChrome = styled('div', {
     },
   },
 });
+
+export const Load = styled('div');

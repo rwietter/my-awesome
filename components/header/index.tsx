@@ -9,19 +9,19 @@ import { Switch } from '../switch';
 import { ContainerCSS, NavCSS, TitleCSS } from './styled';
 
 const Header = () => {
-	const { logout } = authActions();
+  const { logout } = authActions();
 
-	const handleLogout = () => logout({ isLoggedIn: false });
+  const handleLogout = () => logout({ isLoggedIn: false });
 
-	return (
+  return (
 		<ContainerCSS>
 			<TitleCSS>
 				<TextCSS>MyAwesome</TextCSS>
 			</TitleCSS>
 			<NavCSS>
-				<Link href="/home">Início</Link>
+				<Link href="/v1/home">Início</Link>
 				<span> • </span>
-				<Link href="/create-awesome">Criar Awesome</Link>
+				<Link href="/v1/create-awesome">Criar Awesome</Link>
 				<span> • </span>
 				<a data-type="logout" onClick={handleLogout}>
 					Logout
@@ -30,7 +30,7 @@ const Header = () => {
 				<Switch />
 			</NavCSS>
 		</ContainerCSS>
-	);
+  );
 };
 
 export default Header;

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { QueryClientProvider } from 'react-query';
 
+import type { AppProps } from 'next/app';
 import HeadContent from '../components/head';
 import Header from '../components/header';
 import Sidebar from '../components/sidebar';
@@ -13,33 +14,32 @@ import { dark_theme, light_theme } from '../styles/theme';
 import useAuthStore from './api/context/auth';
 import { useThemeStore } from './api/context/theme';
 
-import type { AppProps } from 'next/app';
-
 const MyApp = ({ Component, pageProps }: AppProps) => {
-	const { pathname } = useRouter();
-	const { isLoggedIn } = useAuthStore();
+  const { pathname } = useRouter();
+  const { isLoggedIn } = useAuthStore();
 
-	const paths = ['/user/signin', '/user/signup', '/create-awesome'];
+  const sidebarPaths = ['/user/signin', '/user/signup', '/v1/create-awesome'];
+  const headerPaths = ['/user/signin', '/user/signup'];
 
-	const { theme } = useThemeStore();
-	const themeMode = theme === 'light' ? light_theme : dark_theme;
+  const { theme } = useThemeStore();
+  const themeMode = theme === 'light' ? light_theme : dark_theme;
 
-	useEffect(() => {
-		const classTheme = document.querySelector('#class-theme');
-		if (!classTheme) return;
-		classTheme.className = themeMode;
-	}, [themeMode]);
+  useEffect(() => {
+    const classTheme = document.querySelector('#class-theme');
+    if (!classTheme) return;
+    classTheme.className = themeMode;
+  }, [themeMode]);
 
-	return (
-		<QueryClientProvider client={queryClient}>
-			<div id="class-theme">
-				{!paths.includes(pathname) && isLoggedIn && <Sidebar />}
-				<HeadContent />
-				{isLoggedIn && <Header />}
-				<Component {...pageProps} />
-			</div>
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div id="class-theme">
+        {!sidebarPaths.includes(pathname) && isLoggedIn && <Sidebar />}
+        <HeadContent />
+        {!headerPaths.includes(pathname) && isLoggedIn && <Header />}
+        <Component {...pageProps} />
+      </div>
+    </QueryClientProvider>
+  );
 };
 
 export default MyApp;

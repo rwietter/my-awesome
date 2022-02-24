@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { ActionType as Type } from './types';
 
 const reducer = (state: any, { type, payload }: any) => {
@@ -7,13 +8,13 @@ const reducer = (state: any, { type, payload }: any) => {
         ...state,
         isLoggedIn: payload.isLoggedIn,
         token: payload.token,
-        user_id: payload.user_id,
+        userId: payload.userId,
       };
     case Type.LOGOUT:
       return {
         isLoggedIn: payload.isLoggedIn,
         token: '',
-        user_id: '',
+        userId: '',
       };
   }
 };
