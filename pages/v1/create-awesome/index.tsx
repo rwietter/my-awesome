@@ -11,8 +11,8 @@ import { useAwesomeStore } from '../../api/context/awesome';
 import { contentActions } from '../../api/context/awesome/actions';
 
 interface LinkProps {
-  name: string;
-  url: string;
+	name: string;
+	url: string;
 }
 
 const CreateAwesome: NextPage = () => {
@@ -30,7 +30,10 @@ const CreateAwesome: NextPage = () => {
     } catch (error) {
       const { name, message, statusCode } = httpError(error, 'awesome');
       notifyError({
-        name, message, statusCode, id: name,
+        name,
+        message,
+        statusCode,
+        id: name,
       });
     }
   };
@@ -44,70 +47,70 @@ const CreateAwesome: NextPage = () => {
   };
 
   return (
-    <S.Container>
-      <S.Section>
-        <S.Title>Criar um awesome</S.Title>
-        <S.Form onSubmit={handleSubmit}>
-          <S.Label htmlFor="awesome">Nome para o awesome</S.Label>
-          <S.Input name="awesome" type="text" />
-          <S.Label htmlFor="links">Adicionar um conteúdo por vez</S.Label>
-          <S.TextArea
-            name="links"
-            rows={8}
-            cols={40}
-            ref={inputRef}
-            placeholder={
-              'Typescript\n- docs, https://www.typescriptlang.org/docs/'
-            }
-          />
-          <S.FlexButton>
-            <S.Submit type="button" onClick={handleAddContentItem}>
-              <p>Adicionar conteúdo</p>
-            </S.Submit>
-            <S.Submit type="submit">
-              <p>Salvar awesome</p>
-            </S.Submit>
-          </S.FlexButton>
-        </S.Form>
-      </S.Section>
-      <S.Section>
-        <S.Title>Preview do seu awesome</S.Title>
-        {contentIndex ? (
-          contentIndex?.map((value: string) => (
-            <PageSectionItem key={value}>
-              <h3 id={value}>{value}</h3>
-              <ul>
-                {contentItem ? (
-                  contentItem[value]?.map(
-                    ({ name, url }: LinkProps, idx: number) => (
-                      <li key={idx.toString()}>
-                        <PageLink href={url} target="_blank" rel="noreferrer">
-                          {name}
-                        </PageLink>
-                      </li>
-                    ),
-                  )
-                ) : (
-                  <div />
-                )}
-              </ul>
-            </PageSectionItem>
-          ))
-        ) : (
-          <>
-            <h3>Exemplo</h3>
-            <ul>
-              <li>
-                <PageLink href="google.com" target="_blank">
-                  Google
-                </PageLink>
-              </li>
-            </ul>
-          </>
-        )}
-      </S.Section>
-      <Toastfy />
-    </S.Container>
+		<S.Container>
+			<S.Section>
+				<S.Title>Criar um awesome</S.Title>
+				<S.Form onSubmit={handleSubmit}>
+					<S.Label htmlFor="awesome">Nome para o awesome</S.Label>
+					<S.Input name="awesome" type="text" />
+					<S.Label htmlFor="links">Adicionar um conteúdo por vez</S.Label>
+					<S.TextArea
+						name="links"
+						rows={8}
+						cols={40}
+						ref={inputRef}
+						placeholder={
+							'Typescript\n- docs, https://www.typescriptlang.org/docs/'
+						}
+					/>
+					<S.FlexButton>
+						<S.Submit type="button" onClick={handleAddContentItem}>
+							<p>Adicionar conteúdo</p>
+						</S.Submit>
+						<S.Submit type="submit">
+							<p>Salvar awesome</p>
+						</S.Submit>
+					</S.FlexButton>
+				</S.Form>
+			</S.Section>
+			<S.Section>
+				<S.Title>Preview do seu awesome</S.Title>
+				{contentIndex ? (
+				  contentIndex?.map((value: string) => (
+						<PageSectionItem key={value}>
+							<h3 id={value}>{value}</h3>
+							<ul>
+								{contentItem ? (
+								  contentItem[value]?.map(
+								    ({ name, url }: LinkProps, idx: number) => (
+											<li key={idx.toString()}>
+												<PageLink href={url} target="_blank" rel="noreferrer">
+													{name}
+												</PageLink>
+											</li>
+								    ),
+								  )
+								) : (
+									<div />
+								)}
+							</ul>
+						</PageSectionItem>
+				  ))
+				) : (
+					<>
+						<h3>Exemplo</h3>
+						<ul>
+							<li>
+								<PageLink href="google.com" target="_blank">
+									Google
+								</PageLink>
+							</li>
+						</ul>
+					</>
+				)}
+			</S.Section>
+			<Toastfy />
+		</S.Container>
   );
 };
 

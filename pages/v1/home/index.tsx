@@ -59,7 +59,7 @@ const HomePage = () => {
           statusCode,
         });
       }
-      setLoading((state) => !state);
+      setLoading(false);
     })();
   }, [href]);
 
@@ -74,13 +74,17 @@ const HomePage = () => {
 			<S.PageContent>
 				<S.Section>
 					<S.PageIndice>Índice</S.PageIndice>
-					<IndexTitle pageIndex={pageIndex} />
+					<IndexTitle pageIndex={pageIndex} isLoading={isLoading} />
 				</S.Section>
 
 				<S.Separator />
 
 				<S.Section>
-					<ContentItem pageIndex={pageIndex} pageContent={pageContent} isLoading={isLoading} />
+					<ContentItem
+						pageIndex={pageIndex}
+						pageContent={pageContent}
+						isLoading={isLoading}
+					/>
 				</S.Section>
 			</S.PageContent>
 			<Toastfy />
