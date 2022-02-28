@@ -1,16 +1,15 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import Link from 'next/link';
+import { TextCSS } from '@/features/ui';
 
-import { authActions } from '../../pages/api/context/auth/actions';
-import { TextCSS } from '../styles/Text';
-import { Switch } from '../switch';
+import { authActions } from '@/api/context/auth/actions';
+import { Switch } from '../../features/ui/switch';
 import { ContainerCSS, NavCSS, TitleCSS } from './styled';
 
 const Header = () => {
   const { logout } = authActions();
-
   const handleLogout = () => logout({ isLoggedIn: false });
 
   return (

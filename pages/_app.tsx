@@ -6,13 +6,15 @@ import { useEffect } from 'react';
 import { QueryClientProvider } from 'react-query';
 
 import type { AppProps } from 'next/app';
-import HeadContent from '../components/head';
-import Header from '../components/header';
-import Sidebar from '../components/sidebar';
-import { queryClient } from '../services/queryClient';
-import { dark_theme, light_theme } from '../styles/theme';
+import { ErrorBoundary } from 'react-error-boundary';
+import HeadContent from '@/components/head';
+import Header from '@/components/header';
+import Sidebar from '@/components/sidebar';
+import { queryClient } from '@/services/queryClient';
+import { dark_theme, light_theme } from '@/styles/theme';
 import useAuthStore from './api/context/auth';
 import { useThemeStore } from './api/context/theme';
+import { ErrorFallback } from '@/components/error-boundary';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();
@@ -31,14 +33,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [themeMode]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <div id="class-theme">
-        {!sidebarPaths.includes(pathname) && isLoggedIn && <Sidebar />}
-        <HeadContent />
-        {!headerPaths.includes(pathname) && isLoggedIn && <Header />}
-        <Component {...pageProps} />
-      </div>
-    </QueryClientProvider>
+		<QueryClientProvider client={queryClient}>
+			<ErrorBoundary FallbackComponent={ErrorFallback}>
+				<div id="class-theme">
+					{!sidebarPaths.includes(pathname) && isLoggedIn && <Sidebar />}
+					<HeadContent />
+					{!headerPaths.includes(pathname) && isLoggedIn && <Header />}
+					<Component {...pageProps} />
+				</div>
+			</ErrorBoundary>
+		</QueryClientProvider>
   );
 };
 

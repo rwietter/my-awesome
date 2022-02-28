@@ -5,6 +5,6 @@ const Sidebar = () => (
 	<S.Container>
 		<SidebarLinks />
 	</S.Container>
-  );
+);
 
 export default Sidebar;

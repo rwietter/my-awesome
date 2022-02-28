@@ -1,15 +1,15 @@
 import { FC } from 'react';
-import TextLoader from '../skeleton';
+import { IsOk } from '../../types';
 
-import { Heading } from '../styles/Heading';
-import { PageLink } from '../styles/PageLink';
-import { PageSectionItem } from '../styles/PageSectionItem';
-import { Tooltip } from '../tooltip';
+import { Heading } from '@/features/ui/heading';
+import { Tooltip } from '@/features/ui/tooltip';
+import { PageLink, PageSectionItem } from '@/features/ui';
+import { NoContent } from '@/features/ui/';
 
 interface ContentProps {
 	pageIndex: string[];
 	pageContent: any;
-	isLoading: boolean;
+	isOk: IsOk;
 }
 
 export type LinkProps = {
@@ -20,17 +20,19 @@ export type LinkProps = {
 const ContentItem: FC<ContentProps> = ({
   pageIndex,
   pageContent = [],
-  isLoading,
+  isOk,
 }) => (
 	<div>
+		{(isOk.isLoading || isOk.isError) && <NoContent />}
 		{pageIndex?.map((value: string) => (
 			<PageSectionItem key={value}>
 				<Heading id={value.toLowerCase()} type="h3" weight={400}>
-					{!isLoading ? value : <div />}
+					{(!isOk.isLoading || isOk.isError) && value}
 				</Heading>
 				<ul>
-					{!isLoading && pageContent ? (
-					  pageContent[value]?.map(({ name, url }: LinkProps, idx: number) => (
+					{(!isOk.isLoading || isOk.isError)
+						&& pageContent
+						&& pageContent[value]?.map(({ name, url }: LinkProps, idx: number) => (
 							<li key={idx.toString()}>
 								<Tooltip message={url}>
 									<PageLink href={url} target="_blank">
@@ -38,10 +40,7 @@ const ContentItem: FC<ContentProps> = ({
 									</PageLink>
 								</Tooltip>
 							</li>
-					  ))
-					) : (
-						<div />
-					)}
+						))}
 				</ul>
 			</PageSectionItem>
 		))}

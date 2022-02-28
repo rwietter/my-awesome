@@ -20,6 +20,13 @@ const reducer = (state: any, { type, payload }: any) => {
         ...state,
         contentIndex: [...state.contentIndex, payload.contentIndex],
       };
+    case Type.RESET_AWESOME:
+      return {
+        ...state,
+        contentIndex: [],
+        contentItem: {},
+      };
+    default:
   }
 };
 

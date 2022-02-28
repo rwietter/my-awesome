@@ -31,9 +31,11 @@ const contentActions = () => ({
       payload: { contentItem: content },
     });
   },
+
   addContentIndex: (payload: any) => {
     useStore.getState().dispatch({ type: Types.ADD_CONTENT_INDEX, payload });
   },
+
   saveAwesome: async (payload: any) => {
     try {
       const response = await adapter.post(
@@ -51,6 +53,9 @@ const contentActions = () => ({
       return error;
     }
   },
+  resetStore: async () => {
+    useStore.getState().dispatch({ type: Types.RESET_AWESOME });
+	 },
 });
 
 export { contentActions };

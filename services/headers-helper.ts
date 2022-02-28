@@ -8,15 +8,15 @@ interface HttpHeader extends HeadersDefaults {
 const httpHeader = axios.defaults.headers as HttpHeader;
 
 const setAuthorizationToken = (token: string) => {
-	if (token) {
-		httpHeader.Authorization = `Bearer ${token}`;
-	}
+  if (token) {
+    httpHeader.Authorization = `Bearer ${token}`;
+  }
 };
 
 const setUserId = (userId: string) => {
-	if (userId) {
-		httpHeader['X-user-id'] = userId;
-	}
+  if (userId) {
+    httpHeader['X-user-id'] = userId;
+  }
 };
 
 export { setAuthorizationToken, setUserId, httpHeader };

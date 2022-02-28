@@ -24,6 +24,10 @@ const createAwesome = async (
 
     if (!content) return;
 
+    console.log('contentItem', contentItem);
+    console.log('awesomeTitle', awesomeTitle);
+    console.log('user_id', user_id);
+
     const { content_item, id: content_id } = await Prisma.content.create({
       data: { content_item: content, user_id },
     });
@@ -31,6 +35,9 @@ const createAwesome = async (
     const { id: title_id, title }: Title = await Prisma.title.create({
       data: { title: awesomeTitle, content_id, user_id },
     });
+
+    console.log('title_id', title_id);
+    console.log('title', title);
 
     return res.status(200).json({
       message: 'Successful create awesome',

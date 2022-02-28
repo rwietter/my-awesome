@@ -3,3 +3,21 @@ export declare module 'next' {
 		req: string;
 	}
 }
+
+export type Content = {
+	[key in string]: {
+		name: string;
+		url: string;
+	}[];
+};
+
+interface ErrorHelper {
+	name?: string;
+	message: string;
+	status?: number;
+}
+
+export interface IsOk {
+	isLoading: boolean;
+	isError: boolean;
+}

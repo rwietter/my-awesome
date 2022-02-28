@@ -1,11 +1,10 @@
-/* eslint-disable no-tabs */
+/* eslint-disable no-use-before-define */
 import { ExtendedApiRequest, ExtendedApiResponse } from '../../@types/next';
 import { Prisma } from './db/db';
 import { withProtect } from './middlewares/auth/auth-jwt';
-import { badRequest } from './utils/http/http-helper';
+import { badRequest, forbidden, internalServerError } from './utils/http/http-helper';
 import { httpStatus } from './utils/http/status-code';
 import { success } from './utils/http/successful-types';
-import { log } from './utils/log';
 
 /* eslint-disable consistent-return */
 export const index = ['blockchain', 'bitcoin', 'defi', 'tools', 'news'];
@@ -76,46 +75,81 @@ const homepage = async (
   req: ExtendedApiRequest,
   res: ExtendedApiResponse,
 ): Promise<void> => {
-  try {
-    const { page } = req.body;
-    const user_id = req.user.id;
+  switch (req.method) {
+    case 'POST':
+      return getAwesome();
+    case 'PUT':
+      return deleteAwesome();
+    default:
+  }
 
-    log({
-      path: 'api:homepage',
-      message: `params: page : ${page} and user_id : ${req.url}`,
-    });
+  async function deleteAwesome(): Promise<void> {
+    const { title_id } = req.body;
+    // const user_id = req.user.id;
 
-    if (!user_id) return;
-
-    const title = await Prisma.title.findFirst({
-      where: { AND: { title: page, user_id } },
-    });
-
-    const content = await Prisma.content.findFirst({
-      where: { AND: { id: title?.content_id, user_id } },
-    });
-
-    if (!title || !content) {
+    if (!title_id) {
       throw badRequest({
-        name: 'Bad Request',
-        message: 'Page not found',
+        message: 'Title is required',
       });
     }
 
-    const data = {
-      title: title.title,
-      content: content.content_item,
-    };
+    try {
+      const deletedTitle = await Prisma.title.delete({
+        where: { id: title_id },
+      });
 
-    return res.status(200).json({
-      message: success.SUCCESS_SIGNIN,
-      status: httpStatus.ok,
-      body: {
+      const deletedContent = await Prisma.content.delete({
+        where: { id: deletedTitle.content_id },
+      });
+
+      if (!deletedContent || !deletedTitle) {
+        throw internalServerError({
+          message: 'You are not allowed to delete this awesome',
+        });
+      }
+
+      return res.status(200).json({});
+    } catch (error) {
+      return res.status(404).json({ error });
+    }
+  }
+
+  async function getAwesome(): Promise<void> {
+    try {
+      const { page } = req.body;
+      const user_id = req.user.id;
+
+      if (!user_id) return;
+
+      const title = await Prisma.title.findFirst({
+        where: { AND: { title: page, user_id } },
+      });
+
+      const content = await Prisma.content.findFirst({
+        where: { AND: { id: title?.content_id, user_id } },
+      });
+
+      if (!title || !content) {
+        throw internalServerError({
+          message: 'Page not found',
+        });
+      }
+
+      const data = {
+        title: title.title,
+        content: content.content_item,
+        content_id: content.id,
+        title_id: title.id,
+      };
+
+      return res.status(200).json({
+        message: success.SUCCESS_SIGNIN,
+        status: httpStatus.ok,
         ...data,
-      },
-    });
-  } catch (error) {
-    return res.status(400).json({ error });
+      });
+    } catch (error) {
+      return res.status(400).json({ error });
+    }
   }
 };
 

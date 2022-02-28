@@ -23,7 +23,9 @@ const { theme: dark_theme, styled } = createStitches({
       buttonThumb: '#F4F4F6',
       white: '#F4F4F6',
       dark: '#0c0c0e',
-      green: '#74ebd5',
+      green: '#17b978',
+      danger: '#FF006E',
+      sidebar: '#121214',
     },
     space: {},
     fonts: {
@@ -62,7 +64,7 @@ const { theme: light_theme } = createStitches({
     colors: {
       background: '#D7D7DB',
       mediumBackground:
-        'linear-gradient(to left top, #D7D7DB, #D7D7DB, #E1E1E4, #F4F4F6, #F4F4F6 );',
+        'linear-gradient(to left top, #C9C9CF, #D7D7DB, #E1E1E4, #F4F4F6, #F7F7F7 );',
       gradient:
         'linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8257e5, #3a86ff );',
       highlight145: 'linear-gradient(145deg, #8257e5, #c1b);',
@@ -80,7 +82,9 @@ const { theme: light_theme } = createStitches({
       buttonThumb: '#121214',
       white: '#F4F4F6',
       dark: '#0c0c0e',
-      green: '#74ebd5',
+      green: '#17b978',
+      danger: '#FF006E',
+      sidebar: '#F4F4F6',
     },
     space: {},
     fontSizes: {

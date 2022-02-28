@@ -1,7 +1,7 @@
 import { styled } from '@stitches/react';
 
 const Container = styled('aside', {
-  background: '$mediumBackground',
+  background: '$sidebar',
   fontFamily: 'Poppins',
   backgroundSize: 'cover',
   backgroundPosition: 'center',

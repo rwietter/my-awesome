@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { httpError } from '../../helpers/http-error';
+import { handleError } from '../../helpers/http-error';
 
 import { titleActions } from '../../pages/api/context/page/actions';
 import { adapter } from '../../services/api';
-import { notifyError, Toastfy } from '../toastfy';
+import { Toastfy } from '../../features/ui/toastfy';
 import { Links } from './@types';
 import * as S from './styled';
 
@@ -26,10 +26,7 @@ function SidebarLinks() {
         setPageLinks(data?.title);
         addContentItem({ href: title.title });
       } catch (error) {
-        const { name, message, statusCode } = httpError(error, 'sidebar');
-        notifyError({
-          id: name, message, name, statusCode,
-        });
+        handleError(error);
       }
     };
     fetchTitle();
@@ -38,20 +35,20 @@ function SidebarLinks() {
   const handleClick = (label: string) => addContentItem({ href: label });
 
   return (
-	<S.Container>
-		{pageLinks[0] ? (
+		<S.Container>
+			{pageLinks[0] ? (
 			  pageLinks?.map((link: Links, idx: number) => (
-				<S.Page href="/v1/home" key={idx.toString()}>
-					<S.TextLink onClick={() => handleClick(link.title)}>
+					<S.Page href="/v1/home" key={idx.toString()}>
+						<S.TextLink onClick={() => handleClick(link.title)}>
 							{link.title}
-					</S.TextLink>
-				</S.Page>
+						</S.TextLink>
+					</S.Page>
 			  ))
-		) : (
-			<div />
-		)}
-		<Toastfy />
-	</S.Container>
+			) : (
+				<div />
+			)}
+			<Toastfy />
+		</S.Container>
   );
 }
 

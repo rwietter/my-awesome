@@ -1,15 +1,16 @@
 import { FC } from 'react';
+import { IsOk } from '../../types';
 
-import { PageIndiceRef } from '../homepage/styled';
+import { PageIndiceRef } from '../../pages/v1/home/styled';
 
 interface IndexTitleProps {
 	pageIndex: string[];
-	isLoading: boolean;
+	isOk: IsOk;
 }
 
-const IndexTitle: FC<IndexTitleProps> = ({ pageIndex, isLoading }) => (
+const IndexTitle: FC<IndexTitleProps> = ({ pageIndex, isOk }) => (
 	<ul>
-		{!isLoading ? (
+		{!isOk.isLoading ? (
 		  pageIndex?.map((item: string, idx) => (
 				<span key={idx.toString()}>
 					<PageIndiceRef>
