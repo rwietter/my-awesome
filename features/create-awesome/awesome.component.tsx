@@ -4,10 +4,9 @@ import { FormEvent, useRef } from 'react';
 import { handleError } from 'helpers/http-error';
 import * as S from './style';
 import { Toastfy } from '@/features/ui/toastfy';
-import useAuthStore from '@/api/context/auth';
-import { useAwesomeStore } from '@/api/context/awesome';
-import { contentActions } from '@/api/context/awesome/actions';
+import { useAwesomeStore, contentActions } from '@/features/create-awesome/store';
 import { PageLink, PageSectionItem } from '@/features/ui';
+import { useAuthStore } from '@/features/user/store';
 
 interface LinkProps {
 	name: string;

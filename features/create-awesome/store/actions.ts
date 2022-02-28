@@ -1,6 +1,5 @@
-/* eslint-disable import/prefer-default-export */
-import { useAwesomeStore as useStore } from '.';
-import { adapter } from '../../../../services/api';
+import { useAwesomeStore as store } from '.';
+import { adapter } from '@/services/api';
 import { ActionContext, ActionType as Types } from './types';
 
 const contentActions = () => ({
@@ -26,14 +25,14 @@ const contentActions = () => ({
       [indexName]: [...links],
     };
 
-    useStore.getState().dispatch({
+    store.getState().dispatch({
       type: Types.ADD_CONTENT_ITEM,
       payload: { contentItem: content },
     });
   },
 
   addContentIndex: (payload: any) => {
-    useStore.getState().dispatch({ type: Types.ADD_CONTENT_INDEX, payload });
+    store.getState().dispatch({ type: Types.ADD_CONTENT_INDEX, payload });
   },
 
   saveAwesome: async (payload: any) => {
@@ -54,7 +53,7 @@ const contentActions = () => ({
     }
   },
   resetStore: async () => {
-    useStore.getState().dispatch({ type: Types.RESET_AWESOME });
+    store.getState().dispatch({ type: Types.RESET_AWESOME });
 	 },
 });
 

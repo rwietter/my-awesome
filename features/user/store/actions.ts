@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import { destroyCookie } from 'nookies';
-import store from '.';
+import { useAuthStore as store } from '.';
 import { ActionType as Types } from './types';
 
 type IPayload = {
