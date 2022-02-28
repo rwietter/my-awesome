@@ -4,7 +4,7 @@ import { setCookie } from 'nookies';
 import { handleError } from '@/helpers/http-error';
 import { Toastfy } from '@/features/ui/toastfy';
 import { adapter } from '@/services/api';
-import { authActions } from '@/api/context/auth/actions';
+import { authActions } from '@/features/user/store/actions';
 import { TextCSS } from '@/features/ui';
 import * as S from '../styled';
 

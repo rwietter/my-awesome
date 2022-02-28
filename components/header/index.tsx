@@ -4,8 +4,8 @@
 import Link from 'next/link';
 import { TextCSS } from '@/features/ui';
 
-import { authActions } from '@/api/context/auth/actions';
-import { Switch } from '../../features/ui/switch';
+import { authActions } from '@/features/user/store/actions';
+import { Switch } from '@/features/ui/switch';
 import { ContainerCSS, NavCSS, TitleCSS } from './styled';
 
 const Header = () => {
