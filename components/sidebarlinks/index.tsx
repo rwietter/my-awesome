@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { handleError } from '../../helpers/http-error';
+import { handleError } from '@/helpers/http-error';
 
-import { titleActions } from '../../pages/api/context/page/actions';
-import { adapter } from '../../services/api';
-import { Toastfy } from '../../features/ui/toastfy';
+import { adapter } from '@/services/api';
+import { Toastfy } from '@/features/ui/toastfy';
 import { Links } from './@types';
 import * as S from './styled';
+import { refAwsActions } from '@/features/awesome-list';
 
 function SidebarLinks() {
   const [pageLinks, setPageLinks] = useState([]);
-  const { addContentItem } = titleActions();
+  const { setAwesomeRef } = refAwsActions();
 
   useEffect(() => {
     const fetchTitle = async () => {
@@ -24,7 +24,7 @@ function SidebarLinks() {
         const [title] = data.title;
 
         setPageLinks(data?.title);
-        addContentItem({ href: title.title });
+        setAwesomeRef({ href: title.title });
       } catch (error) {
         handleError(error);
       }
@@ -32,7 +32,7 @@ function SidebarLinks() {
     fetchTitle();
   }, []);
 
-  const handleClick = (label: string) => addContentItem({ href: label });
+  const handleClick = (label: string) => setAwesomeRef({ href: label });
 
   return (
 		<S.Container>

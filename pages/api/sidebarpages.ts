@@ -3,7 +3,7 @@ import { ExtendedApiRequest } from '../../@types/next';
 import { Prisma } from './db/db';
 
 import { withProtect } from './middlewares/auth/auth-jwt';
-import { unauthorized } from './utils/http/http-helper';
+import { internalServerError, unauthorized } from './utils/http/http-helper';
 import { success } from './utils/http/successful-types';
 import { httpStatus } from './utils/http/status-code';
 import { error as errorMessage, ERR_USER_NOT_FOUND } from './utils/http/error-types';
@@ -20,6 +20,12 @@ async function handler(req: ExtendedApiRequest, res: NextApiResponse) {
     }
 
     const data = await Prisma.title.findMany({ where: { user_id } });
+
+    if (!data[0]) {
+      throw internalServerError({
+        message: 'Page not found',
+      });
+    }
 
     return res.status(200).json({
       message: success.SUCCESS_SIGNIN,
