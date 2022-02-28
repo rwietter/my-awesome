@@ -1,6 +1,5 @@
 import Link from 'next/link';
-
-import { styled } from '../../styles/theme';
+import { styled } from '@/features/ui/theme';
 
 export const Container = styled('nav', {
   alignItems: 'center',

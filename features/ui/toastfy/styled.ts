@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { styled } from '@/styles/theme';
+import { styled } from '@/features/ui/theme';
 
 const ToastfyCSS = styled(ToastContainer, {
   '.Toastify__toast--error': {

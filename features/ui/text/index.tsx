@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { styled } from '@/styles/theme';
+import { styled } from '@/features/ui/theme';
 
 interface Props {
 	size?: string | number;

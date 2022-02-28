@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useThemeStore } from '@/api/context/theme';
-import { actionTheme } from '@/api/context/theme/actions';
+import { actionTheme, useThemeStore } from '@/features/ui/theme/';
 import { Flex, SwitchCSS, ThumbCSS } from './styled';
 
 const Switch = () => {

@@ -1,5 +1,5 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import { styled } from '@/styles/theme';
+import { styled } from '@/features/ui/theme';
 
 const SwitchCSS = styled(SwitchPrimitive.Root, {
   all: 'unset',

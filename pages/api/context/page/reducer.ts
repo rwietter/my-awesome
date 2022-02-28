@@ -7,6 +7,7 @@ const reducer = (state: any, { type, payload }: any) => {
         ...state,
         href: payload.href,
       };
+    default:
   }
 };
 

@@ -1,7 +1,6 @@
 import { css } from '@stitches/react';
 import { FC } from 'react';
-
-import { styled } from '../../../styles/theme';
+import { styled } from '@/features/ui/theme';
 
 type Props = {
 	id?: string;

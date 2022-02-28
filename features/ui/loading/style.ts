@@ -1,5 +1,5 @@
 import { keyframes } from '@stitches/react';
-import { styled } from '@/styles/theme';
+import { styled } from '@/features/ui/theme';
 
 const moveSvg = keyframes({
   '0%': {

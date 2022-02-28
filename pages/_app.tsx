@@ -11,10 +11,9 @@ import HeadContent from '@/components/head';
 import Header from '@/components/header';
 import Sidebar from '@/components/sidebar';
 import { queryClient } from '@/services/queryClient';
-import { dark_theme, light_theme } from '@/styles/theme';
-import { useThemeStore } from './api/context/theme';
 import { ErrorFallback } from '@/components/error-boundary';
 import { useAuthStore } from '@/features/user/store';
+import { useThemeStore, dark_theme, light_theme } from '@/features/ui/theme';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();

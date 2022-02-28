@@ -1,4 +1,4 @@
-import { styled } from '@/styles/theme';
+import { styled } from '@/features/ui/theme';
 
 const Wrapper = styled('div', {
   display: 'flex',

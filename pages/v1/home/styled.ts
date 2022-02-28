@@ -1,5 +1,5 @@
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import { styled } from '../../../styles/theme';
+import { styled } from '@/features/ui/theme';
 
 export const Container = styled('div', {
   background: '$background',
