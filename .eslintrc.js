@@ -39,5 +39,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-use-before-define': 'off',
   },
 };

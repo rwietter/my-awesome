@@ -1,20 +1,19 @@
 import bcrypt from 'bcrypt';
-import { ServerResponse } from 'http';
 import JWT from 'jsonwebtoken';
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { Prisma } from './db/db';
+import type { ExtendedApiRequest, ExtendedApiResponse } from 'types';
+import { Prisma } from '@/api/db';
 import {
   ERR_EMAIL_NOT_FOUND,
   ERR_INVALID_PASSWORD,
   ERR_USER_NOT_FOUND,
-  error as errorMessage,
+  errorMsg,
   ERR_INVALID_TOKEN,
-} from './utils/http/error-types';
-import { badRequest, unauthorized } from './utils/http/http-helper';
-import { httpStatus } from './utils/http/status-code';
-import { success } from './utils/http/successful-types';
-import { HttpResponse } from './utils/http/types';
+  httpStatus,
+  success,
+  badRequest,
+  unauthorized,
+} from '@/api/utils/http/';
 
 interface Payload {
   iss: string;
@@ -30,7 +29,7 @@ const generateJwtToken = (payload: Payload) => new Promise((resolve) => {
     if (err) {
       throw badRequest({
         name: ERR_INVALID_TOKEN,
-        message: errorMessage.ERR_INVALID_TOKEN,
+        message: errorMsg.ERR_INVALID_TOKEN,
       });
     }
     resolve(token);
@@ -38,9 +37,9 @@ const generateJwtToken = (payload: Payload) => new Promise((resolve) => {
 });
 
 const signup = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-): Promise<ServerResponse | void | HttpResponse> => {
+  req: ExtendedApiRequest,
+  res: ExtendedApiResponse,
+) => {
   try {
     const { pass: password, email } = req.body;
 
@@ -49,21 +48,21 @@ const signup = async (
     if (!user) {
       throw unauthorized({
         name: ERR_USER_NOT_FOUND,
-        message: errorMessage.ERR_USER_NOT_FOUND,
+        message: errorMsg.ERR_USER_NOT_FOUND,
       });
     }
 
     if (!bcrypt.compareSync(password, user!.password)) {
       throw unauthorized({
         name: ERR_INVALID_PASSWORD,
-        message: errorMessage.ERR_INVALID_PASSWORD,
+        message: errorMsg.ERR_INVALID_PASSWORD,
       });
     }
 
     if (user.email !== email) {
       throw unauthorized({
         name: ERR_EMAIL_NOT_FOUND,
-        message: errorMessage.ERR_EMAIL_NOT_FOUND,
+        message: errorMsg.ERR_EMAIL_NOT_FOUND,
       });
     }
 
@@ -79,7 +78,7 @@ const signup = async (
     if (!jwtToken) {
       throw unauthorized({
         name: ERR_INVALID_TOKEN,
-        message: errorMessage.ERR_INVALID_TOKEN,
+        message: errorMsg.ERR_INVALID_TOKEN,
       });
     }
 

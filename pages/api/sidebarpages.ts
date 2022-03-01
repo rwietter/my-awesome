@@ -1,21 +1,19 @@
-import type { NextApiResponse } from 'next';
-import { ExtendedApiRequest } from '../../@types/next';
-import { Prisma } from './db/db';
+import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
+import { httpStatus } from '@/api/utils/http/';
+import { Prisma } from '@/api/db';
+import { withProtect } from '@/api/middlewares/';
+import {
+  ERR_USER_NOT_FOUND, errorMsg, success, internalServerError, unauthorized,
+} from '@/api/utils/http';
 
-import { withProtect } from './middlewares/auth/auth-jwt';
-import { internalServerError, unauthorized } from './utils/http/http-helper';
-import { success } from './utils/http/successful-types';
-import { httpStatus } from './utils/http/status-code';
-import { error as errorMessage, ERR_USER_NOT_FOUND } from './utils/http/error-types';
-
-async function handler(req: ExtendedApiRequest, res: NextApiResponse) {
+async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
   try {
     const user_id = req.user.id;
 
     if (!user_id) {
       throw unauthorized({
         name: ERR_USER_NOT_FOUND,
-        message: errorMessage.ERR_USER_NOT_FOUND,
+        message: errorMsg.ERR_USER_NOT_FOUND,
       });
     }
 

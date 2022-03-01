@@ -1,29 +1,28 @@
 import bcrypt from 'bcrypt';
-import { ServerResponse } from 'http';
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { Prisma } from './db/db';
+import type { ExtendedApiRequest, ExtendedApiResponse } from 'types';
+import { Prisma } from '@/api/db';
 
-import { badRequest } from './utils/http/http-helper';
 import {
-  error as errorMessage,
+  errorMsg,
   ERR_EMAIL_ALREADY_EXISTS,
   ERR_INVALID_PARAMETER,
-} from './utils/http/error-types';
-import { success } from './utils/http/successful-types';
-import { httpStatus } from './utils/http/status-code';
+  badRequest,
+  success,
+  httpStatus,
+} from '@/api/utils/http/';
 
 const signup = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-): Promise<ServerResponse | void> => {
+  req: ExtendedApiRequest,
+  res: ExtendedApiResponse,
+) => {
   try {
     const { user: name, pass, email } = req.body;
 
     if (!name || !pass || !email) {
       throw badRequest({
         name: ERR_INVALID_PARAMETER,
-        message: errorMessage.ERR_INVALID_PARAMETER,
+        message: errorMsg.ERR_INVALID_PARAMETER,
       });
     }
 
@@ -35,7 +34,7 @@ const signup = async (
     if (response?.email === email) {
       throw badRequest({
         name: ERR_EMAIL_ALREADY_EXISTS,
-        message: errorMessage.ERR_EMAIL_ALREADY_EXISTS,
+        message: errorMsg.ERR_EMAIL_ALREADY_EXISTS,
       });
     }
 

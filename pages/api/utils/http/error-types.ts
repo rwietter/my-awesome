@@ -18,7 +18,7 @@ export {
   ERR_EMAIL_ALREADY_EXISTS,
 };
 
-export const error: ErrorMessage<string> = {
+export const errorMsg: ErrorMessage<string> = {
   ERR_EMAIL_NOT_FOUND: 'E-mail not found',
   ERR_INVALID_PASSWORD: 'Invalid password',
   ERR_INVALID_TOKEN: 'Unauthorized authentication',

@@ -1,12 +1,8 @@
 import JWT from 'jsonwebtoken';
+import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 
-import {
-  ExtendedApiRequest,
-  ExtendedApiResponse,
-} from '../../../../@types/next';
-import { Prisma } from '../../db/db';
-import { ERR_INVALID_TOKEN, error as errorMessage } from '../../utils/http/error-types';
-import { unauthorized } from '../../utils/http/http-helper';
+import { ERR_INVALID_TOKEN, errorMsg, unauthorized } from '@/api/utils/http';
+import { Prisma } from '@/api/db';
 
 const withProtect = (handler: any) => async (req: ExtendedApiRequest, res: ExtendedApiResponse) => {
   try {
@@ -15,7 +11,7 @@ const withProtect = (handler: any) => async (req: ExtendedApiRequest, res: Exten
     if (!authorization) {
       throw unauthorized({
         name: ERR_INVALID_TOKEN,
-        message: errorMessage.ERR_INVALID_TOKEN,
+        message: errorMsg.ERR_INVALID_TOKEN,
       });
     }
 
@@ -29,7 +25,7 @@ const withProtect = (handler: any) => async (req: ExtendedApiRequest, res: Exten
       if (!decoded) {
         throw unauthorized({
           name: ERR_INVALID_TOKEN,
-          message: errorMessage.ERR_INVALID_TOKEN,
+          message: errorMsg.ERR_INVALID_TOKEN,
         });
       }
 
@@ -40,7 +36,7 @@ const withProtect = (handler: any) => async (req: ExtendedApiRequest, res: Exten
       if (!currentUser) {
         throw unauthorized({
           name: ERR_INVALID_TOKEN,
-          message: errorMessage.ERR_INVALID_TOKEN,
+          message: errorMsg.ERR_INVALID_TOKEN,
         });
       }
 

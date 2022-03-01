@@ -1,10 +1,9 @@
-/* eslint-disable no-use-before-define */
-import { ExtendedApiRequest, ExtendedApiResponse } from '../../@types/next';
-import { Prisma } from './db/db';
-import { withProtect } from './middlewares/auth/auth-jwt';
-import { badRequest, forbidden, internalServerError } from './utils/http/http-helper';
-import { httpStatus } from './utils/http/status-code';
-import { success } from './utils/http/successful-types';
+import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
+import { Prisma } from '@/api/db';
+import { withProtect } from '@/api/middlewares/';
+import {
+  badRequest, internalServerError, httpStatus, success,
+} from '@/api/utils/http/';
 
 /* eslint-disable consistent-return */
 export const index = ['blockchain', 'bitcoin', 'defi', 'tools', 'news'];
@@ -85,7 +84,6 @@ const homepage = async (
 
   async function deleteAwesome(): Promise<void> {
     const { title_id } = req.body;
-    // const user_id = req.user.id;
 
     if (!title_id) {
       throw badRequest({

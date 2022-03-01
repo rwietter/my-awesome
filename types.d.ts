@@ -1,3 +1,5 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
 export declare module 'next' {
 	interface Express {
 		req: string;
@@ -21,3 +23,14 @@ export interface IsOk {
 	isLoading: boolean;
 	isError: boolean;
 }
+
+export interface ExtendedApiRequest extends NextApiRequest {
+	user: {
+		id: string;
+		email: string;
+		name: string;
+		password: string;
+	};
+}
+
+export interface ExtendedApiResponse extends NextApiResponse {}
