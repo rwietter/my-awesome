@@ -39,7 +39,7 @@ export const useAxios = ({
       setTitleId(titleId);
       setIsOk({ isLoading: false, isError: false });
     } catch (error) {
-      // handleError(error);
+      handleError(error);
       setIsOk({ isLoading: false, isError: true });
     }
   };
@@ -65,10 +65,6 @@ export const deleteAwesome = async (titleId: string) => {
       window?.location?.reload();
     }
   } catch (error: any) {
-    const status = error.response.data ?? 400;
-    if (status === 500) {
-      return;
-    }
     handleError(error);
   }
 };
