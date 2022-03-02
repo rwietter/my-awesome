@@ -1,10 +1,10 @@
-import { styled } from '@stitches/react';
+import { styled } from '@/features/ui/theme';
 
 const PageLink = styled('a', {
-  fontSize: '$5',
-  fontFamily: '$primary',
-  fontWeight: 400,
-  transition: 'all 0.3s ease',
+  fontSize: '$6',
+  fontFamily: '$secondary',
+  fontWeight: 500,
+  transition: 'color 0.3s ease',
   lineHeight: '1.7',
   cursor: 'pointer',
   '&:hover': {

@@ -4,25 +4,25 @@ import { FC } from 'react';
 import { styled } from '@/features/ui/theme';
 
 interface MarginCSSProps {
-	marginRight?: string;
-	marginLeft?: string;
-	marginTop?: string;
-	marginBottom?: string;
+	right?: string;
+	left?: string;
+	top?: string;
+	bottom?: string;
 	margin?: string;
 }
 
 const Margin: FC<MarginCSSProps> = ({
-  marginRight = '0',
-  marginTop = 0,
-  marginLeft = '0',
-  marginBottom = 0,
-  margin = '0',
+  right = 0,
+  top = 0,
+  left = 0,
+  bottom = 0,
+  margin = 0,
 }) => {
   const MarginCSS = styled('div', {
-    marginRight,
-    marginLeft,
-    marginBottom,
-    marginTop,
+    marginRight: `${right}rem`,
+    marginLeft: `${left}rem`,
+    marginBottom: `${bottom}rem`,
+    marginTop: `${top}rem`,
     margin,
   });
   return <MarginCSS />;

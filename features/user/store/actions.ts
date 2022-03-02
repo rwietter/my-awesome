@@ -1,5 +1,6 @@
 import Router from 'next/router';
 import { destroyCookie } from 'nookies';
+import { adapter } from '@/services/api';
 import { useAuthStore as store } from '.';
 import { ActionType as Types } from './types';
 
@@ -16,6 +17,7 @@ const authActions = () => ({
   logout: (payload: IPayload | string) => {
     destroyCookie(undefined, 'awesome:token');
     Router.push('/user/signin');
+    adapter.defaults.headers.common.Authorization = '';
     store.getState().dispatch({ type: Types.LOGOUT, payload });
   },
 });

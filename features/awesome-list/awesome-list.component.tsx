@@ -20,7 +20,7 @@ const AwesomeList = () => {
 		<S.Container>
 			<S.SectionHeader>
 				<S.PageDescription>
-					Sua lista {title && `de ${title}`}
+				Your list {title && `of ${title}`}
 				</S.PageDescription>
 				<S.PageContainer>
 					<S.IconDelete size={28} onClick={() => deleteAwesome(titleId)} />
@@ -30,7 +30,7 @@ const AwesomeList = () => {
 
 			<S.PageContent>
 				<S.Section>
-					<S.PageIndice>Índice</S.PageIndice>
+					<S.PageIndice>Content</S.PageIndice>
 					<IndexTitle pageIndex={pageIndex} isOk={isOk} />
 				</S.Section>
 

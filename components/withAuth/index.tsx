@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { NextComponentType } from 'next';
-import useAuthStore from '../../pages/api/context/auth';
-import Login from '../../pages/user/signin';
+import { Login, useAuthStore } from '@/features/user';
 
 function withAuth<T>(Component: NextComponentType<T>) {
   function Auth(props: T) {

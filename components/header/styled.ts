@@ -1,4 +1,14 @@
+import { VscDebugBreakpointLog } from 'react-icons/vsc';
+import { AiOutlineMore } from 'react-icons/ai';
 import { styled } from '@/features/ui/theme';
+
+const HexagonIcon = styled(VscDebugBreakpointLog, {
+  color: '$gray50',
+});
+
+const SeparatorIcon = styled(AiOutlineMore, {
+  color: '$gray50',
+});
 
 const ContainerCSS = styled('header', {
   background: '$gray200',
@@ -60,4 +70,6 @@ const TitleCSS = styled('div', {
   },
 });
 
-export { ContainerCSS, NavCSS, TitleCSS };
+export {
+  ContainerCSS, NavCSS, TitleCSS, HexagonIcon, SeparatorIcon,
+};

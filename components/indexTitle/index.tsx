@@ -1,27 +1,49 @@
 import { FC } from 'react';
-import { IsOk } from '../../types';
-
-import { PageIndiceRef } from '../../pages/v1/home/styled';
+import { IsOk } from 'types';
+import { VscChevronRight } from 'react-icons/vsc';
+import { styled } from '@/features/ui/theme';
 
 interface IndexTitleProps {
 	pageIndex: string[];
 	isOk: IsOk;
 }
 
+const Center = styled('div', {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  padding: '0 0 1rem 0',
+  color: '$primary',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    color: '$primaryHover',
+  },
+});
+
+const ContentTitle = styled('a', {
+  fontWeight: 600,
+  fontSize: '$5',
+  fontFamily: '$secondary',
+});
+
+const ArrowIcon = styled(VscChevronRight, {
+  color: 'inherit',
+  marginRight: '0.5rem',
+});
+
 const IndexTitle: FC<IndexTitleProps> = ({ pageIndex, isOk }) => (
-	<ul>
+	<div>
 		{!isOk.isLoading ? (
 		  pageIndex?.map((item: string, idx) => (
-				<span key={idx.toString()}>
-					<PageIndiceRef>
-						<a href={`#${item.toLowerCase()}`}>{item}</a>
-					</PageIndiceRef>
-				</span>
+				<Center key={idx.toString()}>
+					<ArrowIcon size={15} />
+					<ContentTitle href={`#${item.toLowerCase()}`}>{item}</ContentTitle>
+				</Center>
 		  ))
 		) : (
 			<div />
 		)}
-	</ul>
+	</div>
 );
 
 export { IndexTitle };

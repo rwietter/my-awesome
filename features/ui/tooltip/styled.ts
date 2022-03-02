@@ -28,8 +28,13 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   fontSize: 15,
   lineHeight: 1,
   color: '$gray100',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
   fontWeight: 400,
-  background: '$tooltip',
+  width: 'auto',
+  maxWidth: '200px',
+  background: '$highlight30',
   boxShadow:
 		'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   '@media (prefers-reduced-motion: no-preference)': {
@@ -42,6 +47,12 @@ const StyledContent = styled(TooltipPrimitive.Content, {
       '&[data-side="bottom"]': { animationName: slideUpAndFade },
       '&[data-side="left"]': { animationName: slideRightAndFade },
     },
+  },
+  '@bp3': {
+    maxWidth: '300px',
+  },
+  '@bp5': {
+    maxWidth: '500px',
   },
 });
 

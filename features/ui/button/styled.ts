@@ -8,7 +8,7 @@ export const ButtonContainerCSS = styled('div', {
 export const ButtonCSS = styled('button', {
   width: 'auto',
   height: 'auto',
-  padding: '1rem 2rem',
+  padding: '1rem 2.5rem',
   borderRadius: '4px',
   outline: 'none',
   border: 'none',
@@ -55,11 +55,7 @@ export const ButtonTextCSS = styled('span', {
   padding: 0,
   fontFamily: '$secondary',
   fontWeight: '600',
-  fontSize: '$1',
-
-  '@media (min-width: 500px)': {
-    fontSize: '$3',
-  },
+  fontSize: '$3',
 
   '@media (min-width: 768px)': {
     fontSize: '$4',

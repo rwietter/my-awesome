@@ -29,10 +29,14 @@ const Form = styled('form', {
 
 const Title = styled('h1', {
   fontFamily: '$secondary',
-  fontSize: '$9',
-  margin: '0 0 2rem 0',
+  fontSize: '$7',
+  margin: '0',
   fontWeight: 900,
   color: '$gray50',
+
+  '@bp3': {
+    fontSize: '$9',
+  },
 });
 
 const Label = styled('label', {
@@ -60,37 +64,6 @@ const Input = styled('input', {
   width: '100%',
 });
 
-const Submit = styled('button', {
-  fontFamily: '"Poppins", sans-serif',
-  fontSize: '$4',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'relative',
-  maxWidth: '20rem',
-  width: '100%',
-  height: '4.5rem',
-  marginTop: '3rem',
-  borderRadius: '4px',
-  outline: 'none',
-  overflow: 'hidden',
-  cursor: 'pointer',
-  fontWeight: '500',
-  background: '$highlight145',
-  color: '$white',
-  border: '1px solid $gray400',
-
-  transition:
-    'background 0.3s, box-shadow .3s, color .3s, border .2s cubic-bezier(.55,.055,.675,.19)',
-
-  '&:hover': {
-    background: '$highlight145',
-    color: '$white',
-    boxShadow: '0 5px 7px -3px rgba(0,0,0,0.3)',
-    outline: '1px solid $green',
-  },
-});
-
 export {
-  Wrapper, Form, Title, Label, Input, Submit,
+  Wrapper, Form, Title, Label, Input,
 };

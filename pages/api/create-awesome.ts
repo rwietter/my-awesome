@@ -26,8 +26,16 @@ const createAwesome = async (
 
     const content = JSON.stringify(contentItem);
 
-    const isDuplicatedContent = await Prisma.content.findUnique({
-      where: { content_item: content },
+    const isDuplicatedContent = await Prisma.content.findMany({
+      where: { user_id },
+    });
+
+    isDuplicatedContent.forEach((contents: any) => {
+      if (contents.content_item === content) {
+        throw badRequest({
+          message: 'Duplicated content',
+        });
+      }
     });
 
     if (!isDuplicatedContent) {

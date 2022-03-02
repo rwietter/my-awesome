@@ -15,20 +15,14 @@ export const Container = styled('nav', {
 export const Page = styled(Link, {});
 
 export const TextLink = styled('span', {
-  fontSize: '$5',
+  fontSize: '$6',
   margin: '0.5rem 0',
   cursor: 'pointer',
-  color: '$primary',
-  fontWeight: 600,
+  fontWeight: 800,
   fontFamily: '$secondary',
+  textGradient: '$highlight30',
   transition: 'color .3s ease',
-  '&:hover': {
-    color: '$secondary',
-  },
-  '&.active': {
-    color: '$secondary',
-  },
-  '@media (min-width: 720px)': {
+  '@bp3': {
     fontSize: '$6',
   },
 });

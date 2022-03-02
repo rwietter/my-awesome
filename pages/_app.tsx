@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import '../styles/globals.css';
 
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { QueryClientProvider } from 'react-query';
 
@@ -17,7 +17,14 @@ import { useThemeStore, dark_theme, light_theme } from '@/features/ui/theme';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, token } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!token || !isLoggedIn) {
+      router.push('/user/signin');
+    }
+  }, [isLoggedIn, token]);
 
   const sidebarPaths = ['/user/signin', '/user/signup', '/v1/create-awesome'];
   const headerPaths = ['/user/signin', '/user/signup'];

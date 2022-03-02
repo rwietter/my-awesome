@@ -56,7 +56,7 @@ export const PageIndice = styled('h3', {
   color: '$gray50',
 });
 
-export const PageIndiceRef = styled('li', {
+export const PageIndiceRef = styled('span', {
   fontWeight: 400,
   fontSize: '$5',
   fontFamily: '$secondary',

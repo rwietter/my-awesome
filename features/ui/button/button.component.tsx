@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 
-import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 import * as S from './styled';
 
 interface ButtonCSSProps extends ButtonHTMLAttributes<HTMLButtonElement> {
