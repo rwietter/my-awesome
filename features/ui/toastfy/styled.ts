@@ -8,6 +8,18 @@ const ToastfyCSS = styled(ToastContainer, {
     color: '$gray50',
     fontSize: '$3',
   },
+  '.Toastify__toast--success': {
+    background: '$gray100',
+    borderRadius: '4px',
+    color: '$gray50',
+    fontSize: '$3',
+  },
+  '.Toastify__toast--warn': {
+    background: '$gray100',
+    borderRadius: '4px',
+    color: '$gray50',
+    fontSize: '$3',
+  },
   '.Toastify__progress-bar': {
     background: '$gradient',
   },

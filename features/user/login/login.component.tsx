@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 import { setCookie } from 'nookies';
-import { handleError } from '@/helpers/http-error';
-import { Toastfy } from '@/features/ui/toastfy';
 import { adapter } from '@/services/api';
 import { authActions } from '@/features/user/store/actions';
-import { TextCSS } from '@/features/ui';
+import { TextCSS, Toastfy } from '@/features/ui';
 import * as S from '../styled';
+import { handleError } from '@/helpers/handler-notify';
 
 function Login() {
   const router = useRouter();
@@ -40,22 +39,22 @@ function Login() {
   };
 
   return (
-	<S.Wrapper>
-		<S.Form onSubmit={handleSubmit}>
-			<TextCSS fontWeight={400} size="$5">
-				Já tem conta ?
-			</TextCSS>
-			<S.Title>Faça login aqui</S.Title>
-			<S.Label htmlFor="email">E-mail</S.Label>
-			<S.Input name="email" type="email" />
-			<S.Label htmlFor="password">Password</S.Label>
-			<S.Input name="password" type="password" />
-			<S.Submit type="submit">
-				<p>Enviar</p>
-			</S.Submit>
-		</S.Form>
-		<Toastfy />
-	</S.Wrapper>
+		<S.Wrapper>
+			<S.Form onSubmit={handleSubmit}>
+				<TextCSS fontWeight={400} size="$5">
+					Já tem conta ?
+				</TextCSS>
+				<S.Title>Faça login aqui</S.Title>
+				<S.Label htmlFor="email">E-mail</S.Label>
+				<S.Input name="email" type="email" />
+				<S.Label htmlFor="password">Password</S.Label>
+				<S.Input name="password" type="password" />
+				<S.Submit type="submit">
+					<p>Enviar</p>
+				</S.Submit>
+			</S.Form>
+			<Toastfy />
+		</S.Wrapper>
   );
 }
 

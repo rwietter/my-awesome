@@ -7,6 +7,7 @@ interface NotifyError {
 	name?: string;
 	status: string;
 	message: string;
+	type?: 'warn' | 'error' | 'info' | 'success';
 }
 
 const Toastfy = () => (
@@ -15,16 +16,17 @@ const Toastfy = () => (
 
 const toastfy = toast;
 
-const notifyError = ({
+const notify = ({
   id = '',
   name = '',
   message = '',
   status = '',
+  type = 'warn',
 }: NotifyError) => {
-  toastfy.error(`${name} (${status}): ${message}`, {
+  toastfy[type](`${name} (${status}): ${message}`, {
     position: 'bottom-right',
-    toastId: `${id}-${Math.floor(Math.random() * (20 - 1 + 1)) + 1}`,
+    toastId: `${id}-${Math.floor(Math.random() * (90 - 1 + 1)) + 1}`,
   });
 };
 
-export { Toastfy, notifyError };
+export { Toastfy, notify };

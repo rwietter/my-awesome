@@ -1,10 +1,27 @@
-import { styled } from '@/features/ui/theme';
+import { styled, keyframes } from '@/features/ui/theme';
+
+const pulse = keyframes({
+  '0%': {
+    transform: 'scale(1)',
+    boxShadow: '0 0 0 0 rgba(0, 0, 0, 0.7)',
+  },
+
+  '70%': {
+    transform: 'scale(1.05)',
+    boxShadow: '0 0 0 10px rgba(0, 0, 0, 0)',
+  },
+
+  '100%': {
+    transform: 'scale(1)',
+    boxShadow: '0 0 0 0 rgba(0, 0, 0, 0)',
+  },
+});
 
 const Container = styled('section', {
   position: 'relative',
   width: '100%',
   display: 'grid',
-  padding: '8rem 0.5rem 0 0.5rem',
+  padding: '6rem 0.5rem 0 0.5rem',
   gridTemplateColumns: '1fr',
   gridTemplateRows: '1fr 1fr',
   justifyContent: 'center',
@@ -12,7 +29,7 @@ const Container = styled('section', {
   minHeight: '100vh',
   color: '$gray50',
   background: '$background',
-  '@media(min-width: 720px)': {
+  '@media(min-width: 1125px)': {
     gridTemplateColumns: '1fr 1fr',
     gridTemplateRows: '1fr',
   },
@@ -23,12 +40,10 @@ const Form = styled('form', {
   flexDirection: 'column',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
-  width: '100%',
-  maxWidth: '700px',
 });
 
 const Label = styled('label', {
-  fontFamily: '"Poppins", sans-serif',
+  fontFamily: '$secondary',
   fontSize: '$4',
   alignSelf: 'flex-start',
   padding: '0.2rem 0',
@@ -99,19 +114,25 @@ const Submit = styled('button', {
 });
 
 const Title = styled('h1', {
-  fontFamily: '$primary',
-  fontSize: '$9',
+  fontFamily: '$secondary',
+  fontSize: '$7',
   fontWeight: 700,
   margin: 0,
   textGradient: '$highlight30',
-  paddingBottom: '2rem',
+  '&[data-type="preview"]': {
+    paddingTop: '4rem',
+  },
 
   '@media (min-width: 720px)': {
     fontSize: '$10',
+
+    '&[data-type="preview"]': {
+      paddingTop: 0,
+    },
   },
 
   '@media (min-width: 1100px)': {
-    fontSize: '3.5rem',
+    fontSize: '$10',
   },
 });
 
@@ -119,13 +140,27 @@ const FlexButton = styled('div', {
   display: 'flex',
   justifyContent: 'flex-start',
   width: '100%',
+  alignItems: 'center',
+
+  'div:not(:nth-child(3))': {
+    marginRight: '1rem',
+  },
+
+  'button[type="submit"]': {
+    animation: `${pulse} 2s infinite`,
+  },
 });
 
 const Section = styled('section', {
   display: 'flex',
   flexFlow: 'column',
   width: '100%',
-  padding: '2rem',
+  padding: '0.4rem',
+  paddingBottom: '0.4rem',
+
+  '@media(min-width: 720px)': {
+    padding: '2rem',
+  },
 });
 
 export {

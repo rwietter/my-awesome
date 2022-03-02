@@ -19,7 +19,7 @@ const {
       gray400: '#0C0C0E',
       primary: '#74ebd5',
       secondary: '#8257e5',
-      tertiary: '#ff006e',
+      tertiary: '#eea3b4',
       separator: '#1B1B1E',
       tooltip: '#ff006e',
       buttonThumb: '#F4F4F6',
@@ -48,6 +48,13 @@ const {
       9: '2.5rem',
       10: '3rem',
     },
+  },
+  media: {
+    '@bp1': '(min-width: 480px)',
+    '@bp2': '(min-width: 620px)',
+    '@bp3': '(min-width: 720px)',
+    '@bp4': '(min-width: 970px)',
+    '@bp5': '(min-width: 1100px)',
   },
   utils: {
     linearGradient: (value: string) => ({
@@ -78,7 +85,7 @@ const { theme: light_theme } = createStitches({
       gray400: '#C9C9CF',
       primary: '#ff006e',
       secondary: '#8257e5',
-      tertiary: '#74ebd5',
+      tertiary: '#b15cdd',
       separator: '#C9C9CF',
       tooltip: '#8257e5',
       buttonThumb: '#121214',

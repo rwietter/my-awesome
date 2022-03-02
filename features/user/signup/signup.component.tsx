@@ -3,9 +3,8 @@ import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 
 import * as S from '../styled';
-import { Toastfy } from '@/features/ui/toastfy';
-import { handleError } from '@/helpers/http-error';
-import { TextCSS } from '@/features/ui';
+import { TextCSS, Toastfy } from '@/features/ui';
+import { handleError } from '@/helpers/handler-notify';
 
 const SignUp = () => {
   const router = useRouter();
@@ -47,7 +46,7 @@ const SignUp = () => {
           <TextCSS color="$white">Enviar</TextCSS>
         </S.Submit>
       </S.Form>
-      <Toastfy />
+			<Toastfy />
     </S.Wrapper>
   );
 };

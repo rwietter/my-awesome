@@ -1,6 +1,7 @@
 import { useAwesomeStore as store } from '.';
 import { adapter } from '@/services/api';
 import { ActionContext, ActionType as Types } from './types';
+import { handleError, handleSuccess } from '@/helpers/handler-notify';
 
 const contentActions = () => ({
   addContentItem: (context: ActionContext) => {
@@ -48,12 +49,18 @@ const contentActions = () => ({
       if (response.status !== 200) {
         throw response;
       }
+      handleSuccess('Awesome created');
     } catch (error) {
       return error;
     }
   },
   resetStore: async () => {
     store.getState().dispatch({ type: Types.RESET_AWESOME });
+    handleSuccess('Reseted previous awesome');
+    if (document) {
+      const form = document.querySelector('#awesome-form') as HTMLFormElement;
+      if (form) return form.reset();
+    }
 	 },
 });
 

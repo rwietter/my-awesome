@@ -1,34 +1,42 @@
-import { NextPage } from 'next';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
-import { handleError } from 'helpers/http-error';
 import * as S from './style';
-import { Toastfy } from '@/features/ui/toastfy';
-import { useAwesomeStore, contentActions } from '@/features/create-awesome/store';
-import { PageLink, PageSectionItem } from '@/features/ui';
-import { useAuthStore } from '@/features/user/store';
+import { Toastfy, notify } from '@/features/ui/toastfy';
+import {
+  useAwesomeStore,
+  contentActions,
+} from '@/features/create-awesome/store';
+import { ContentItem } from '@/components/contentItem';
+import { Button } from '@/features/ui/button';
+import { Margin } from '@/features/ui/margin';
+import { handleError } from '@/helpers/handler-notify';
 
-interface LinkProps {
-	name: string;
-	url: string;
-}
-
-const CreateAwesome: NextPage = () => {
+const CreateAwesome = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const {
     addContentIndex, addContentItem, saveAwesome, resetStore,
-  } = contentActions();
+  } =		contentActions();
+  const [done, setDone] = useState(false);
   const { contentItem, contentIndex } = useAwesomeStore();
-  const { token } = useAuthStore();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleClearPreview = () => resetStore();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       const title = e.currentTarget.awesome.value;
 
-      if (title) saveAwesome({ title, contentItem, token });
-    } catch (error) {
+      if (title) {
+        const res = await saveAwesome({ title, contentItem }) as Response;
+
+        if (res.status !== 200) {
+          throw res;
+        }
+      }
+    } catch (error: any) {
       handleError(error);
+    } finally {
+      setDone(false);
     }
   };
 
@@ -40,76 +48,85 @@ const CreateAwesome: NextPage = () => {
     }
   };
 
-  const handleClearPreview = () => resetStore();
-
   return (
-		<S.Container>
-			<S.Section>
-				<S.Title>Create Awesome</S.Title>
-				<S.Form onSubmit={handleSubmit}>
-					<S.Label htmlFor="awesome">Name of awesome</S.Label>
-					<S.Input name="awesome" type="text" />
-					<S.Label htmlFor="links">Add content</S.Label>
-					<S.TextArea
-						name="links"
-						rows={8}
-						cols={40}
-						ref={inputRef}
-						placeholder={
-							'Typescript\n- docs, https://www.typescriptlang.org/docs/'
-						}
-					/>
-					<S.FlexButton>
-						<S.Submit type="button" onClick={handleAddContentItem}>
-							<p>Add content</p>
-						</S.Submit>
-						<S.Submit type="submit">
-							<p>Save awesome</p>
-						</S.Submit>
-						<S.Submit type="button" onClick={handleClearPreview}>
-							<p>Clear preview</p>
-						</S.Submit>
-					</S.FlexButton>
-				</S.Form>
-			</S.Section>
-			<S.Section>
-				<S.Title>Preview your awesome content</S.Title>
-				{contentIndex ? (
-				  contentIndex?.map((value: string) => (
-						<PageSectionItem key={value}>
-							<h3 id={value}>{value}</h3>
-							<ul>
-								{contentItem ? (
-								  contentItem[value]?.map(
-								    ({ name, url }: LinkProps, idx: number) => (
-											<li key={idx.toString()}>
-												<PageLink href={url} target="_blank" rel="noreferrer">
-													{name}
-												</PageLink>
-											</li>
-								    ),
-								  )
-								) : (
-									<div />
-								)}
-							</ul>
-						</PageSectionItem>
-				  ))
-				) : (
-					<>
-						<h3>Exemple</h3>
-						<ul>
-							<li>
-								<PageLink href="google.com" target="_blank">
-									Google
-								</PageLink>
-							</li>
-						</ul>
-					</>
-				)}
-			</S.Section>
+		<>
+			<S.Container>
+				<S.Section>
+					<S.Title>Create Awesome</S.Title>
+					<S.Form id="awesome-form" onSubmit={handleSubmit}>
+						{done && (
+							<>
+								<S.Label htmlFor="awesome">Name of awesome</S.Label>
+								<S.Input name="awesome" type="text" required />
+							</>
+						)}
+
+						{!done && (
+							<>
+								<S.Label htmlFor="links">Add content</S.Label>
+								<S.TextArea
+									name="links"
+									rows={8}
+									cols={40}
+									ref={inputRef}
+									required
+									placeholder={
+										'Typescript\n- docs, https://www.typescriptlang.org/docs/'
+									}
+								/>
+							</>
+						)}
+						<Margin margin="1rem" />
+						<S.FlexButton>
+							{!done && (
+								<Button
+									type="button"
+									color="primary"
+									onClick={handleAddContentItem}
+								>
+									Add content
+								</Button>
+							)}
+							{done && (
+								<Button type="submit" color="secondary" data-margin="margin">
+									Save awesome
+								</Button>
+							)}
+							{!done && (
+								<Button
+									type="button"
+									data-margin="margin"
+									color="secondary"
+									onClick={() => setDone((state) => !state)}
+								>
+									Ok, I am done!
+								</Button>
+							)}
+							{contentItem[contentIndex[0]] && (
+								<Button
+									type="button"
+									color="tertiary"
+									onClick={handleClearPreview}
+								>
+									Clear preview
+								</Button>
+							)}
+						</S.FlexButton>
+					</S.Form>
+				</S.Section>
+				<S.Section>
+					<S.Title data-type="preview">Preview your awesome content</S.Title>
+					<S.Section>
+						<ContentItem
+							pageIndex={contentIndex}
+							pageContent={contentItem}
+							isOk={{ isLoading: false, isError: false }}
+						/>
+					</S.Section>
+				</S.Section>
+			</S.Container>
 			<Toastfy />
-		</S.Container>
+		</>
   );
 };
 

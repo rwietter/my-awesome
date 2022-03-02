@@ -1,6 +1,7 @@
 import { NextApiResponse } from 'next';
 
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
+import { badRequest, internalServerError } from './utils/http/http-helper';
 import { Prisma } from '@/api/db';
 import { withProtect } from '@/api/middlewares/';
 
@@ -17,25 +18,47 @@ const createAwesome = async (
     const { contentItem, title: awesomeTitle } = req.body;
     const user_id = req.user.id;
 
-    if (!user_id) return;
+    if (!contentItem || !awesomeTitle) {
+      throw badRequest({
+        message: 'Missing content or title',
+      });
+    }
 
     const content = JSON.stringify(contentItem);
 
-    if (!content) return;
+    const isDuplicatedContent = await Prisma.content.findUnique({
+      where: { content_item: content },
+    });
 
-    const { content_item, id: content_id } = await Prisma.content.create({
+    if (!isDuplicatedContent) {
+      throw internalServerError({
+        message: 'Content is duplicated',
+      });
+    }
+
+    const createdContent = await Prisma.content.create({
       data: { content_item: content, user_id },
     });
 
-    const { id: title_id, title }: Title = await Prisma.title.create({
-      data: { title: awesomeTitle, content_id, user_id },
+    if (!createdContent) {
+      throw internalServerError({
+        message: 'The content could not be created',
+      });
+    }
+
+    const createdTitle: Title = await Prisma.title.create({
+      data: { title: awesomeTitle, content_id: createdContent.id, user_id },
     });
+
+    if (!createdTitle) {
+      throw internalServerError({
+        message: 'The title of content could not be created',
+      });
+    }
 
     return res.status(200).json({
       message: 'Successful create awesome',
-      title,
-      content_item,
-      title_id,
+      status: 200,
     });
   } catch (error) {
     return res.status(404).json({ error });

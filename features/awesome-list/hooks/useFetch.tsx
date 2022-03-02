@@ -1,7 +1,7 @@
 import { Content, IsOk } from 'types';
 import { useState, useEffect } from 'react';
-import { handleError } from '@/helpers/http-error';
 import { adapter } from '@/services/api';
+import { handleError, handleSuccess } from '@/helpers/handler-notify';
 
 interface StateProps {
 	title: string;
@@ -64,6 +64,8 @@ export const deleteAwesome = async (titleId: string) => {
     if (window && window.location) {
       window?.location?.reload();
     }
+
+    handleSuccess('Awesome deleted successfully');
   } catch (error: any) {
     handleError(error);
   }

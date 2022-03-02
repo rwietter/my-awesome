@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { handleError } from '@/helpers/http-error';
 
 import { adapter } from '@/services/api';
 import { Toastfy } from '@/features/ui/toastfy';
@@ -26,7 +25,7 @@ function SidebarLinks() {
         setPageLinks(data?.title);
         setAwesomeRef({ href: title.title });
       } catch (error) {
-        handleError(error);
+        // handleError(error);
       }
     };
     fetchTitle();
