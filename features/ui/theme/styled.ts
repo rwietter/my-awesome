@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { createStitches } from '@stitches/react';
 
 const {
@@ -29,6 +30,7 @@ const {
       green: '#17b978',
       danger: '#FF006E',
       sidebar: '#121214',
+      bgMd: '#121214',
     },
     space: {},
     fonts: {
@@ -96,6 +98,7 @@ const { theme: light_theme } = createStitches({
       green: '#17b978',
       danger: '#FF006E',
       sidebar: '#F4F4F6',
+      bgMd: '#F4F4F6',
     },
     space: {},
     fontSizes: {

@@ -3,7 +3,7 @@ import { NextApiResponse } from 'next';
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 import { badRequest, internalServerError } from './utils/http/http-helper';
 import { Prisma } from '@/api/db';
-import { withProtect } from '@/api/middlewares/';
+import { withAuth } from '@/api/middlewares/';
 
 type Title = {
   id: string;
@@ -73,4 +73,4 @@ const createAwesome = async (
   }
 };
 
-export default withProtect(createAwesome);
+export default withAuth(createAwesome);

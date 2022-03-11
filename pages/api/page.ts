@@ -1,14 +1,9 @@
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 import { Prisma } from '@/api/db';
-import { withProtect } from '@/api/middlewares/';
+import { withAuth } from '@/api/middlewares/';
 import {
   badRequest, internalServerError, httpStatus, success,
 } from '@/api/utils/http/';
-
-/* eslint-disable consistent-return */
-export const index = ['blockchain', 'bitcoin', 'defi', 'tools', 'news'];
-
-export const index2 = ['Typescript', 'Javascript'];
 
 // export const content = {
 // 	blockchain: [
@@ -70,20 +65,22 @@ export const index2 = ['Typescript', 'Javascript'];
 // 	],
 // };
 
-const homepage = async (
+const handler = async (
   req: ExtendedApiRequest,
   res: ExtendedApiResponse,
 ): Promise<void> => {
   switch (req.method) {
-    case 'POST':
+    case 'GET':
       return getAwesome();
-    case 'PUT':
+    case 'DELETE':
       return deleteAwesome();
     default:
   }
 
   async function deleteAwesome(): Promise<void> {
-    const { title_id } = req.body;
+    const { title_id: titleId } = req.query;
+
+    const title_id = titleId.toString();
 
     if (!title_id) {
       throw badRequest({
@@ -106,7 +103,13 @@ const homepage = async (
         });
       }
 
-      return res.status(200).json({});
+      const awesomeTitles = await Prisma.title.findMany({
+        where: { user_id: req.user.id },
+      });
+
+      return res.status(200).json({
+        awesomeTitles,
+      });
     } catch (error) {
       return res.status(404).json({ error });
     }
@@ -114,13 +117,18 @@ const homepage = async (
 
   async function getAwesome(): Promise<void> {
     try {
-      const { page } = req.body;
       const user_id = req.user.id;
+      const { page } = req.query;
+      const ref = page.toString();
 
-      if (!user_id) return;
+      if (!user_id || !ref) {
+        throw badRequest({
+          message: 'User id or page is required',
+        });
+      }
 
       const title = await Prisma.title.findFirst({
-        where: { AND: { title: page, user_id } },
+        where: { AND: { title: ref, user_id } },
       });
 
       const content = await Prisma.content.findFirst({
@@ -141,7 +149,7 @@ const homepage = async (
       };
 
       return res.status(200).json({
-        message: success.SUCCESS_SIGNIN,
+        message: `Success to get awesome ${title.title}`,
         status: httpStatus.ok,
         ...data,
       });
@@ -151,4 +159,4 @@ const homepage = async (
   }
 };
 
-export default withProtect(homepage);
+export default withAuth(handler);

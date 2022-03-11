@@ -1,26 +1,32 @@
-import { ContentItem } from '@/components/contentItem/contentItem';
+import { useEffect } from 'react';
 import * as S from './styled';
-import { IndexTitle } from '@/components/indexTitle';
 import { Toastfy } from '@/features/ui/toastfy';
-import { deleteAwesome, useAxios } from './hooks/useFetch';
-import { useTitleStore } from './store';
+import { deleteAwesome, useFetchAwesome } from './hooks';
+import { useAwesomeListStore } from './store';
+import { MarkdownRender } from './awesome-md.component';
+import { sideNavigationEffect } from './hooks/useNavigationQuery';
+import { Sidebar, useSidebarStore } from './components/sidebar';
 
 const AwesomeList = () => {
-  const { href: ref } = useTitleStore();
+  const { awesomeName } = useAwesomeListStore();
+  const { isNavigationOpen } = useSidebarStore();
+  const { useNavigationQuery } = sideNavigationEffect();
 
   const {
-    title, isOk, pageIndex, titleId, pageContent,
-  } = useAxios({
-    method: 'post',
+    content, isOk, title, titleId,
+  } = useFetchAwesome({
     url: '/page',
-    ref,
+    awesomeName,
   });
 
+  useEffect(useNavigationQuery, [isNavigationOpen]);
+
   return (
-		<S.Container>
+		<S.Container className="main-content">
+			<Sidebar />
 			<S.SectionHeader>
 				<S.PageDescription>
-				Your list {title && `of ${title}`}
+					Your Awesome {title && `of ${title}`}
 				</S.PageDescription>
 				<S.PageContainer>
 					<S.IconDelete size={28} onClick={() => deleteAwesome(titleId)} />
@@ -30,18 +36,10 @@ const AwesomeList = () => {
 
 			<S.PageContent>
 				<S.Section>
-					<S.PageIndice>Content</S.PageIndice>
-					<IndexTitle pageIndex={pageIndex} isOk={isOk} />
+					<S.PageIndice>{title && title}</S.PageIndice>
 				</S.Section>
-
-				<S.Separator />
-
 				<S.Section>
-					<ContentItem
-						pageIndex={pageIndex}
-						pageContent={pageContent}
-						isOk={isOk}
-					/>
+					<MarkdownRender content={content} isOk={isOk} />
 				</S.Section>
 			</S.PageContent>
 			<Toastfy />

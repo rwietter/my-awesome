@@ -11,7 +11,7 @@ interface NotifyError {
 }
 
 const Toastfy = () => (
-	<ToastfyCSS hideProgressBar closeOnClick pauseOnHover draggable />
+	<ToastfyCSS hideProgressBar closeOnClick pauseOnHover draggable autoClose={false} />
 );
 
 const toastfy = toast;

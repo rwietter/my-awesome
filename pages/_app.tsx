@@ -1,15 +1,15 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
 import '../styles/globals.css';
-
-import { Router, useRouter } from 'next/router';
+import 'react-markdown-editor-lite/lib/index.css';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { QueryClientProvider } from 'react-query';
 
-import type { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import { ErrorBoundary } from 'react-error-boundary';
 import HeadContent from '@/components/head';
 import Header from '@/components/header';
-import Sidebar from '@/components/sidebar';
 import { queryClient } from '@/services/queryClient';
 import { ErrorFallback } from '@/components/error-boundary';
 import { useAuthStore } from '@/features/user/store';
@@ -26,8 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     }
   }, [isLoggedIn, token]);
 
-  const sidebarPaths = ['/user/signin', '/user/signup', '/v1/create-awesome'];
-  const headerPaths = ['/user/signin', '/user/signup'];
+  const headerPaths = ['/', '/user/signin', '/user/signup'];
 
   const { theme } = useThemeStore();
   const themeMode = theme === 'light' ? light_theme : dark_theme;
@@ -42,7 +41,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 		<QueryClientProvider client={queryClient}>
 			<ErrorBoundary FallbackComponent={ErrorFallback}>
 				<div id="class-theme">
-					{!sidebarPaths.includes(pathname) && isLoggedIn && <Sidebar />}
 					<HeadContent />
 					{!headerPaths.includes(pathname) && isLoggedIn && <Header />}
 					<Component {...pageProps} />

@@ -35,7 +35,7 @@ function Login() {
       });
 
       signin({ isLoggedIn: true, token, userId });
-      router.push('/v1/home');
+      router.push('/home');
     } catch (err: any) {
       handleError(err);
     }
@@ -48,7 +48,7 @@ function Login() {
 					Sign in to MyAwesome
 				</TextCSS>
 				<Margin margin="1rem 0 0 0" />
-				<S.Title>Sign in here</S.Title>
+				<S.Title>Sign in</S.Title>
 				<S.Label htmlFor="email">E-mail</S.Label>
 				<S.Input name="email" type="email" />
 				<S.Label htmlFor="password">Password</S.Label>

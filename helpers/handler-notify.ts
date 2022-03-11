@@ -7,6 +7,8 @@ function handleError(error: any) {
 
   const status = errorData?.status ?? 400; // No data available
 
+  if (status === 500) return;
+
   const errMsg = errorData?.message ?? 'Something went wrong';
 
   notify({

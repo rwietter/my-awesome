@@ -1,5 +1,5 @@
-export type IPage = {
-  href: '';
+export type AwesomeList = {
+  awesomeName: string;
 };
 
 export enum ActionType {

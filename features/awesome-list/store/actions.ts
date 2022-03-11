@@ -1,10 +1,10 @@
-import { useTitleStore as useStore } from '.';
-import { ActionType as Types } from './types';
+import { useAwesomeListStore as store } from '.';
+import { ActionType as Types, AwesomeList } from './types';
 
-const refAwsActions = () => ({
-  setAwesomeRef: (payload: { href: string }) => {
-    useStore.getState().dispatch({ type: Types.SAVE_PAGE, payload });
+const awesomeListActions = () => ({
+  setAwesomeRef: (payload: AwesomeList) => {
+    store.getState().dispatch({ type: Types.SAVE_PAGE, payload });
   },
 });
 
-export { refAwsActions };
+export { awesomeListActions };

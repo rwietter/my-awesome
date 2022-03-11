@@ -1,7 +1,7 @@
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 import { httpStatus } from '@/api/utils/http/';
 import { Prisma } from '@/api/db';
-import { withProtect } from '@/api/middlewares/';
+import { withAuth } from '@/api/middlewares/';
 import {
   ERR_USER_NOT_FOUND, errorMsg, success, internalServerError, unauthorized,
 } from '@/api/utils/http';
@@ -37,4 +37,4 @@ async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
   }
 }
 
-export default withProtect(handler);
+export default withAuth(handler);

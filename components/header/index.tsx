@@ -21,9 +21,9 @@ const Header = () => {
 				<TextCSS><VscRocket size={15} /> MyAwesome</TextCSS>
 			</TitleCSS>
 			<NavCSS>
-				<Link href="/v1/home">Home</Link>
+				<Link href="/home">Home</Link>
 				<HexagonIcon size={5} />
-				<Link href="/v1/create-awesome">Create list</Link>
+				<Link href="/create-awesome">Create list</Link>
 				<HexagonIcon size={5} />
 				<a data-type="logout" onClick={handleLogout}>
 					Sign out

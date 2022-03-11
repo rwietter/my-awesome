@@ -151,3 +151,12 @@ export const Container = styled('div', {
   padding: '5rem 5rem 2rem 20rem',
 });
 ```
+
+```javascript
+<ReactMarkdownCSS
+	className={mdTheme}
+	children={content}
+	remarkPlugins={[remarkGfm]}
+	rehypePlugins={[rehypeRaw, rehypeHighlight]}
+/>
+```

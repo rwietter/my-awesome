@@ -1,13 +1,20 @@
-import create from 'zustand';
+import create, { UseBoundStore } from 'zustand';
 import { persist, redux } from 'zustand/middleware';
 
 import { reducer } from './reducer';
-import { IPage } from './types';
+import { AwesomeList } from './types';
 
-const state: IPage = {
-  href: '',
+const state: AwesomeList = {
+  awesomeName: '',
 };
 
-export const useTitleStore = create(
-  persist(redux(reducer, state), { name: 'title-store' }),
+interface AwesomeListStore {
+	awesomeName: string;
+	dispatch: (payload: any) => void;
+}
+
+const useAwesomeListStore = create<AwesomeListStore>(
+  persist(redux(reducer, state), { name: 'awesome-list-store' }),
 );
+
+export { useAwesomeListStore };

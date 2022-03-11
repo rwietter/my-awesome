@@ -14,11 +14,16 @@ const ToastfyCSS = styled(ToastContainer, {
     color: '$gray50',
     fontSize: '$3',
   },
-  '.Toastify__toast--warn': {
-    background: '$gray100',
+  '.Toastify__toast--warning': {
+    background: '$gray50',
     borderRadius: '4px',
-    color: '$gray50',
-    fontSize: '$3',
+    fontSize: '$4',
+    '.Toastify__toast-body': {
+      color: '$gray400',
+    },
+    '.Toastify__close-button--light': {
+      color: '$gray400',
+    },
   },
   '.Toastify__progress-bar': {
     background: '$gradient',

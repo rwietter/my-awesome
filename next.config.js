@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
+const withCSS = require('@zeit/next-css');
+
+module.exports = withCSS({});
+
 const nextConfig = {
-	reactStrictMode: true,
+  reactStrictMode: true,
+  env: {
+    SECRET_JWT_KEY: process.env.SECRET_JWT_KEY,
+  },
 };
 
 module.exports = nextConfig;

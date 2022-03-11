@@ -1,1 +1,1 @@
-export { withProtect } from './auth/auth-jwt';
+export { withAuth } from './auth/auth-jwt';

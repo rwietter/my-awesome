@@ -5,7 +5,7 @@ const reducer = (state: any, { type, payload }: any) => {
     case Type.SAVE_PAGE:
       return {
         ...state,
-        href: payload.href,
+        awesomeName: payload.awesomeName,
       };
     default:
   }

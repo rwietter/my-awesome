@@ -1,10 +1,11 @@
 import JWT from 'jsonwebtoken';
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 
+import { parseCookies } from 'nookies';
 import { ERR_INVALID_TOKEN, errorMsg, unauthorized } from '@/api/utils/http';
 import { Prisma } from '@/api/db';
 
-const withProtect = (handler: any) => async (req: ExtendedApiRequest, res: ExtendedApiResponse) => {
+const withAuth = (handler: any) => async (req: ExtendedApiRequest, res: ExtendedApiResponse) => {
   try {
     const authorization = req.headers.authorization as string;
 
@@ -50,4 +51,4 @@ const withProtect = (handler: any) => async (req: ExtendedApiRequest, res: Exten
   }
 };
 
-export { withProtect };
+export { withAuth };

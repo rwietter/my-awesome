@@ -4,7 +4,7 @@ import { VscChevronRight } from 'react-icons/vsc';
 import { styled } from '@/features/ui/theme';
 
 interface IndexTitleProps {
-	pageIndex: string[];
+	contentKeys: string[];
 	isOk: IsOk;
 }
 
@@ -31,10 +31,10 @@ const ArrowIcon = styled(VscChevronRight, {
   marginRight: '0.5rem',
 });
 
-const IndexTitle: FC<IndexTitleProps> = ({ pageIndex, isOk }) => (
+const IndexTitle: FC<IndexTitleProps> = ({ contentKeys, isOk }) => (
 	<div>
 		{!isOk.isLoading ? (
-		  pageIndex?.map((item: string, idx) => (
+		  contentKeys?.map((item: string, idx) => (
 				<Center key={idx.toString()}>
 					<ArrowIcon size={15} />
 					<ContentTitle href={`#${item.toLowerCase()}`}>{item}</ContentTitle>

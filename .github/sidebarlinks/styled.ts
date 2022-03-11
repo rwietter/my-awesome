@@ -2,17 +2,18 @@ import Link from 'next/link';
 import { styled } from '@/features/ui/theme';
 
 export const Container = styled('nav', {
-  alignItems: 'center',
+  alignItems: 'flex-start',
   display: 'flex',
   justifyContent: 'space-around',
   flexFlow: 'row wrap',
-  padding: '1.5rem 0.3rem 0 0.3rem',
+  padding: '1.5rem 0.3rem 0 1rem',
   '@media (min-width: 720px)': {
     flexFlow: 'column',
   },
 });
 
-export const Page = styled(Link, {});
+export const Page = styled(Link, {
+});
 
 export const TextLink = styled('span', {
   fontSize: '$6',
@@ -22,6 +23,8 @@ export const TextLink = styled('span', {
   fontFamily: '$secondary',
   textGradient: '$highlight30',
   transition: 'color .3s ease',
+  wordBreak: 'break-all',
+  wordWrap: 'break-word',
   '@bp3': {
     fontSize: '$6',
   },

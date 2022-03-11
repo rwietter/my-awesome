@@ -4,11 +4,11 @@ import { adapter } from '@/services/api';
 import { Toastfy } from '@/features/ui/toastfy';
 import { Links } from './@types';
 import * as S from './styled';
-import { refAwsActions } from '@/features/awesome-list';
+import { awesomeListActions } from '@/features/awesome-list';
 
-function SidebarLinks() {
-  const [pageLinks, setPageLinks] = useState([]);
-  const { setAwesomeRef } = refAwsActions();
+export default function SidebarLinks() {
+  const [pageLinks, setPageLinks] = useState([]); // Estado global para remap on exclude
+  const { setAwesomeRef } = awesomeListActions();
 
   useEffect(() => {
     const fetchTitle = async () => {
@@ -36,8 +36,8 @@ function SidebarLinks() {
   return (
 		<S.Container>
 			{pageLinks[0] ? (
-			  pageLinks?.map((link: Links, idx: number) => (
-					<S.Page href="/v1/home" key={idx.toString()}>
+			  pageLinks?.map((link: Links) => (
+					<S.Page href="/home" key={link.id.toString()}>
 						<S.TextLink onClick={() => handleClick(link.title)}>
 							{link.title}
 						</S.TextLink>
@@ -50,5 +50,3 @@ function SidebarLinks() {
 		</S.Container>
   );
 }
-
-export default SidebarLinks;

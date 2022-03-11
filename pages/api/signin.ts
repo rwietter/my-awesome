@@ -69,7 +69,7 @@ const signup = async (
     const JWTData = {
       iss: 'awesome',
       sub: user.id,
-      exp: Math.floor(Date.now() / 1000) + 60 * 60,
+      exp: Math.floor(Date.now() / 1000) + 60 * 4,
       data: { userId: user.id, name: user.name },
     };
 

@@ -23,6 +23,7 @@
 			"@/helpers/*": ["helpers/*"],
 			"@/styles/*": ["styles/*"],
 			"@/prisma/*": ["prisma/*"],
+			"@/hoc/*": ["hoc/*"],
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

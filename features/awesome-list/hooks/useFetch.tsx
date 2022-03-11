@@ -1,42 +1,31 @@
-import { Content, IsOk } from 'types';
+import { IsOk } from 'types';
 import { useState, useEffect } from 'react';
 import { adapter } from '@/services/api';
 import { handleError, handleSuccess } from '@/helpers/handler-notify';
+import { FechListProps, UseFetchAwesomeReturnProps, ContentState } from './types';
 
-interface StateProps {
-	title: string;
-	isOk: IsOk;
-	pageIndex: string[];
-	titleId: string;
-	pageContent: Content | null
-}
-
-interface FechListProps {
-	url: any;
-	method: 'get' | 'post' | 'put' | 'delete';
-	ref: string;
-}
-
-export const useAxios = ({
-  url = '', method = 'post', ref = '',
-}: FechListProps): StateProps => {
-  const [title, setTitle] = useState('');
+export const useFetchAwesome = ({
+  url = '',
+  awesomeName = '',
+}: FechListProps): UseFetchAwesomeReturnProps => {
   const [isOk, setIsOk] = useState<IsOk>({ isLoading: true, isError: false });
-  const [pageIndex, setPageIndex] = useState<string[]>([]);
-  const [pageContent, setPageContent] = useState<Content | null>(null);
-  const [titleId, setTitleId] = useState('');
+  const [state, setState] = useState<ContentState>({
+    title: '',
+    content: '',
+    titleId: '',
+  });
 
   const fetchData = async () => {
     try {
-      const response = await adapter[method](url, { page: ref });
+      const response = await adapter.get(url, { params: { page: awesomeName } });
       const { content, title: contentTitle, title_id: titleId } = response.data;
-      const parsedContend = content ? JSON.parse(content) : null;
-      const contentKeys = Object.keys(parsedContend);
+      const parsedContent = JSON.parse(content);
 
-      setPageIndex(contentKeys);
-      setTitle(contentTitle);
-      setPageContent(parsedContend);
-      setTitleId(titleId);
+      setState({
+        content: parsedContent,
+        title: contentTitle,
+        titleId,
+      });
       setIsOk({ isLoading: false, isError: false });
     } catch (error) {
       handleError(error);
@@ -46,24 +35,23 @@ export const useAxios = ({
 
   useEffect(() => {
     fetchData();
-  }, [ref]);
+  }, [awesomeName]);
 
-  return {
-    title, isOk, pageIndex, titleId, pageContent,
-  };
+  return { ...state, isOk };
 };
 
 export const deleteAwesome = async (titleId: string) => {
   try {
-    const response = await adapter.put('/page', { title_id: titleId });
+    const response = await adapter.delete('/page', { params: { title_id: titleId } });
+    console.log('delete awesome', response.data);
 
     if (response.status !== 200) {
       throw response;
     }
 
-    if (window && window.location) {
-      window?.location?.reload();
-    }
+    // if (window && window.location) {
+    //   window?.location?.reload();
+    // }
 
     handleSuccess('Awesome deleted successfully');
   } catch (error: any) {

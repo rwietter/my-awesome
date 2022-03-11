@@ -1,3 +1,4 @@
+import MdEditor from 'react-markdown-editor-lite';
 import { styled, keyframes } from '@/features/ui/theme';
 
 const pulse = keyframes({
@@ -17,13 +18,13 @@ const pulse = keyframes({
   },
 });
 
-const Container = styled('section', {
+export const Container = styled('section', {
   position: 'relative',
   width: '100%',
-  display: 'grid',
-  padding: '6rem 0.5rem 0 0.5rem',
-  gridTemplateColumns: '1fr',
-  gridTemplateRows: '1fr 1fr',
+  // display: 'grid',
+  // padding: '6rem 0.5rem 0 0.5rem',
+  // gridTemplateColumns: '1fr',
+  // gridTemplateRows: '1fr 1fr',
   justifyContent: 'center',
   alignItems: 'start',
   minHeight: '100vh',
@@ -35,14 +36,14 @@ const Container = styled('section', {
   },
 });
 
-const Form = styled('form', {
+export const Form = styled('form', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
 });
 
-const Label = styled('label', {
+export const Label = styled('label', {
   fontFamily: '$secondary',
   fontSize: '$4',
   alignSelf: 'flex-start',
@@ -55,7 +56,7 @@ const Label = styled('label', {
   },
 });
 
-const Input = styled('input', {
+export const Input = styled('input', {
   fontFamily: '$secondary',
   fontSize: '$4',
   fontWeight: 400,
@@ -68,7 +69,7 @@ const Input = styled('input', {
   width: '100%',
 });
 
-const TextArea = styled('textarea', {
+export const TextArea = styled('textarea', {
   fontFamily: '$secondary',
   fontSize: '$4',
   fontWeight: 400,
@@ -80,7 +81,7 @@ const TextArea = styled('textarea', {
   color: '$gray50',
 });
 
-const Submit = styled('button', {
+export const Submit = styled('button', {
   fontFamily: '"Poppins", sans-serif',
   fontSize: '$4',
   display: 'flex',
@@ -113,11 +114,12 @@ const Submit = styled('button', {
   },
 });
 
-const Title = styled('h1', {
+export const Title = styled('h1', {
   fontFamily: '$secondary',
-  fontSize: '$7',
+  fontSize: '$5',
   fontWeight: 700,
   margin: 0,
+  padding: 0,
   textGradient: '$highlight30',
   '&[data-type="preview"]': {
     paddingTop: '4rem',
@@ -136,7 +138,7 @@ const Title = styled('h1', {
   },
 });
 
-const FlexButton = styled('div', {
+export const FlexButton = styled('div', {
   display: 'flex',
   justifyContent: 'flex-start',
   width: '100%',
@@ -151,7 +153,7 @@ const FlexButton = styled('div', {
   },
 });
 
-const Section = styled('section', {
+export const Section = styled('section', {
   display: 'flex',
   flexFlow: 'column',
   width: '100%',
@@ -163,14 +165,96 @@ const Section = styled('section', {
   },
 });
 
-export {
-  Container,
-  Form,
-  Label,
-  Input,
-  Submit,
-  TextArea,
-  Title,
-  FlexButton,
-  Section,
-};
+export const Forms = styled('form', {
+  background: '$background',
+  border: '1px solid $gray400',
+  height: '100vh',
+  padding: '4.2rem 0 0 0',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
+
+  'button[data-type=md]': {
+    position: 'absolute',
+    bottom: '20px',
+    left: '20px',
+  },
+});
+
+export const FormNameContainer = styled('div', {
+  display: 'flex',
+  width: 'max-content',
+  margin: '0 auto',
+  height: '100%',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  '@bp2': {
+    width: '50rem',
+  },
+});
+
+export const FormNameButtonFlex = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+  justifyContent: 'space-between',
+});
+
+export const FormName = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '$gray200',
+  flexFlow: 'column',
+  width: '100%',
+  padding: '5rem 2rem',
+  borderRadius: '10px',
+
+  '@bp2': {
+    padding: '10rem 5rem',
+  },
+});
+
+export const MdEditorCSS = styled(MdEditor, {
+  background: '$gray100',
+  border: '1px solid $gray400',
+  height: '100vh',
+  position: 'relative',
+  width: '100%',
+
+  '@bp3': {
+    height: '90vh',
+    width: '90%',
+    margin: '2rem auto',
+  },
+
+  '.rc-md-navigation': {
+    background: '$gray100',
+    borderBottom: '1px solid $gray400',
+    color: '$gray50',
+    fontWeight: 600,
+    fontFamily: '$secondary',
+  },
+  '.editor-container .sec-md .section-container': {
+    background: '$gray100',
+    color: '$gray50',
+    fontWeight: 500,
+    fontFamily: '$secondary',
+    letterSpacing: '0.07rem',
+  },
+  '.editor-container .custom-html-style': {
+    color: '$gray50',
+    fontWeight: 500,
+    fontFamily: '$secondary',
+    letterSpacing: '0.07rem',
+  },
+  '.editor-container .sec-md .input': {
+    overflowY: 'hidden',
+    borderRight: '2px solid $gray200',
+  },
+  '.rc-md-navigation .button-wrap .button:hover': {
+    color: '$gray50',
+  },
+});

@@ -1,18 +1,20 @@
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import ReactMarkdown from 'react-markdown';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import Link from 'next/link';
 import { styled } from '@/features/ui/theme';
 
 export const Container = styled('div', {
   background: '$background',
   fontFamily: 'Poppins',
   minHeight: '100vh',
-  padding: '7rem 1rem 0 1rem',
+  width: '100%',
+  padding: '7rem 1.5rem 0 7rem',
+  transition: 'padding 0.5s ease',
 
-  '@media (min-width: 720px)': {
-    padding: '8rem 1rem 2rem 24rem',
-  },
-
-  '@media (min-width: 970px)': {
-    padding: '7.5rem 4rem 2rem 25rem',
+  '&.active': {
+    transition: 'padding 0.5s ease',
+    paddingLeft: '350px',
   },
 });
 
@@ -48,12 +50,13 @@ export const PageDescription = styled('p', {
   '-webkit-text-fill-color': 'transparent',
 });
 
-export const PageIndice = styled('h3', {
+export const PageIndice = styled('h1', {
   fontWeight: 800,
-  paddingTop: '3rem',
-  fontSize: '$7',
-  fontFamily: '$secondary',
-  color: '$gray50',
+  paddingTop: '1rem',
+  fontSize: '$10',
+  fontFamily: '$primary',
+  textAlign: 'center',
+  textGradient: '$highlight30',
 });
 
 export const PageIndiceRef = styled('li', {
@@ -68,9 +71,9 @@ export const PageIndiceRef = styled('li', {
 });
 
 export const PageContent = styled('main', {
-  background: '$mediumBackground',
+  background: '$bgMd',
   width: '100%',
-  padding: '0 1rem 1rem 2rem',
+  padding: '2rem 1rem 1rem 2rem',
   marginTop: '1rem',
   borderRadius: '0.5rem',
   fontFamily: '$primary',
@@ -102,4 +105,12 @@ export const IconEdit = styled(AiOutlineEdit, {
     color: '$green',
     transform: 'scale(1.1)',
   },
+});
+
+export const ReactMarkdownCSS = styled(ReactMarkdown, {
+  fontSize: '$4',
+});
+
+export const HighlighterCSS = styled(SyntaxHighlighter, {
+  background: '#1B1B1E !important',
 });

@@ -23,7 +23,7 @@ const SignUp = () => {
       });
 
       if (response.status !== 200) {
-        throw new Error(`Error: ${response.statusText}`);
+        throw response;
       }
 
       return router.push('/user/signin');
@@ -36,7 +36,7 @@ const SignUp = () => {
     <S.Wrapper>
       <S.Form onSubmit={handleSubmit}>
         <TextCSS textColor="text" font="md">
-					Welcome to GitHub!
+					Welcome to MyAwesome!
         </TextCSS>
 				<Margin margin="1rem 0 0 0" />
 				<S.Title>Create Account</S.Title>

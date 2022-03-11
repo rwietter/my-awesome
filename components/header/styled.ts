@@ -11,13 +11,11 @@ const SeparatorIcon = styled(AiOutlineMore, {
 });
 
 const ContainerCSS = styled('header', {
-  background: '$gray200',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
+  background: '$gray100',
   position: 'fixed',
   top: 0,
   padding: '0.5rem 0.2rem',
-  zIndex: 1,
+  zIndex: 5,
   width: '100%',
   height: '4.5rem',
   display: 'flex',
