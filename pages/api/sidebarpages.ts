@@ -19,21 +19,31 @@ async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
 
     const data = await Prisma.title.findMany({ where: { user_id } });
 
-    if (!data[0]) {
+    if (data.length === 0) {
+      return res.status(200).json({
+        status: 200,
+        error: false,
+        message: 'Your awesome space is empty',
+        content: [],
+      });
+    }
+
+    if (!data) {
       throw internalServerError({
         message: 'Page not found',
       });
     }
 
     return res.status(200).json({
-      message: success.SUCCESS_SIGNIN,
-      status: httpStatus.ok,
-      body: {
+      status: 200,
+      error: false,
+      message: 'Success to get your awesome',
+      content: {
         title: data,
       },
     });
-  } catch (error) {
-    return res.status(404).json({ error });
+  } catch (error: any) {
+    return res.status(error.status ?? 500).json(error);
   }
 }
 

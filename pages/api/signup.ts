@@ -16,7 +16,6 @@ const signup = async (
   req: ExtendedApiRequest,
   res: ExtendedApiResponse,
 ) => {
-  console.log(req.body);
   try {
     const { user: name, pass, email } = req.body;
 

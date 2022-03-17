@@ -6,25 +6,18 @@ import { parseCookies } from 'nookies';
 
 type AdapterContext = NextApiRequest | any | undefined
 
-// export const ssrAdapter = (ctx: AdapterContext) => {
-// const { 'awesome:token': token } = parseCookies(ctx);
+export const ssrAdapter = (ctx: AdapterContext) => {
+  const { 'awesome:token': token } = parseCookies(ctx);
 
-// const adapter = axios.create({
-//   baseURL: 'http://localhost:3000',
-// });
-
-// if (token) {
-//   adapter.defaults.headers.common.Authorization = `Bearer ${token}`;
-// }
-
-//   return adapter;
-// };
-
-const ssrAdapter = () => {
   const adapter = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'api',
   });
+
+  if (token) {
+    adapter.defaults.headers.common.Authorization = `Bearer ${token}`;
+  }
+
   return adapter;
 };
 
-export const adapter = ssrAdapter();
+export const adapter = ssrAdapter(null);

@@ -18,8 +18,6 @@ const createAwesome = async (
     const { contentItem, title: awesomeTitle } = req.body;
     const user_id = req.user.id;
 
-    console.log(awesomeTitle);
-
     if (!contentItem || !awesomeTitle) {
       throw badRequest({
         message: 'Missing content or title',

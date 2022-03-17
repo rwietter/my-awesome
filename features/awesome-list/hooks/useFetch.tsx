@@ -2,10 +2,13 @@ import { IsOk } from 'types';
 import { useState, useEffect } from 'react';
 import { adapter } from '@/services/api';
 import { handleError, handleSuccess } from '@/helpers/handler-notify';
-import { FechListProps, UseFetchAwesomeReturnProps, ContentState } from './types';
+import {
+  FechListProps,
+  UseFetchAwesomeReturnProps,
+  ContentState,
+} from './types';
 
 export const useFetchAwesome = ({
-  url = '',
   awesomeName = '',
 }: FechListProps): UseFetchAwesomeReturnProps => {
   const [isOk, setIsOk] = useState<IsOk>({ isLoading: true, isError: false });
@@ -17,13 +20,20 @@ export const useFetchAwesome = ({
 
   const fetchData = async () => {
     try {
-      const response = await adapter.get(url, { params: { page: awesomeName } });
-      const { content, title: contentTitle, title_id: titleId } = response.data;
+      const response = await adapter.get('/page', {
+        params: { page: awesomeName },
+      });
+
+      if (response.data.status !== 200 || response.data.error) {
+        throw response;
+      }
+
+      const { content, title, titleId } = response.data;
       const parsedContent = JSON.parse(content);
 
       setState({
         content: parsedContent,
-        title: contentTitle,
+        title,
         titleId,
       });
       setIsOk({ isLoading: false, isError: false });
@@ -42,15 +52,17 @@ export const useFetchAwesome = ({
 
 export const deleteAwesome = async (titleId: string) => {
   try {
-    const response = await adapter.delete('/page', { params: { title_id: titleId } });
+    const response = await adapter.delete('/page', {
+      params: { title_id: titleId },
+    });
 
-    if (response.status !== 200) {
+    if (response.data.status !== 200 || response.data.error) {
       throw response;
     }
 
-    // if (window && window.location) {
-    //   window?.location?.reload();
-    // }
+    if (window && window.location) {
+      window?.location?.reload();
+    }
 
     handleSuccess('Awesome deleted successfully');
   } catch (error: any) {

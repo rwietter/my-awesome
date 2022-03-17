@@ -141,20 +141,17 @@ const handler = async (
         });
       }
 
-      const data = {
+      return res.status(200).json({
+        message: `Success to get awesome ${title.title ?? ''}`,
+        status: 200,
+        error: false,
         title: title.title,
         content: content.content_item,
-        content_id: content.id,
-        title_id: title.id,
-      };
-
-      return res.status(200).json({
-        message: `Success to get awesome ${title.title}`,
-        status: httpStatus.ok,
-        ...data,
+        contentId: content.id,
+        titleId: title.id,
       });
-    } catch (error) {
-      return res.status(400).json({ error });
+    } catch (error: any) {
+      return res.status(error.status ?? 500).json(error);
     }
   }
 };

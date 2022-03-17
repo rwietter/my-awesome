@@ -854,6 +854,8 @@
   line-height: inherit;
   word-wrap: normal;
   background-color: transparent;
+  display: block;
+  padding: 16px;
   border: 0;
 }
 

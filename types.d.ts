@@ -17,7 +17,8 @@ export type Content = {
 interface ErrorHelper {
 	name?: string;
 	message: string;
-	status?: number;
+  status?: number;
+  error?: boolean;
 }
 
 export interface IsOk {

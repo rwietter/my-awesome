@@ -17,14 +17,14 @@ const AwesomeList = () => {
   const {
     content, isOk, title, titleId,
   } = useFetchAwesome({
-    url: '/page',
     awesomeName,
   });
 
   useEffect(useNavigationQuery, [isNavigationOpen]);
 
   return (
-		<Layout>
+    <>
+      <Header />
 			<S.Container className="main-content">
 				<Sidebar />
 				<S.SectionHeader>
@@ -47,7 +47,7 @@ const AwesomeList = () => {
 				</S.PageContent>
 				<Toastfy />
 			</S.Container>
-		</Layout>
+    </>
   );
 };
 

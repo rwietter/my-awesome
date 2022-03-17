@@ -5,6 +5,7 @@ import { Toastfy } from '@/features/ui/toastfy';
 import * as CSS from './styled';
 import { awesomeListActions } from '@/features/awesome-list';
 import { AwesomeLink } from './types';
+import { handleError } from '@/helpers/handler-notify';
 
 export function SidebarLinks() {
   const [pageLinks, setPageLinks] = useState([]); // Estado global para remap on exclude
@@ -15,11 +16,11 @@ export function SidebarLinks() {
       try {
         const response = await adapter.get('/sidebarpages');
 
-        if (response.status !== 200) {
+        if (response.data.error || response.data.status !== 200) {
           throw response;
         }
 
-        const data = response?.data?.body;
+        const data = response?.data?.content;
         const [title] = data.title;
 
         setPageLinks(data?.title);

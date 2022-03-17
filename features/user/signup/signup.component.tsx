@@ -29,7 +29,6 @@ const SignUp = () => {
 
       return router.push('/auth/signin');
     } catch (error) {
-      console.log({ error });
       handleError(error);
     }
   };
