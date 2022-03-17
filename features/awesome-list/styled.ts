@@ -64,7 +64,7 @@ export const PageIndiceRef = styled('li', {
   fontSize: '$5',
   fontFamily: '$secondary',
   padding: '0.2rem 0',
-  transition: 'all 0.3s ease',
+  transition: 'all 0.2s ease',
   '&:hover': {
     color: '$primary',
   },
@@ -90,7 +90,7 @@ export const IconDelete = styled(AiOutlineDelete, {
   cursor: 'pointer',
   marginRight: '2rem',
   color: '$gray50',
-  transition: 'color 0.3s, transform 0.4s ease',
+  transition: 'color 0.2s, transform 0.4s ease',
   '&:hover': {
     color: '$danger',
     transform: 'scale(1.1)',
@@ -100,7 +100,7 @@ export const IconDelete = styled(AiOutlineDelete, {
 export const IconEdit = styled(AiOutlineEdit, {
   cursor: 'pointer',
   color: '$gray50',
-  transition: 'color 0.3s, transform 0.4s ease',
+  transition: 'color 0.2s, transform 0.4s ease',
   '&:hover': {
     color: '$green',
     transform: 'scale(1.1)',

@@ -80,7 +80,7 @@
 
 .markdown-body mark {
   background-color: #fff8c5;
-  color: #24292f;
+  color: #ffff;
 }
 
 .markdown-body small {
@@ -839,7 +839,7 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   overflow: auto;
-  font-size: 100%;
+  font-size: 1.2em;
   line-height: 1.45;
   border-radius: 6px;
 }
@@ -855,7 +855,6 @@
   word-wrap: normal;
   background-color: transparent;
   display: block;
-  padding: 16px;
   border: 0;
 }
 
@@ -964,3 +963,4 @@
 .markdown-body ::-webkit-calendar-picker-indicator {
   filter: invert(50%);
 }
+

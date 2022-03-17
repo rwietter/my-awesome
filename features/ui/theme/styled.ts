@@ -2,7 +2,7 @@
 import { createStitches } from '@stitches/react';
 
 const {
-  theme: dark_theme, styled, keyframes, css,
+  theme: dark_theme, styled, keyframes, css, globalCss, reset,
 } = createStitches({
   theme: {
     colors: {
@@ -121,5 +121,5 @@ const { theme: light_theme } = createStitches({
 });
 
 export {
-  dark_theme, light_theme, styled, css, keyframes,
+  dark_theme, light_theme, styled, css, keyframes, globalCss, reset,
 };

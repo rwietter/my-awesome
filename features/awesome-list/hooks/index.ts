@@ -1,2 +1,3 @@
 export { sideNavigationEffect } from './useNavigationQuery';
-export { deleteAwesome, useFetchAwesome } from './useFetch';
+export { useFetchAwesome } from './useFetch';
+export { useDeleteAwesome } from './useDeleteAwesome';

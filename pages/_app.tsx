@@ -8,6 +8,8 @@ import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 import HeadContent from '@/components/head';
 import Config from './_config';
+import '../styles/syntax-nord.css';
+// import '../styles/syntax-material-light.css';
 
 interface MyAppProps extends AppProps {
 	session: Session;

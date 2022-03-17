@@ -1,16 +1,15 @@
 import MarkdownIt from 'markdown-it';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import { adapter } from '@/services/api';
+import Prism from 'prismjs';
+import MdEditor from 'react-markdown-editor-lite';
 import { Button } from '@/features/ui/button';
 import * as S from './style';
 import { Margin } from '@/features/ui/margin';
 import { Toastfy, notify } from '@/features/ui';
 import { useThemeStore } from '@/features/ui/theme';
-
 import darkMd from '@/styles/github-markdown-css-dark.module.css';
 import lightMd from '@/styles/github-markdown-css-light.module.css';
-import { handleError, handleSuccess } from '@/helpers/handler-notify';
+import { handleError } from '@/helpers/handler-notify';
 import Layout from '@/components/layout/layout';
 import { contentActions } from './store';
 
@@ -22,7 +21,6 @@ const CreateAwesome = () => {
 
   const [isMarkForm, setIsMarkForm] = useState(false);
   const [awesomeText, setAwesomeText] = useState('');
-  const router = useRouter();
   const { saveAwesome } = contentActions();
 
   const { theme } = useThemeStore();
@@ -54,7 +52,6 @@ const CreateAwesome = () => {
         notify({
           type: 'warn',
           message: 'Please, insert a valid text',
-          status: '400',
         });
         return;
       }

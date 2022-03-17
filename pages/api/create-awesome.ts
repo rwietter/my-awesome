@@ -39,8 +39,19 @@ const createAwesome = async (
     });
 
     const createdContent = await Prisma.content.create({
-      data: { content_item: content, user_id },
+      data: {
+        content_item: content,
+        Title: {
+          create: {
+            title: awesomeTitle,
+            user_id,
+          },
+        },
+        user_id,
+      },
     });
+
+    console.log(createdContent);
 
     if (!createdContent) {
       throw internalServerError({
@@ -48,22 +59,22 @@ const createAwesome = async (
       });
     }
 
-    const createdTitle: Title = await Prisma.title.create({
-      data: { title: awesomeTitle, content_id: createdContent.id, user_id },
-    });
+    // const createdTitle: Title = await Prisma.title.create({
+    //   data: { title: awesomeTitle, content_id: createdContent.id, user_id },
+    // });
 
-    if (!createdTitle) {
-      throw internalServerError({
-        message: 'The title of content could not be created',
-      });
-    }
+    // if (!createdTitle) {
+    //   throw internalServerError({
+    //     message: 'The title of content could not be created',
+    //   });
+    // }
 
     return res.status(200).json({
       message: 'Successful create awesome',
       status: 200,
     });
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(404).json(error);
   }
 };
 

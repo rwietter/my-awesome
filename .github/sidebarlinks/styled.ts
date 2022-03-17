@@ -22,7 +22,7 @@ export const TextLink = styled('span', {
   fontWeight: 800,
   fontFamily: '$secondary',
   textGradient: '$highlight30',
-  transition: 'color .3s ease',
+  transition: 'color .2s ease',
   wordBreak: 'break-all',
   wordWrap: 'break-word',
   '@bp3': {

@@ -108,10 +108,12 @@ const handler = async (
       });
 
       return res.status(200).json({
+        error: false,
+        status: 200,
         awesomeTitles,
       });
     } catch (error) {
-      return res.status(404).json({ error });
+      return res.status(404).json(error);
     }
   }
 
@@ -137,7 +139,7 @@ const handler = async (
 
       if (!title || !content) {
         throw internalServerError({
-          message: 'Page not found',
+          message: 'Awesome not found. Please, create an awesome do visualize here!',
         });
       }
 

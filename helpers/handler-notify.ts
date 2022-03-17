@@ -6,8 +6,6 @@ function handleError(error: any) {
   const errorData = response?.data ?? '';
   const errMsg = errorData?.message ?? 'Something went wrong';
 
-  console.log(errorData);
-
   notify({
     message: errMsg,
     type: 'error',

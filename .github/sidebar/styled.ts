@@ -8,7 +8,7 @@ const Container = styled('aside', {
   position: 'fixed',
   top: '0',
   left: '0',
-  transition: 'width 0.3s ease',
+  transition: 'width 0.2s ease',
   padding: '5.5rem 2rem 0 0.2rem',
 
   '&.active': {

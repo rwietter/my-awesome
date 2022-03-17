@@ -14,7 +14,7 @@ export const ButtonCSS = styled('button', {
   border: 'none',
   background: '#8c4bff',
   color: '#fff',
-  transition: 'transform .4s, background .4s ease',
+  transition: 'transform .4s, background .2s cubic-bezier(.55,.055,.675,.19)',
   cursor: 'pointer',
   willChange: 'transform',
 

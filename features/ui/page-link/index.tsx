@@ -4,7 +4,7 @@ const PageLink = styled('a', {
   fontSize: '$6',
   fontFamily: '$secondary',
   fontWeight: 500,
-  transition: 'color 0.3s ease',
+  transition: 'color 0.2s ease',
   lineHeight: '1.7',
   cursor: 'pointer',
   '&:hover': {

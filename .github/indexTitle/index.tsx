@@ -14,7 +14,7 @@ const Center = styled('div', {
   alignItems: 'center',
   padding: '0 0 1rem 0',
   color: '$primary',
-  transition: 'all 0.3s ease',
+  transition: 'all 0.2s ease',
   '&:hover': {
     color: '$primaryHover',
   },

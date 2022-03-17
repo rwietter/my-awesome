@@ -24,12 +24,16 @@ export const useFetchAwesome = ({
         params: { page: awesomeName },
       });
 
-      if (response.data.status !== 200 || response.data.error) {
+      if (response?.data?.status !== 200 || response?.data?.error) {
         throw response;
       }
 
       const { content, title, titleId } = response.data;
       const parsedContent = JSON.parse(content);
+
+      if (!content || !title || !titleId) {
+        throw response;
+      }
 
       setState({
         content: parsedContent,
@@ -48,24 +52,4 @@ export const useFetchAwesome = ({
   }, [awesomeName]);
 
   return { ...state, isOk };
-};
-
-export const deleteAwesome = async (titleId: string) => {
-  try {
-    const response = await adapter.delete('/page', {
-      params: { title_id: titleId },
-    });
-
-    if (response.data.status !== 200 || response.data.error) {
-      throw response;
-    }
-
-    if (window && window.location) {
-      window?.location?.reload();
-    }
-
-    handleSuccess('Awesome deleted successfully');
-  } catch (error: any) {
-    handleError(error);
-  }
 };

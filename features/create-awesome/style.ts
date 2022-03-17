@@ -101,7 +101,7 @@ export const Submit = styled('button', {
   border: '1px solid $gray400',
 
   transition:
-    'background 0.3s, box-shadow .3s, color .3s, border .2s cubic-bezier(.55,.055,.675,.19)',
+    'background 0.2s, box-shadow .3s, color .2s, border .2s cubic-bezier(.55,.055,.675,.19)',
 
   '&:hover': {
     background: '$highlight145',

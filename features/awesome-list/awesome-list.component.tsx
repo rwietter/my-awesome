@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import * as S from './styled';
 import { Toastfy } from '@/features/ui/toastfy';
-import { deleteAwesome, useFetchAwesome } from './hooks';
+import { useFetchAwesome, useDeleteAwesome } from './hooks';
 import { useAwesomeListStore } from './store';
 import { MarkdownRender } from './awesome-md.component';
 import { sideNavigationEffect } from './hooks/useNavigationQuery';
 import { Sidebar, useSidebarStore } from './components/sidebar';
 import Header from '@/components/header';
-import Layout from '@/components/layout/layout';
 
 const AwesomeList = () => {
   const { awesomeName } = useAwesomeListStore();
@@ -32,7 +31,7 @@ const AwesomeList = () => {
 						Your Awesome {title && `of ${title}`}
 					</S.PageDescription>
 					<S.PageContainer>
-						<S.IconDelete size={28} onClick={() => deleteAwesome(titleId)} />
+						<S.IconDelete size={28} onClick={() => useDeleteAwesome(titleId)} />
 						<S.IconEdit size={28} />
 					</S.PageContainer>
 				</S.SectionHeader>
