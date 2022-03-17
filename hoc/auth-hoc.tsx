@@ -1,9 +1,10 @@
-import Jwt from 'jsonwebtoken';
+import { getSession, signIn } from 'next-auth/react';
 import { useState, useEffect } from 'react';
+import Jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router';
-import { authActions } from '@/features/user/store/actions';
+import { getToken } from 'next-auth/jwt';
 import { unauthorized } from '@/api/utils/http';
-import { useAuthStore } from '@/features/user/store';
+import { authActions, useAuthStore } from '@/features/user';
 
 const verifyToken = (token: string) => {
   try {
@@ -22,30 +23,35 @@ const verifyToken = (token: string) => {
   }
 };
 
-const withProtect = (WrappedComponent: any) => (props: any) => {
-  const router = useRouter();
+const withProtectRoute = (WrappedComponent: any) => (props: any) => {
+  const [isLoading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
   const { token } = useAuthStore();
   const { logout } = authActions();
 
   useEffect(() => {
-    if (!token) {
-      router.replace('/auth/signin');
-    } else {
-      const data = verifyToken(token);
-      if (data.verified) {
+    const securePage = async () => {
+      const session = await getSession();
+
+      if (!session) {
+        return signIn();
+      }
+      // const data = verifyToken(token);
+      if (session) {
         setIsAuthenticated(true);
       } else {
         logout({ isLoggedIn: false });
-        router.replace('/auth/signin');
       }
-    }
+      setLoading(false);
+    };
+    securePage();
   }, [token]);
 
   if (isAuthenticated) {
     return <WrappedComponent {...props} />;
   }
-  return null;
+  return [isLoading, isAuthenticated];
 };
 
-export { withProtect };
+export { withProtectRoute };

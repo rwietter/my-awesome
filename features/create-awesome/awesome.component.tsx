@@ -11,6 +11,8 @@ import { useThemeStore } from '@/features/ui/theme';
 import darkMd from '@/styles/github-markdown-css-dark.module.css';
 import lightMd from '@/styles/github-markdown-css-light.module.css';
 import { handleError, handleSuccess } from '@/helpers/handler-notify';
+import Layout from '@/components/layout/layout';
+import { contentActions } from './store';
 
 const mdParser = new MarkdownIt();
 
@@ -21,6 +23,7 @@ const CreateAwesome = () => {
   const [isMarkForm, setIsMarkForm] = useState(false);
   const [awesomeText, setAwesomeText] = useState('');
   const router = useRouter();
+  const { saveAwesome } = contentActions();
 
   const { theme } = useThemeStore();
   const [mdTheme, setMdTheme] = useState(lightMd['markdown-body']);
@@ -36,17 +39,7 @@ const CreateAwesome = () => {
     try {
       if (titleRef.current) {
         const title = titleRef.current.value;
-
-        const response = await adapter.post('/markdown-creator', {
-          awesome: awesomeText,
-          title,
-        });
-
-        if (response.status !== 200) {
-          throw response;
-        }
-        handleSuccess('Awesome created successfully');
-        router.push('/home');
+        saveAwesome({ contentItem: awesomeText, title });
       }
     } catch (error) {
       handleError(error);
@@ -71,7 +64,7 @@ const CreateAwesome = () => {
   };
 
   return (
-		<>
+		<Layout>
 			<S.Container>
 				<S.Forms id="awesome-form" onSubmit={(e) => handleSubmit(e)}>
 					{!isMarkForm && (
@@ -119,7 +112,7 @@ const CreateAwesome = () => {
 				</S.Forms>
 			</S.Container>
 			<Toastfy />
-		</>
+		</Layout>
   );
 };
 

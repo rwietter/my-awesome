@@ -16,9 +16,9 @@ const authActions = () => ({
   },
   logout: (payload: IPayload | string) => {
     destroyCookie(undefined, 'awesome:token');
-    Router.push('/user/signin');
     adapter.defaults.headers.common.Authorization = '';
     store.getState().dispatch({ type: Types.LOGOUT, payload });
+    Router.push('/auth/signin');
   },
 });
 

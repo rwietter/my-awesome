@@ -18,6 +18,8 @@ const createAwesome = async (
     const { contentItem, title: awesomeTitle } = req.body;
     const user_id = req.user.id;
 
+    console.log(awesomeTitle);
+
     if (!contentItem || !awesomeTitle) {
       throw badRequest({
         message: 'Missing content or title',
@@ -26,23 +28,17 @@ const createAwesome = async (
 
     const content = JSON.stringify(contentItem);
 
-    const isDuplicatedContent = await Prisma.content.findMany({
+    const userContents = await Prisma.content.findMany({
       where: { user_id },
     });
 
-    isDuplicatedContent.forEach((contents: any) => {
+    userContents.forEach((contents: any) => {
       if (contents.content_item === content) {
         throw badRequest({
           message: 'Duplicated content',
         });
       }
     });
-
-    if (!isDuplicatedContent) {
-      throw internalServerError({
-        message: 'Content is duplicated',
-      });
-    }
 
     const createdContent = await Prisma.content.create({
       data: { content_item: content, user_id },

@@ -49,7 +49,10 @@ const contentActions = () => ({
       if (response.status !== 200) {
         throw response;
       }
-      handleSuccess('Awesome created');
+
+      if (response.status === 200) {
+        handleSuccess('Awesome created');
+      }
     } catch (error) {
       return error;
     }

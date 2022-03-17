@@ -10,17 +10,48 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+	previewFeatures = ["referentialActions"]
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model User {
-  id       String @id @default(cuid())
-  email    String @unique
-  name     String
-  password String
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  password      String?
+  emailVerified DateTime?
+  image         String?
 
-  title Title[]
+
+  title   Title[]
   content Content[]
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Account Account[]
+  Session Session[]
   @@map("user")
 }
 
@@ -34,6 +65,9 @@ model Title {
   content    Content @relation(fields: [content_id], references: [id])
   content_id String
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("title")
 }
 
@@ -46,5 +80,27 @@ model Content {
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@map("content")
+}
+
+model VerificationRequest {
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([identifier, token])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

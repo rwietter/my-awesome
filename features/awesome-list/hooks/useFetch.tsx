@@ -43,7 +43,6 @@ export const useFetchAwesome = ({
 export const deleteAwesome = async (titleId: string) => {
   try {
     const response = await adapter.delete('/page', { params: { title_id: titleId } });
-    console.log('delete awesome', response.data);
 
     if (response.status !== 200) {
       throw response;

@@ -31,6 +31,8 @@ const {
       danger: '#FF006E',
       sidebar: '#121214',
       bgMd: '#121214',
+      twitter: '#1da1f2',
+      google: '#ea4335',
     },
     space: {},
     fonts: {
@@ -99,6 +101,8 @@ const { theme: light_theme } = createStitches({
       danger: '#FF006E',
       sidebar: '#F4F4F6',
       bgMd: '#F4F4F6',
+      twitter: '#1da1f2',
+      google: '#ea4335',
     },
     space: {},
     fontSizes: {

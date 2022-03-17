@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export declare module 'next' {
@@ -25,12 +26,7 @@ export interface IsOk {
 }
 
 export interface ExtendedApiRequest extends NextApiRequest {
-	user: {
-		id: string;
-		email: string;
-		name: string;
-		password: string;
-	};
+	user: User
 }
 
 export interface ExtendedApiResponse extends NextApiResponse {}

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 
-import type { ExtendedApiRequest, ExtendedApiResponse } from 'types';
-import { Prisma } from '@/api/db';
+import type { ExtendedApiRequest, ExtendedApiResponse } from '../types';
+import { Prisma } from '../pages/api/db';
 
 import {
   errorMsg,
@@ -10,25 +10,14 @@ import {
   badRequest,
   success,
   httpStatus,
-} from '@/api/utils/http/';
+} from '../pages/api/utils/http';
 
 const signup = async (
   req: ExtendedApiRequest,
   res: ExtendedApiResponse,
 ) => {
-  console.log(req.body);
   try {
-    const { user: name, pass, email } = req.body;
-
-    if (!name || !pass || !email) {
-      throw badRequest({
-        name: ERR_INVALID_PARAMETER,
-        message: errorMsg.ERR_INVALID_PARAMETER,
-      });
-    }
-
-    const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(pass, salt);
+    const { user: name, email } = req.body;
 
     const response = await Prisma.user.findUnique({ where: { email } });
 
@@ -40,20 +29,18 @@ const signup = async (
     }
 
     const data = await Prisma.user.create({
-      data: { email, password, name },
+      data: { email, password: '', name },
     });
 
     if (data.email) {
       return res.status(200).json({
         message: success.SUCCESS_SIGNUP,
         status: httpStatus.ok,
-        body: {},
       });
     }
   } catch (error) {
     return res.status(400).json({ error });
   }
-  return res.end();
 };
 
 export default signup;

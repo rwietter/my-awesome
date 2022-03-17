@@ -15,7 +15,7 @@ const ContainerCSS = styled('header', {
   position: 'fixed',
   top: 0,
   padding: '0.5rem 0.2rem',
-  zIndex: 5,
+  zIndex: 20,
   width: '100%',
   height: '4.5rem',
   display: 'flex',

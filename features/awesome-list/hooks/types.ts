@@ -1,3 +1,5 @@
+import { IsOk } from 'types';
+
 export interface FechListProps {
 	url: any;
 	awesomeName: string;

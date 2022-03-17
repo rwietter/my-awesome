@@ -44,7 +44,6 @@ const signup = async (
     const { pass: password, email } = req.body;
 
     const user = await Prisma.user.findUnique({ where: { email } });
-
     if (!user) {
       throw unauthorized({
         name: ERR_USER_NOT_FOUND,
@@ -52,7 +51,11 @@ const signup = async (
       });
     }
 
-    if (!bcrypt.compareSync(password, user!.password)) {
+    const { password: userPassword } = user;
+
+    if (!userPassword) return;
+
+    if (!bcrypt.compareSync(password, userPassword)) {
       throw unauthorized({
         name: ERR_INVALID_PASSWORD,
         message: errorMsg.ERR_INVALID_PASSWORD,

@@ -35,4 +35,4 @@ const Sidebar = () => {
   );
 };
 
-export default withProtect(Sidebar);
+export default Sidebar;

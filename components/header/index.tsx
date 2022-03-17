@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import Link from 'next/link';
 import { VscRocket, VscDebugBreakpointLog } from 'react-icons/vsc';
+import { useSession } from 'next-auth/react';
 import { TextCSS } from '@/features/ui';
 
 import { authActions } from '@/features/user/store/actions';
@@ -10,9 +11,16 @@ import { Switch } from '@/features/ui/switch';
 import {
   ContainerCSS, HexagonIcon, NavCSS, SeparatorIcon, TitleCSS,
 } from './styled';
+import { useAuthStore } from '@/features/user';
+import { withProtect } from '@/hoc/auth';
 
 const Header = () => {
   const { logout } = authActions();
+  // const { isLoggedIn } = useAuthStore();
+
+  // if (!isLoggedIn) return <div />;
+  const { data: session } = useSession();
+
   const handleLogout = () => logout({ isLoggedIn: false });
 
   return (

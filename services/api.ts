@@ -1,21 +1,30 @@
 import axios from 'axios';
 import { NextApiRequest } from 'next';
+import { getToken } from 'next-auth/jwt';
+import { getSession } from 'next-auth/react';
 import { parseCookies } from 'nookies';
 
 type AdapterContext = NextApiRequest | any | undefined
 
-export const ssrAdapter = (ctx: AdapterContext) => {
-  const { 'awesome:token': token } = parseCookies(ctx);
+// export const ssrAdapter = (ctx: AdapterContext) => {
+// const { 'awesome:token': token } = parseCookies(ctx);
 
+// const adapter = axios.create({
+//   baseURL: 'http://localhost:3000',
+// });
+
+// if (token) {
+//   adapter.defaults.headers.common.Authorization = `Bearer ${token}`;
+// }
+
+//   return adapter;
+// };
+
+const ssrAdapter = () => {
   const adapter = axios.create({
-    baseURL: '/api',
+    baseURL: 'http://localhost:3000/',
   });
-
-  if (token) {
-    adapter.defaults.headers.common.Authorization = `Bearer ${token}`;
-  }
-
   return adapter;
 };
 
-export const adapter = ssrAdapter(null);
+export const adapter = ssrAdapter();

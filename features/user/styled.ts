@@ -1,4 +1,24 @@
+import { IoLogoTwitter, IoLogoGithub, IoLogoGoogle } from 'react-icons/io5';
 import { styled } from '@/features/ui/theme';
+
+export const getIcon = (provider: 'google' | 'github' | 'twitter') => {
+  const authIcons = {
+    google: {
+      icon: IoLogoGoogle,
+      color: '#dd4b39',
+    },
+    github: {
+      icon: IoLogoGithub,
+      color: '#333',
+    },
+    twitter: {
+      icon: IoLogoTwitter,
+      color: '#1da1f2',
+    },
+  };
+
+  return authIcons[provider];
+};
 
 const Wrapper = styled('div', {
   display: 'flex',
@@ -63,6 +83,79 @@ const Input = styled('input', {
   padding: '1.3rem',
   width: '100%',
 });
+
+export const SeparatorContainer = styled('div', {
+  display: 'flex',
+  color: '$gray50',
+  width: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+export const Separator = styled('div', {
+  background: '$gray50',
+  width: '70%',
+  display: 'inline',
+  height: '1px',
+});
+
+export const SeparatorTitle = styled('p', {
+  fontFamily: '$secondary',
+  fontSize: '$4',
+  margin: '0',
+  padding: '0 1rem',
+  width: '100%',
+  fontWeight: 400,
+});
+
+export const OAuthContainer = styled('div', {
+  display: 'flex',
+  width: '-webkit-fill-available',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+export const OAuthButton = styled('button', {
+  width: 'max-content',
+
+  '& + &': {
+    marginLeft: '1rem',
+  },
+});
+
+export const personalIcon = {
+  margin: '0 0.5rem',
+  cursor: 'pointer',
+
+  variants: {
+    type: {
+      google: {
+        fill: '$google',
+        transition: 'filter 0.3s ease-in-out',
+
+        '&:hover': {
+          filter: 'brightness(1.4)',
+        },
+      },
+      github: {
+        fill: '$gray50',
+        transition: 'filter 0.3s ease-in-out',
+
+        '&:hover': {
+          filter: 'brightness(0.7)',
+        },
+      },
+      twitter: {
+        fill: '$twitter',
+        transition: 'filter 0.3s ease-in-out',
+
+        '&:hover': {
+          filter: 'brightness(1.4)',
+        },
+      },
+    },
+  },
+};
 
 export {
   Wrapper, Form, Title, Label, Input,
