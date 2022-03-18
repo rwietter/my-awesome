@@ -1,5 +1,3 @@
-import { NextApiResponse } from 'next';
-
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 import { badRequest, internalServerError } from './utils/http/http-helper';
 import { Prisma } from '@/api/db';
@@ -18,13 +16,15 @@ const createAwesome = async (
     const { contentItem, title: awesomeTitle } = req.body;
     const user_id = req.user.id;
 
-    if (!contentItem || !awesomeTitle) {
+    if (!contentItem || !awesomeTitle || !user_id) {
       throw badRequest({
         message: 'Missing content or title',
       });
     }
 
     const content = JSON.stringify(contentItem);
+
+    if (!content) return res.json({ error: true });
 
     const userContents = await Prisma.content.findMany({
       where: { user_id },
@@ -38,20 +38,18 @@ const createAwesome = async (
       }
     });
 
-    const createdContent = await Prisma.content.create({
+    const createdContent = await Prisma.title.create({
       data: {
-        content_item: content,
-        Title: {
+        title: awesomeTitle,
+        user_id,
+        content: {
           create: {
-            title: awesomeTitle,
+            content_item: content,
             user_id,
           },
         },
-        user_id,
       },
     });
-
-    console.log(createdContent);
 
     if (!createdContent) {
       throw internalServerError({
@@ -73,8 +71,8 @@ const createAwesome = async (
       message: 'Successful create awesome',
       status: 200,
     });
-  } catch (error) {
-    return res.status(404).json(error);
+  } catch (error: any) {
+    return res.status(error.status ?? 500).json(error);
   }
 };
 

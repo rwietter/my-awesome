@@ -54,9 +54,10 @@ const contentActions = () => ({
         handleSuccess('Awesome created');
       }
     } catch (error) {
-      return error;
+      handleError(error);
     }
   },
+
   resetStore: async () => {
     store.getState().dispatch({ type: Types.RESET_AWESOME });
     handleSuccess('Reseted previous awesome');

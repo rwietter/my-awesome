@@ -29,7 +29,7 @@ const withAuth = (handler: any) => async (req: ExtendedApiRequest, res: Extended
     req.user = currentUser;
     return handler(req, res);
   } catch (error: any) {
-    return res.status(error.status ?? 500).send(error);
+    return res.status(error.status ?? 500).json(error);
   }
 };
 

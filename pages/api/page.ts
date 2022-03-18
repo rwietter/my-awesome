@@ -90,27 +90,23 @@ const handler = async (
 
     try {
       const deletedTitle = await Prisma.title.delete({
-        where: { id: title_id },
+        where: {
+          id: title_id,
+        },
+        include: {
+          content: true,
+        },
       });
 
-      const deletedContent = await Prisma.content.delete({
-        where: { id: deletedTitle.content_id },
-      });
-
-      if (!deletedContent || !deletedTitle) {
+      if (!deletedTitle) {
         throw internalServerError({
           message: 'You are not allowed to delete this awesome',
         });
       }
 
-      const awesomeTitles = await Prisma.title.findMany({
-        where: { user_id: req.user.id },
-      });
-
       return res.status(200).json({
         error: false,
         status: 200,
-        awesomeTitles,
       });
     } catch (error) {
       return res.status(404).json(error);
@@ -123,34 +119,56 @@ const handler = async (
       const { page } = req.query;
       const ref = page.toString();
 
-      if (!user_id || !ref) {
+      if (!user_id) {
         throw badRequest({
           message: 'User id or page is required',
         });
       }
 
-      const title = await Prisma.title.findFirst({
-        where: { AND: { title: ref, user_id } },
-      });
+      let titleContent;
+      if (!ref) {
+        titleContent = await Prisma.title.findFirst({
+          where: {
+            AND: {
+              user_id,
+            },
+          },
+          include: {
+            content: true,
+          },
+        });
+      } else {
+        titleContent = await Prisma.title.findFirst({
+          where: {
+            AND: {
+              title: ref,
+              user_id,
+            },
+          },
+          include: {
+            content: true,
+          },
+        });
+      }
 
-      const content = await Prisma.content.findFirst({
-        where: { AND: { id: title?.content_id, user_id } },
-      });
+      // const content = await Prisma.content.findFirst({
+      //   where: { AND: { id: title?.content_id, user_id } },
+      // });
 
-      if (!title || !content) {
+      if (!titleContent) {
         throw internalServerError({
           message: 'Awesome not found. Please, create an awesome do visualize here!',
         });
       }
 
       return res.status(200).json({
-        message: `Success to get awesome ${title.title ?? ''}`,
+        message: `Success to get awesome ${titleContent.title ?? ''}`,
         status: 200,
         error: false,
-        title: title.title,
-        content: content.content_item,
-        contentId: content.id,
-        titleId: title.id,
+        title: titleContent.title,
+        content: titleContent.content?.content_item,
+        contentId: titleContent.content?.id,
+        titleId: titleContent.id,
       });
     } catch (error: any) {
       return res.status(error.status ?? 500).json(error);

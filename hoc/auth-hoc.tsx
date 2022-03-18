@@ -26,7 +26,6 @@ const verifyToken = (token: string) => {
 const withProtectRoute = (WrappedComponent: any) => (props: any) => {
   const [isLoading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const router = useRouter();
   const { token } = useAuthStore();
   const { logout } = authActions();
 
@@ -46,7 +45,7 @@ const withProtectRoute = (WrappedComponent: any) => (props: any) => {
       setLoading(false);
     };
     securePage();
-  }, [token]);
+  }, []);
 
   if (isAuthenticated) {
     return <WrappedComponent {...props} />;

@@ -9,9 +9,9 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
-	previewFeatures = ["referentialActions"]
-  binaryTargets = ["native", "debian-openssl-1.1.x"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
+  binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
 model Account {
@@ -43,7 +43,6 @@ model User {
   emailVerified DateTime?
   image         String?
 
-
   title   Title[]
   content Content[]
 
@@ -59,11 +58,10 @@ model Title {
   id    String @id @default(cuid())
   title String @unique
 
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
-  content    Content @relation(fields: [content_id], references: [id])
-  content_id String
+  content Content?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -75,9 +73,10 @@ model Content {
   id           String @id @default(cuid())
   content_item String @unique
 
-  Title Title[]
+  title    Title  @relation(fields: [title_id], references: [id], onDelete: Cascade)
+  title_id String @unique
 
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
   createdAt DateTime @default(now())

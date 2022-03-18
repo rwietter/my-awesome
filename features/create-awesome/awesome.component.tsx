@@ -34,13 +34,9 @@ const CreateAwesome = () => {
   async function handleSubmit(e: any) {
     e.preventDefault();
 
-    try {
-      if (titleRef.current) {
-        const title = titleRef.current.value;
-        saveAwesome({ contentItem: awesomeText, title });
-      }
-    } catch (error) {
-      handleError(error);
+    if (titleRef.current) {
+      const title = titleRef.current.value;
+      saveAwesome({ contentItem: awesomeText, title });
     }
   }
 
@@ -68,9 +64,11 @@ const CreateAwesome = () => {
 						<S.MdEditorCSS
 							ref={awesomeRef}
 							renderHTML={(text: string) => mdParser.render(text)}
-							className={mdTheme}
 							autoFocus
+							className={mdTheme}
+							defaultValue="# Write your awesome here"
 							allowPasteImage
+							markdownClass={mdTheme}
 						/>
 					)}
 					{!isMarkForm && (
