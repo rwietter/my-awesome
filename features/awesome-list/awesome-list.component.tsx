@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { setCookie } from 'nookies';
-import { HomePageProps } from 'pages/home';
 import * as S from './styled';
 import { Toastfy } from '@/features/ui/toastfy';
 import { useFetchAwesome, useDeleteAwesome } from './hooks';
@@ -9,8 +7,6 @@ import { MarkdownRender } from './awesome-md.component';
 import { sideNavigationEffect } from './hooks/useNavigationQuery';
 import { Sidebar, useSidebarStore } from './components/sidebar';
 import Header from '@/components/header';
-import { handleError } from '@/helpers/handler-notify';
-import { NoContent } from '../ui';
 
 const AwesomeList = () => {
   const { awesomeName, awesomeTitleId } = useAwesomeListStore();
