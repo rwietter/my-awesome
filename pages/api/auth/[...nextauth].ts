@@ -1,20 +1,17 @@
-import JWT from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 /* eslint-disable no-dupe-keys */
 /* eslint-disable no-param-reassign */
 /* eslint-disable arrow-body-style */
 /* eslint-disable semi */
 /* eslint-disable comma-dangle */
+import JWT from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import TwitterProvider from 'next-auth/providers/twitter';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { JWTOptions } from 'next-auth/jwt';
-import { User } from '@prisma/client';
 import Credentials from 'next-auth/providers/credentials';
 import { badRequest } from '../utils/http/http-helper';
-import { adapter } from '../../../services/api';
 import { Prisma } from '../db';
 import { unauthorized } from '../utils/http';
 
@@ -56,8 +53,8 @@ export default NextAuth({
     Credentials({
       name: 'credentials',
       credentials: {
-        email: { label: 'Username', type: 'text', placeholder: 'jsmith' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: 'email', type: 'email', placeholder: 'jhondoe@gmail.com' },
+        password: { label: 'passowrd', type: 'password' },
       },
       async authorize(credentials, req): Promise<any> {
         if (req.method === 'POST') {

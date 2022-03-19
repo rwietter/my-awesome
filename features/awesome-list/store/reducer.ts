@@ -6,6 +6,7 @@ const reducer = (state: any, { type, payload }: any) => {
       return {
         ...state,
         awesomeName: payload.awesomeName,
+        awesomeTitleId: payload.awesomeTitleId,
       };
     default:
   }

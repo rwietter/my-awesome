@@ -5,7 +5,6 @@ import { Toastfy } from '@/features/ui/toastfy';
 import * as CSS from './styled';
 import { awesomeListActions } from '@/features/awesome-list';
 import { AwesomeLink } from './types';
-import { handleError } from '@/helpers/handler-notify';
 
 export function SidebarLinks() {
   const [pageLinks, setPageLinks] = useState([]); // Estado global para remap on exclude
@@ -32,14 +31,16 @@ export function SidebarLinks() {
     fetchTitle();
   }, []);
 
-  const handleClick = (label: string) => setAwesomeRef({ awesomeName: label });
+  const handleClick = (label: string, id: string) => {
+    setAwesomeRef({ awesomeName: label, awesomeTitleId: id });
+  };
 
   return (
 		<CSS.SidebarLinksContainer>
 			{pageLinks[0] ? (
 			  pageLinks?.map((link: AwesomeLink) => (
 					<CSS.Page href="/home" key={link.id.toString()}>
-						<CSS.TextLink onClick={() => handleClick(link.title)}>
+						<CSS.TextLink onClick={() => handleClick(link.title, link.id)}>
 							{link.title}
 						</CSS.TextLink>
 					</CSS.Page>

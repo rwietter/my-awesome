@@ -1,10 +1,11 @@
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
-import { httpStatus } from '@/api/utils/http/';
+import { Title } from '@prisma/client';
 import { Prisma } from '@/api/db';
 import { withAuth } from '@/api/middlewares/';
 import {
-  ERR_USER_NOT_FOUND, errorMsg, success, internalServerError, unauthorized,
+  ERR_USER_NOT_FOUND, errorMsg, internalServerError, unauthorized,
 } from '@/api/utils/http';
+import { getRedis, setRedis } from '@/services/redis/redis-config';
 
 async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
   try {
@@ -17,7 +18,22 @@ async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
       });
     }
 
+    const redisData = await getRedis(`awesome-titles-${user_id}`).then((parseData: any) => JSON.parse(parseData)) as unknown as Title;
+
+    if (redisData) {
+      return res.status(200).json({
+        status: 200,
+        error: false,
+        message: 'Success to get your awesome',
+        content: {
+          title: redisData,
+        },
+      });
+    }
+
     const data = await Prisma.title.findMany({ where: { user_id } });
+
+    setRedis(`awesome-titles-${user_id}`, JSON.stringify(data));
 
     if (data.length === 0) {
       return res.status(200).json({

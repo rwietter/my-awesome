@@ -6,10 +6,12 @@ import { AwesomeList } from './types';
 
 const state: AwesomeList = {
   awesomeName: '',
+  awesomeTitleId: '',
 };
 
 interface AwesomeListStore {
-	awesomeName: string;
+  awesomeName: string;
+  awesomeTitleId: string;
 	dispatch: (payload: any) => void;
 }
 

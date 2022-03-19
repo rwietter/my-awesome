@@ -1,5 +1,6 @@
 export type AwesomeList = {
   awesomeName: string;
+  awesomeTitleId?: string;
 };
 
 export enum ActionType {
