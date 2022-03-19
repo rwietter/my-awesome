@@ -1,7 +1,7 @@
 import { IsOk } from 'types';
 import { useState, useEffect } from 'react';
 import { adapter } from '@/services/api';
-import { handleError, handleSuccess } from '@/helpers/handler-notify';
+import { handleError } from '@/helpers/handler-notify';
 import {
   FechListProps,
   UseFetchAwesomeReturnProps,
@@ -10,6 +10,7 @@ import {
 
 export const useFetchAwesome = ({
   awesomeName = '',
+  id = '',
 }: FechListProps): UseFetchAwesomeReturnProps => {
   const [isOk, setIsOk] = useState<IsOk>({ isLoading: true, isError: false });
   const [state, setState] = useState<ContentState>({
@@ -21,7 +22,7 @@ export const useFetchAwesome = ({
   const fetchData = async () => {
     try {
       const response = await adapter.get('/page', {
-        params: { page: awesomeName },
+        params: { page: awesomeName, pageId: id },
       });
 
       if (response?.data?.status !== 200 || response?.data?.error) {

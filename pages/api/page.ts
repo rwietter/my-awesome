@@ -1,69 +1,11 @@
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
+import { getRedis, setRedis } from '@/services/redis/redis-config';
 import { Prisma } from '@/api/db';
 import { withAuth } from '@/api/middlewares/';
 import {
-  badRequest, internalServerError, httpStatus, success,
+  badRequest, internalServerError,
 } from '@/api/utils/http/';
-
-// export const content = {
-// 	blockchain: [
-// 		{
-// 			name: 'Tradingview',
-// 			url: 'https://br.tradingview.com/chart/',
-// 		},
-// 	],
-
-// 	bitcoin: [
-// 		{
-// 			name: 'Bitcoin Market Cycle Charts',
-// 			url: 'https://www.lookintobitcoin.com/charts/',
-// 		},
-// 		{
-// 			name: 'Bitcoin Monthly Return',
-// 			url: 'https://bitcoinmonthlyreturn.com/',
-// 		},
-// 		{
-// 			name: 'Social Intelligence for Crypto',
-// 			url: 'https://lunarcrush.com/markets?col=1&metric=social_dominance',
-// 		},
-// 	],
-
-// 	defi: [
-// 		{
-// 			name: 'DeFil Lama',
-// 			url: 'https://defillama.com/',
-// 		},
-// 	],
-
-// 	tools: [
-// 		{
-// 			name: 'Tradingview',
-// 			url: 'https://br.tradingview.com/chart/',
-// 		},
-// 	],
-
-// 	news: [
-// 		{
-// 			name: 'Coindesk',
-// 			url: 'https://www.coindesk.com/',
-// 		},
-// 	],
-// };
-
-// export const content2 = {
-// 	Typescript: [
-// 		{
-// 			name: 'Typescript src',
-// 			url: 'https://br.tradingview.com/chart/',
-// 		},
-// 	],
-// 	Javascript: [
-// 		{
-// 			name: 'Typesc',
-// 			url: 'https://br.tradingview.com/chart/',
-// 		},
-// 	],
-// };
+import { TitleData } from './types';
 
 const handler = async (
   req: ExtendedApiRequest,
@@ -125,6 +67,21 @@ const handler = async (
         });
       }
 
+      const dataCache: string = await getRedis(`awesome-${user_id}-${ref}`) as string;
+      const data: TitleData = JSON.parse(dataCache);
+
+      if (data?.title === ref) {
+        return res.status(200).json({
+          message: `Success to get awesome ${data.title ?? ''}`,
+          status: 200,
+          error: false,
+          title: data.title,
+          content: data.content?.content_item,
+          contentId: data.content?.id,
+          titleId: data.id,
+        });
+      }
+
       let titleContent;
       if (!ref) {
         titleContent = await Prisma.title.findFirst({
@@ -151,15 +108,13 @@ const handler = async (
         });
       }
 
-      // const content = await Prisma.content.findFirst({
-      //   where: { AND: { id: title?.content_id, user_id } },
-      // });
-
       if (!titleContent) {
         throw internalServerError({
           message: 'Awesome not found. Please, create an awesome do visualize here!',
         });
       }
+
+      setRedis(`awesome-${user_id}-${titleContent?.title}`, JSON.stringify(titleContent));
 
       return res.status(200).json({
         message: `Success to get awesome ${titleContent.title ?? ''}`,

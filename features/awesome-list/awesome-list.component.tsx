@@ -9,7 +9,7 @@ import { Sidebar, useSidebarStore } from './components/sidebar';
 import Header from '@/components/header';
 
 const AwesomeList = () => {
-  const { awesomeName } = useAwesomeListStore();
+  const { awesomeName, awesomeTitleId } = useAwesomeListStore();
   const { isNavigationOpen } = useSidebarStore();
   const { useNavigationQuery } = sideNavigationEffect();
 
@@ -17,6 +17,7 @@ const AwesomeList = () => {
     content, isOk, title, titleId,
   } = useFetchAwesome({
     awesomeName,
+    id: awesomeTitleId,
   });
 
   useEffect(useNavigationQuery, [isNavigationOpen]);

@@ -1,5 +1,5 @@
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
-import { badRequest, internalServerError } from './utils/http/http-helper';
+import { badRequest, internalServerError } from '../pages/api/utils/http/http-helper';
 import { Prisma } from '@/api/db';
 import { withAuth } from '@/api/middlewares/';
 

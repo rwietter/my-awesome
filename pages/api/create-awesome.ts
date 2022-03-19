@@ -2,6 +2,7 @@ import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
 import { badRequest, internalServerError } from './utils/http/http-helper';
 import { Prisma } from '@/api/db';
 import { withAuth } from '@/api/middlewares/';
+import { delRedis } from '@/services/redis/redis-config';
 
 type Title = {
   id: string;
@@ -22,23 +23,21 @@ const createAwesome = async (
       });
     }
 
-    const content = JSON.stringify(contentItem);
+    const content = JSON.stringify(contentItem) as string;
 
     if (!content) return res.json({ error: true });
 
-    const userContents = await Prisma.content.findMany({
-      where: { user_id },
+    const findIfRepeatTitles = await Prisma.title.count({
+      where: { title: awesomeTitle },
     });
 
-    userContents.forEach((contents: any) => {
-      if (contents.content_item === content) {
-        throw badRequest({
-          message: 'Duplicated content',
-        });
-      }
-    });
+    if (findIfRepeatTitles >= 1) {
+      throw internalServerError({
+        message: 'That title already exists. Please provide another title.',
+      });
+    }
 
-    const createdContent = await Prisma.title.create({
+    const createdAwesome = await Prisma.title.create({
       data: {
         title: awesomeTitle,
         user_id,
@@ -51,21 +50,13 @@ const createAwesome = async (
       },
     });
 
-    if (!createdContent) {
+    if (!createdAwesome) {
       throw internalServerError({
-        message: 'The content could not be created',
+        message: 'The awesome could not be created',
       });
     }
 
-    // const createdTitle: Title = await Prisma.title.create({
-    //   data: { title: awesomeTitle, content_id: createdContent.id, user_id },
-    // });
-
-    // if (!createdTitle) {
-    //   throw internalServerError({
-    //     message: 'The title of content could not be created',
-    //   });
-    // }
+    delRedis(`awesome-titles-${user_id}`);
 
     return res.status(200).json({
       message: 'Successful create awesome',

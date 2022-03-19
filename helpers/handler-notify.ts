@@ -1,7 +1,6 @@
 import { notify } from '@/features/ui';
 
 function handleError(error: any) {
-  console.log(error);
   const { response } = error;
 
   const errorData = response?.data ?? '';

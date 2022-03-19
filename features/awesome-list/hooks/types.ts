@@ -1,7 +1,8 @@
 import { IsOk } from 'types';
 
 export interface FechListProps {
-	awesomeName: string;
+  awesomeName: string;
+  id: string;
 }
 
 export interface ContentState {
