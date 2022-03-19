@@ -1,5 +1,6 @@
 import { IsOk } from 'types';
 import { useState, useEffect } from 'react';
+import { setCookie } from 'nookies';
 import { adapter } from '@/services/api';
 import { handleError } from '@/helpers/handler-notify';
 import {
@@ -30,11 +31,12 @@ export const useFetchAwesome = ({
       }
 
       const { content, title, titleId } = response.data;
-      const parsedContent = JSON.parse(content);
 
       if (!content || !title || !titleId) {
         throw response;
       }
+
+      const parsedContent = JSON.parse(content);
 
       setState({
         content: parsedContent,

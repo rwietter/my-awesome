@@ -37,11 +37,11 @@ model Account {
 
 model User {
   id            String    @id @default(cuid())
-  email         String    @unique
-  name          String
-  password      String?
+  email         String    @unique @db.VarChar()
+  name          String    @db.VarChar()
+  password      String?   @db.VarChar()
   emailVerified DateTime?
-  image         String?
+  image         String?   @db.VarChar()
 
   title   Title[]
   content Content[]
@@ -56,7 +56,7 @@ model User {
 
 model Title {
   id    String @id @default(cuid())
-  title String
+  title String @db.Text
 
   user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
@@ -71,7 +71,7 @@ model Title {
 
 model Content {
   id           String @id @default(cuid())
-  content_item String
+  content_item String @db.Text
 
   title    Title  @relation(fields: [title_id], references: [id], onDelete: Cascade)
   title_id String @unique

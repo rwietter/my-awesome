@@ -61,7 +61,7 @@ const handler = async (
       const { page } = req.query;
       const ref = page.toString();
 
-      if (!user_id) {
+      if (!user_id || !ref) {
         throw badRequest({
           message: 'User id or page is required',
         });

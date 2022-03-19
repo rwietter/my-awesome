@@ -839,7 +839,7 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   overflow: auto;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 1.45;
   border-radius: 6px;
 }

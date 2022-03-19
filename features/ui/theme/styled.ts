@@ -100,7 +100,7 @@ const { theme: light_theme } = createStitches({
       green: '#17b978',
       danger: '#FF006E',
       sidebar: '#F4F4F6',
-      bgMd: '#F4F4F6',
+      bgMd: '#FFFFFF',
       twitter: '#1da1f2',
       google: '#ea4335',
     },

@@ -1,7 +1,7 @@
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { VscZoomIn, VscZoomOut } from 'react-icons/vsc';
 import ReactMarkdown from 'react-markdown';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import Link from 'next/link';
 import { styled } from '@/features/ui/theme';
 
 export const Container = styled('div', {
@@ -84,11 +84,14 @@ export const PageContainer = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+
+  '& svg + svg': {
+    marginLeft: '2rem',
+  },
 });
 
 export const IconDelete = styled(AiOutlineDelete, {
   cursor: 'pointer',
-  marginRight: '2rem',
   color: '$gray50',
   transition: 'color 0.2s, transform 0.4s ease',
   '&:hover': {
@@ -107,8 +110,41 @@ export const IconEdit = styled(AiOutlineEdit, {
   },
 });
 
+export const IncrementFontSize = styled(VscZoomIn, {
+  cursor: 'pointer',
+  color: '$gray50',
+  transition: 'color 0.2s ease',
+  '&:hover': {
+    color: '$twitter',
+  },
+});
+
+export const DecrementFontSize = styled(VscZoomOut, {
+  cursor: 'pointer',
+  color: '$gray50',
+  transition: 'color 0.2s ease',
+  '&:hover': {
+    color: '$secondary',
+  },
+});
+
 export const ReactMarkdownCSS = styled(ReactMarkdown, {
-  fontSize: '$4',
+  fontSize: '$5',
+  transition: 'font .5s ease',
+
+  variants: {
+    fontSize: {
+      increment: {
+        fontSize: '$6',
+      },
+      decrement: {
+        fontSize: '$4',
+      },
+      normal: {
+        fontSize: '$5',
+      },
+    },
+  },
 });
 
 export const HighlighterCSS = styled(SyntaxHighlighter, {

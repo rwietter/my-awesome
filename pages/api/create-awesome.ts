@@ -28,7 +28,7 @@ const createAwesome = async (
     if (!content) return res.json({ error: true });
 
     const findIfRepeatTitles = await Prisma.title.count({
-      where: { title: awesomeTitle },
+      where: { title: awesomeTitle, user_id },
     });
 
     if (findIfRepeatTitles >= 1) {

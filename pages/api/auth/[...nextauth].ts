@@ -152,7 +152,7 @@ export default NextAuth({
     },
 
     session: async ({ session, token, user }: any) => {
-      session.accessToken = token.accessToken;
+      session.accessToken = token;
       return session
     },
   },

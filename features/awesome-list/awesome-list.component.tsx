@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { setCookie } from 'nookies';
+import { HomePageProps } from 'pages/home';
 import * as S from './styled';
 import { Toastfy } from '@/features/ui/toastfy';
 import { useFetchAwesome, useDeleteAwesome } from './hooks';
@@ -7,10 +9,15 @@ import { MarkdownRender } from './awesome-md.component';
 import { sideNavigationEffect } from './hooks/useNavigationQuery';
 import { Sidebar, useSidebarStore } from './components/sidebar';
 import Header from '@/components/header';
+import { handleError } from '@/helpers/handler-notify';
+import { NoContent } from '../ui';
 
 const AwesomeList = () => {
   const { awesomeName, awesomeTitleId } = useAwesomeListStore();
   const { isNavigationOpen } = useSidebarStore();
+  const [fontSize, setFontSize] = useState<
+		'increment' | 'decrement' | 'normal'
+	>('normal');
   const { useNavigationQuery } = sideNavigationEffect();
 
   const {
@@ -22,9 +29,13 @@ const AwesomeList = () => {
 
   useEffect(useNavigationQuery, [isNavigationOpen]);
 
+  const handleIncrementFontSize = () => setFontSize('increment');
+
+  const handleDecrementFontSize = () => setFontSize('decrement');
+
   return (
-    <>
-      <Header />
+		<>
+			<Header />
 			<S.Container className="main-content">
 				<Sidebar />
 				<S.SectionHeader>
@@ -32,22 +43,21 @@ const AwesomeList = () => {
 						Your Awesome {title && `of ${title}`}
 					</S.PageDescription>
 					<S.PageContainer>
-						<S.IconDelete size={28} onClick={() => useDeleteAwesome(titleId)} />
-						<S.IconEdit size={28} />
+						<S.IconDelete size={20} onClick={() => useDeleteAwesome(titleId)} />
+						<S.IconEdit size={20} />
+						<S.IncrementFontSize size={20} onClick={handleIncrementFontSize} />
+						<S.DecrementFontSize size={20} onClick={handleDecrementFontSize} />
 					</S.PageContainer>
 				</S.SectionHeader>
 
 				<S.PageContent>
 					<S.Section>
-						<S.PageIndice>{title && title}</S.PageIndice>
-					</S.Section>
-					<S.Section>
-						<MarkdownRender content={content} isOk={isOk} />
+						<MarkdownRender content={content} isOk={isOk} fontSize={fontSize} />
 					</S.Section>
 				</S.PageContent>
 				<Toastfy />
 			</S.Container>
-    </>
+		</>
   );
 };
 

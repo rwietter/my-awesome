@@ -44,6 +44,7 @@
 		"rehype-highlight": "^5.0.2",
 		"rehype-raw": "^6.1.1",
 		"rehype-sanitize": "^5.0.1",
+		"remark-gemoji": "^7.0.1",
 		"remark-gfm": "^3.0.1",
 		"swr": "^1.2.2",
 		"uuid": "^8.3.2",
