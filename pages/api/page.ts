@@ -1,5 +1,5 @@
 import { ExtendedApiRequest, ExtendedApiResponse } from 'types';
-import { getRedis, setRedis } from '@/services/redis/redis-config';
+import { delRedis, getRedis, setRedis } from '@/services/redis/redis-config';
 import { Prisma } from '@/api/db';
 import { withAuth } from '@/api/middlewares/';
 import {
@@ -20,11 +20,12 @@ const handler = async (
   }
 
   async function deleteAwesome(): Promise<void> {
-    const { title_id: titleId } = req.query;
+    const { title_id: titleId, title } = req.query as { title_id: string, title: string };
+    const user_id = req.user.id;
 
     const title_id = titleId.toString();
 
-    if (!title_id) {
+    if (!title_id || !title || !user_id) {
       throw badRequest({
         message: 'Title is required',
       });
@@ -45,6 +46,9 @@ const handler = async (
           message: 'You are not allowed to delete this awesome',
         });
       }
+
+      await delRedis(`awesome-${user_id}-${title}`);
+      await delRedis(`awesome-titles-${user_id}`);
 
       return res.status(200).json({
         error: false,

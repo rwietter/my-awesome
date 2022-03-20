@@ -1,13 +1,10 @@
 /* eslint-disable react/button-has-type */
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
-import { setCookie } from 'nookies';
 import Link from 'next/link';
 import {
-  signIn as signInOAuth, getProviders, signIn, getSession,
+  signIn as signInOAuth, getProviders, signIn,
 } from 'next-auth/react';
-import { adapter } from '@/services/api';
-import { authActions } from '@/features/user/store/actions';
 import { TextCSS, Toastfy } from '@/features/ui';
 import * as S from '../styled';
 import { getIcon, personalIcon } from '../styled';
@@ -16,38 +13,49 @@ import { Button } from '@/features/ui/button';
 import { Margin } from '@/features/ui/margin';
 import { styled } from '@/features/ui/theme';
 
+interface SignInProps {
+  ok: boolean | null;
+  error: boolean | null;
+  status: number;
+  url: string;
+}
+
 function Login() {
   const router = useRouter();
-  const { signin } = authActions();
   const [providers, setProviders] = useState<any>([]);
-  const [credentials, setCredentials] = useState<any>([]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      // const response = await adapter.post('/signin', {
-      //   pass: e.currentTarget.password.value,
-      //   email: e.currentTarget.email.value,
-      // });
 
-      // if (response.status !== 200) {
-      //   throw response;
-      // }
-
-      // const { token, userId } = response.data.body;
-      // adapter.defaults.headers.common.Authorization = `Bearer ${token}`;
-      // setCookie(undefined, 'awesome:token', token, {
-      //   maxAge: 2.592e6, // 4 hours
-      // });
-
-      signIn(
+      const res: SignInProps = await signIn(
         'credentials',
         {
           email: e.currentTarget.email.value,
           password: e.currentTarget.password.value,
-          callbackUrl: `${window.location.origin}/home`,
+          redirect: false,
         },
-      );
+      ) as unknown as SignInProps;
+
+      const error = {
+        response: {
+          data: {
+            message: 'User or password incorrect',
+          },
+        },
+      };
+
+      if (!res) {
+        return handleError(error);
+      }
+
+      if (res.error) {
+        return handleError(error);
+      }
+
+      if (res.ok && res.status === 200) {
+        return router.push('/home');
+      }
 
       // signin({ isLoggedIn: true, token, userId });
     } catch (err: any) {
@@ -62,11 +70,10 @@ function Login() {
       if (!authProviders) return;
 
       const {
-        github, google, twitter, credentials,
+        github, google, twitter,
       } = authProviders;
 
       setProviders({ github, google, twitter });
-      setCredentials(credentials);
     })();
   }, []);
 

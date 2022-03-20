@@ -39,7 +39,7 @@ const AwesomeList = () => {
 						Your Awesome {title && `of ${title}`}
 					</S.PageDescription>
 					<S.PageContainer>
-						<S.IconDelete size={20} onClick={() => useDeleteAwesome(titleId)} />
+						<S.IconDelete size={20} onClick={() => useDeleteAwesome(titleId, title)} />
 						<S.IconEdit size={20} />
 						<S.IncrementFontSize size={20} onClick={handleIncrementFontSize} />
 						<S.DecrementFontSize size={20} onClick={handleDecrementFontSize} />
@@ -51,7 +51,6 @@ const AwesomeList = () => {
 						<MarkdownRender content={content} isOk={isOk} fontSize={fontSize} />
 					</S.Section>
 				</S.PageContent>
-				<Toastfy />
 			</S.Container>
 		</>
   );

@@ -45,7 +45,6 @@ export const useFetchAwesome = ({
       });
       setIsOk({ isLoading: false, isError: false });
     } catch (error) {
-      handleError(error);
       setIsOk({ isLoading: false, isError: true });
     }
   };

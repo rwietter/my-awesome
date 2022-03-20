@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 
 import Link from 'next/link';
-import { signIn, signOut } from 'next-auth/react';
 import * as S from '../styled';
 import { TextCSS, Toastfy } from '@/features/ui';
 import { handleError } from '@/helpers/handler-notify';

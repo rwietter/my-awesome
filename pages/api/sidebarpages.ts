@@ -13,8 +13,7 @@ async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
 
     if (!user_id) {
       throw unauthorized({
-        name: ERR_USER_NOT_FOUND,
-        message: errorMsg.ERR_USER_NOT_FOUND,
+        message: 'User is not found',
       });
     }
 
@@ -33,8 +32,6 @@ async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
 
     const data = await Prisma.title.findMany({ where: { user_id } });
 
-    setRedis(`awesome-titles-${user_id}`, JSON.stringify(data));
-
     if (data.length === 0) {
       return res.status(200).json({
         status: 200,
@@ -46,8 +43,12 @@ async function handler(req: ExtendedApiRequest, res: ExtendedApiResponse) {
 
     if (!data) {
       throw internalServerError({
-        message: 'Page not found',
+        message: 'There is no record for this user',
       });
+    }
+
+    if (data.length > 0) {
+      setRedis(`awesome-titles-${user_id}`, JSON.stringify(data));
     }
 
     return res.status(200).json({

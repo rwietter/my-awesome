@@ -56,68 +56,69 @@ export default NextAuth({
         email: { label: 'email', type: 'email', placeholder: 'jhondoe@gmail.com' },
         password: { label: 'passowrd', type: 'password' },
       },
-      async authorize(credentials, req): Promise<any> {
-        if (req.method === 'POST') {
-          if (!credentials) {
-            return Promise.reject();
+      async authorize(credentials): Promise<any> {
+        if (!credentials) {
+          throw badRequest({
+            name: 'ERR_INVALID_CREDENTIALS',
+            message: 'Invalid credentials',
+          })
+        }
+
+        const { email, password } = credentials
+
+        try {
+          const user = await Prisma.user.findUnique({ where: { email } });
+          if (!user) {
+            throw unauthorized({
+              name: 'ERR_USER_NOT_FOUND',
+              message: 'User not found',
+            });
           }
 
-          const { email, password } = credentials
+          const { password: userPassword } = user;
 
-          try {
-            const user = await Prisma.user.findUnique({ where: { email } });
-            if (!user) {
-              throw unauthorized({
-                name: 'ERR_USER_NOT_FOUND',
-                message: 'User not found',
-              });
-            }
+          if (!userPassword) return;
 
-            const { password: userPassword } = user;
-
-            if (!userPassword) return;
-
-            if (!bcrypt.compareSync(password, userPassword)) {
-              throw unauthorized({
-                name: 'ERR_INVALID_PASSWORD',
-                message: 'Invalid password',
-              });
-            }
-
-            if (user.email !== email) {
-              throw unauthorized({
-                name: 'ERR_INVALID_EMAIL',
-                message: 'Invalid email',
-              });
-            }
-
-            const JWTData = {
-              iss: 'awesome',
-              sub: user.id,
-              exp: Math.floor(Date.now() / 1000) + 60 * 4,
-              data: { userId: user.id, name: user.name },
-            };
-
-            const jwtToken = await generateJwtToken(JWTData);
-
-            if (!jwtToken) {
-              throw unauthorized({
-                name: 'ERR_INVALID_TOKEN',
-                message: 'Invalid token',
-              });
-            }
-
-            return {
-              message: 'Authorized sign in',
-              status: 200,
-              accessToken: jwtToken,
-              name: user.name,
-              email: user.email,
-              id: user.id,
-            }
-          } catch (error) {
-            return null;
+          if (!bcrypt.compareSync(password, userPassword)) {
+            throw unauthorized({
+              name: 'ERR_INVALID_PASSWORD',
+              message: 'Invalid password',
+            });
           }
+
+          if (user.email !== email) {
+            throw unauthorized({
+              name: 'ERR_INVALID_EMAIL',
+              message: 'Invalid email',
+            });
+          }
+
+          const JWTData = {
+            iss: 'awesome',
+            sub: user.id,
+            exp: Math.floor(Date.now() / 1000) + 60 * 4,
+            data: { userId: user.id, name: user.name },
+          };
+
+          const jwtToken = await generateJwtToken(JWTData);
+
+          if (!jwtToken) {
+            throw unauthorized({
+              name: 'ERR_INVALID_TOKEN',
+              message: 'Invalid token',
+            });
+          }
+
+          return {
+            message: 'Authorized sign in',
+            status: 200,
+            accessToken: jwtToken,
+            name: user.name,
+            email: user.email,
+            id: user.id,
+          }
+        } catch (error) {
+          return null;
         }
       },
     }),
@@ -137,9 +138,9 @@ export default NextAuth({
     verifyRequest: '/auth/verify-request', // (used for check email message)
   },
   callbacks: {
-    redirect: async () => {
-      return 'http://localhost:3000/home';
-    },
+    // redirect: async (props) => {
+    //   return `${props.baseUrl}/home`;
+    // },
     async jwt({
       token, user
     }) {

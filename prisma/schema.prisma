@@ -14,22 +14,43 @@ generator client {
   binaryTargets   = ["native", "debian-openssl-1.1.x"]
 }
 
+// model Account {
+//   id                String  @id @default(cuid())
+//   userId            String
+//   type              String
+//   provider          String
+//   providerAccountId String
+//   refresh_token     String? @db.Text
+//   access_token      String? @db.Text
+//   expires_at        Int?
+//   token_type        String?
+//   scope             String?
+//   id_token          String? @db.Text
+//   session_state     String?
+
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   @@unique([provider, providerAccountId])
+//   @@map("accounts")
+// }
+
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+  id                 String  @id @default(cuid())
+  userId             String  @map("user_id")
+  type               String
+  provider           String
+  providerAccountId  String  @map("provider_account_id")
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  oauth_token_secret String?
+  oauth_token        String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -37,21 +58,21 @@ model Account {
 
 model User {
   id            String    @id @default(cuid())
-  email         String    @unique @db.VarChar()
-  name          String    @db.VarChar()
+  name          String?   @db.VarChar()
+  email         String?   @unique @db.VarChar()
   password      String?   @db.VarChar()
-  emailVerified DateTime?
-  image         String?   @db.VarChar()
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 
   title   Title[]
   content Content[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  accounts Account[]
+  sessions Session[]
 
-  Account Account[]
-  Session Session[]
-  @@map("user")
+  @@map(name: "user")
 }
 
 model Title {

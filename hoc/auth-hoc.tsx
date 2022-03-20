@@ -1,10 +1,8 @@
 import { getSession, signIn } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import Jwt from 'jsonwebtoken';
-import { useRouter } from 'next/router';
-import { getToken } from 'next-auth/jwt';
 import { unauthorized } from '@/api/utils/http';
-import { authActions, useAuthStore } from '@/features/user';
+import { authActions } from '@/features/user';
 
 const verifyToken = (token: string) => {
   try {
@@ -26,7 +24,6 @@ const verifyToken = (token: string) => {
 const withProtectRoute = (WrappedComponent: any) => (props: any) => {
   const [isLoading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { token } = useAuthStore();
   const { logout } = authActions();
 
   useEffect(() => {

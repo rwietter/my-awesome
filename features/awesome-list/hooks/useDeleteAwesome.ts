@@ -1,10 +1,10 @@
 import { handleError, handleSuccess } from '@/helpers/handler-notify';
 import { adapter } from '@/services/api';
 
-export const useDeleteAwesome = async (titleId: string) => {
+export const useDeleteAwesome = async (titleId: string, title: string) => {
   try {
     const response = await adapter.delete('/page', {
-      params: { title_id: titleId },
+      params: { title_id: titleId, title },
     });
 
     if (response.data.status !== 200 || response.data.error) {
