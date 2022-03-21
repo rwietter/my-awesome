@@ -8,6 +8,7 @@ import { TextCSS, Toastfy } from '@/features/ui';
 import { handleError } from '@/helpers/handler-notify';
 import { Button } from '@/features/ui/button';
 import { Margin } from '@/features/ui/margin';
+import { PublicHeader } from '@/components/public-header';
 
 const SignUp = () => {
   const router = useRouter();
@@ -33,9 +34,10 @@ const SignUp = () => {
   };
 
   return (
-		<S.Wrapper>
+    <S.Wrapper>
+      <PublicHeader />
 			<S.Form onSubmit={handleSubmit}>
-				<TextCSS textColor="text" font="md">
+				<TextCSS textColor="white" font="md">
 					Welcome to MyAwesome!
 				</TextCSS>
 				<Margin margin="1rem 0 0 0" />
@@ -52,7 +54,7 @@ const SignUp = () => {
 					Sign Up
 				</Button>
 				<Margin margin="1rem 0 1rem 0" />
-				<TextCSS textColor="text" font="md" display="inline">
+				<TextCSS textColor="white" font="md" display="inline">
 					Already have an account?
 					<Link href="/auth/signin">
 						<TextCSS textColor="link" font="md" display="inline">
@@ -63,7 +65,7 @@ const SignUp = () => {
 				</TextCSS>
 			</S.Form>
 			<Toastfy />
-		</S.Wrapper>
+    </S.Wrapper>
   );
 };
 

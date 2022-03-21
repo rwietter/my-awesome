@@ -9,11 +9,15 @@ import { TextCSS } from '@/features/ui';
 import { authActions } from '@/features/user/store/actions';
 import { Switch } from '@/features/ui/switch';
 import {
-  ContainerCSS, HexagonIcon, NavCSS, SeparatorIcon, TitleCSS,
+  ContainerCSS,
+  HexagonIcon,
+  NavCSS,
+  SeparatorIcon,
+  TitleCSS,
 } from './styled';
 
 const Header = () => {
-  const { logout } = authActions();
+  // const { logout } = authActions();
   // const { isLoggedIn } = useAuthStore();
 
   // if (!isLoggedIn) return <div />;
@@ -29,14 +33,20 @@ const Header = () => {
   return (
 		<ContainerCSS>
 			<TitleCSS>
-        <TextCSS><VscRocket size={15} /> MyAwesome | { session?.user?.name }</TextCSS>
+				<TextCSS font="sm">
+					<VscRocket size={15} />
+					MyAwesome {session?.user && <span>| {session?.user?.name}</span>}
+				</TextCSS>
 			</TitleCSS>
 			<NavCSS>
 				<Link href="/home">Home</Link>
 				<HexagonIcon size={5} />
 				<Link href="/create-awesome">Create list</Link>
 				<HexagonIcon size={5} />
-				<a data-type="logout" onClick={handleLogout}>
+				<a
+					data-type="logout"
+					onClick={handleLogout}
+				>
 					Sign out
 				</a>
 				<SeparatorIcon size={20} />

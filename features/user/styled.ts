@@ -9,7 +9,7 @@ export const getIcon = (provider: 'google' | 'github' | 'twitter') => {
     },
     github: {
       icon: IoLogoGithub,
-      color: '#333',
+      color: '#FFFFFF',
     },
     twitter: {
       icon: IoLogoTwitter,
@@ -26,7 +26,8 @@ const Wrapper = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   minHeight: '100vh',
-  background: '$background',
+  background: '$dark',
+  color: '#f5f7fa',
 });
 
 const Form = styled('form', {
@@ -35,7 +36,7 @@ const Form = styled('form', {
   alignItems: 'center',
   justifyContent: 'center',
   width: 'fit-content',
-  background: '$gray100',
+  background: 'rgba(23, 23, 23, 0.9)',
   padding: '1rem 1rem',
 
   '@media (min-width: 520px)': {
@@ -52,7 +53,7 @@ const Title = styled('h1', {
   fontSize: '$7',
   margin: '0',
   fontWeight: 900,
-  color: '$gray50',
+  color: '#f5f7fa',
 
   '@bp3': {
     fontSize: '$9',
@@ -65,7 +66,7 @@ const Label = styled('label', {
   alignSelf: 'flex-start',
   padding: '0.2rem 0',
   fontWeight: 500,
-  color: '$gray50',
+  color: '#f5f7fa',
 
   '&:not(:last-child)': {
     marginTop: '1rem',
@@ -76,8 +77,8 @@ const Input = styled('input', {
   fontFamily: '$secondary',
   fontSize: '$4',
   fontWeight: 400,
-  background: '$gray200',
-  color: '$gray50',
+  background: '#27272B',
+  color: '#f5f7fa',
   border: 'none',
   outline: 'none',
   padding: '1.3rem',
@@ -86,14 +87,14 @@ const Input = styled('input', {
 
 export const SeparatorContainer = styled('div', {
   display: 'flex',
-  color: '$gray50',
+  color: '#f5f7fa',
   width: '100%',
   justifyContent: 'center',
   alignItems: 'center',
 });
 
 export const Separator = styled('div', {
-  background: '$gray50',
+  background: '#f5f7fa',
   width: '70%',
   display: 'inline',
   height: '1px',
@@ -101,10 +102,11 @@ export const Separator = styled('div', {
 
 export const SeparatorTitle = styled('p', {
   fontFamily: '$secondary',
-  fontSize: '$4',
+  fontSize: '$5',
   margin: '0',
   padding: '0 1rem',
   width: '100%',
+  color: '#f5f7fa',
   fontWeight: 400,
 });
 
@@ -138,7 +140,7 @@ export const personalIcon = {
         },
       },
       github: {
-        fill: '$gray50',
+        fill: '$white',
         transition: 'filter 0.3s ease-in-out',
 
         '&:hover': {

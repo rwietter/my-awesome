@@ -4,18 +4,21 @@ import { styled } from '@/features/ui/theme';
 const ToastfyCSS = styled(ToastContainer, {
   '.Toastify__toast--error': {
     background: '$gray100',
+    fontFamily: '$secondary',
     borderRadius: '4px',
     color: '$gray50',
-    fontSize: '$3',
+    fontSize: '$4',
   },
   '.Toastify__toast--success': {
     background: '$gray100',
+    fontFamily: '$secondary',
     borderRadius: '4px',
     color: '$gray50',
-    fontSize: '$3',
+    fontSize: '$4',
   },
   '.Toastify__toast--warning': {
     background: '$gray50',
+    fontFamily: '$secondary',
     borderRadius: '4px',
     fontSize: '$4',
     '.Toastify__toast-body': {

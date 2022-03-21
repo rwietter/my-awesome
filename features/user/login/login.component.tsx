@@ -1,10 +1,7 @@
-/* eslint-disable react/button-has-type */
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
-import {
-  signIn as signInOAuth, getProviders, signIn,
-} from 'next-auth/react';
+import { signIn as signInOAuth, getProviders, signIn } from 'next-auth/react';
 import { TextCSS, Toastfy } from '@/features/ui';
 import * as S from '../styled';
 import { getIcon, personalIcon } from '../styled';
@@ -12,12 +9,13 @@ import { handleError } from '@/helpers/handler-notify';
 import { Button } from '@/features/ui/button';
 import { Margin } from '@/features/ui/margin';
 import { styled } from '@/features/ui/theme';
+import { PublicHeader } from '@/components/public-header';
 
 interface SignInProps {
-  ok: boolean | null;
-  error: boolean | null;
-  status: number;
-  url: string;
+	ok: boolean | null;
+	error: boolean | null;
+	status: number;
+	url: string;
 }
 
 function Login() {
@@ -28,14 +26,11 @@ function Login() {
     try {
       e.preventDefault();
 
-      const res: SignInProps = await signIn(
-        'credentials',
-        {
-          email: e.currentTarget.email.value,
-          password: e.currentTarget.password.value,
-          redirect: false,
-        },
-      ) as unknown as SignInProps;
+      const res: SignInProps = (await signIn('credentials', {
+        email: e.currentTarget.email.value,
+        password: e.currentTarget.password.value,
+        redirect: false,
+      })) as unknown as SignInProps;
 
       const error = {
         response: {
@@ -69,9 +64,7 @@ function Login() {
 
       if (!authProviders) return;
 
-      const {
-        github, google, twitter,
-      } = authProviders;
+      const { github, google, twitter } = authProviders;
 
       setProviders({ github, google, twitter });
     })();
@@ -79,24 +72,46 @@ function Login() {
 
   return (
 		<S.Wrapper>
+			<PublicHeader />
 			<S.Form onSubmit={handleSubmit}>
-				<TextCSS textColor="text" font="md" display="inline">
+				<TextCSS
+					textColor="white"
+					font="lg"
+					display="inline"
+				>
 					Sign in to MyAwesome
 				</TextCSS>
 				<Margin margin="1rem 0 0 0" />
 				<S.Label htmlFor="email">E-mail</S.Label>
-				<S.Input name="email" type="email" />
+				<S.Input
+					name="email"
+					type="email"
+				/>
 				<S.Label htmlFor="password">Password</S.Label>
-				<S.Input name="password" type="password" />
+				<S.Input
+					name="password"
+					type="password"
+				/>
 				<Margin margin="2rem 0 1rem 0" />
-				<Button type="submit" color="primary">
+				<Button
+					type="submit"
+					color="primary"
+				>
 					Sign In
 				</Button>
 				<Margin margin="1.5rem 0" />
-				<TextCSS textColor="text" font="sm" display="inline">
+				<TextCSS
+					textColor="white"
+					font="md"
+					display="inline"
+				>
 					New to MyAwesome?
 					<Link href="/auth/signup">
-						<TextCSS textColor="link" font="sm" display="inline">
+						<TextCSS
+							textColor="link"
+							font="md"
+							display="inline"
+						>
 							{' '}
 							Create an account
 						</TextCSS>
@@ -121,7 +136,9 @@ function Login() {
 									type={id}
 									name={name}
 									key={name}
-									onClick={() => signInOAuth(id, { callbackUrl: `${window.location.origin}/home` })}
+									onClick={() => signInOAuth(id, {
+									    callbackUrl: `${window.location.origin}/home`,
+									  })}
 								/>
 						  );
 						})}

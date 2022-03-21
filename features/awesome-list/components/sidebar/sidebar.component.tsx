@@ -1,20 +1,21 @@
 /* eslint-disable no-return-assign */
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { useState } from 'react';
 import * as CSS from './styled';
-import { withProtect } from '@/hoc/auth';
-import { awesomeListActions } from '../../store/actions';
 import { SidebarLinks } from './sidebar-links.component';
 import { useSidebarStore } from './store/store';
 
 const Sidebar = () => {
   const { isNavigationOpen, setNavigationStatus } = useSidebarStore();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     const side = document.querySelector('.side-navigation') as HTMLElement;
     if (side === null) return;
 
     side.classList.toggle('active');
-    setNavigationStatus();
+    // setNavigationStatus();
+    setIsOpen((state) => !state);
   };
 
   return (
@@ -25,11 +26,17 @@ const Sidebar = () => {
 				  handleClick();
 				}}
 			>
-				{isNavigationOpen && (
-					<VscChevronLeft size={30} color="var(--colors-primary)" />
+				{isOpen && (
+					<VscChevronLeft
+						size={30}
+						color="var(--colors-primary)"
+					/>
 				)}
-				{!isNavigationOpen && (
-					<VscChevronRight size={30} color="var(--colors-primary)" />
+				{!isOpen && (
+					<VscChevronRight
+						size={30}
+						color="var(--colors-primary)"
+					/>
 				)}
 			</CSS.Button>
 			<CSS.OverFlow className="sidebar-overflow">
