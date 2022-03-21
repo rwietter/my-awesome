@@ -1,12 +1,11 @@
+/** @format */
+
 module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -15,10 +14,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
@@ -29,6 +25,7 @@ module.exports = {
     camelcase: 'off',
     'no-tabs': 'off',
     'eact/jsx-props-no-spreading': 'off',
+    'jsx-quotes': ['error', 'prefer-double'],
     'react/function-component-definition': 'off',
     'react/no-unused-prop-types': 'off',
     'no-shadow': 'off',

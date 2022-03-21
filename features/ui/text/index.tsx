@@ -12,6 +12,7 @@ const Text = styled('p', {
   fontSize: '$5',
   margin: 0,
   fontFamily: '$secondary',
+  fontWeight: 600,
   variants: {
     font: {
       sm: {
@@ -42,7 +43,7 @@ const Text = styled('p', {
         color: '$white',
       },
       link: {
-        textGradient: '$highlight30',
+        color: '$green',
         cursor: 'pointer',
       },
     },

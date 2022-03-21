@@ -48,6 +48,7 @@
 		"remark-gfm": "^3.0.1",
 		"swr": "^1.2.2",
 		"uuid": "^8.3.2",
+		"vanilla-tilt": "^1.7.2",
 		"zustand": "^3.7.0"
 	},
 	"devDependencies": {

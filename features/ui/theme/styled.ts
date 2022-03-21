@@ -13,6 +13,8 @@ const {
         'linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8257e5, #3a86ff );',
       highlight145: 'linear-gradient(145deg, #8257e5, #c1b);',
       highlight30: 'linear-gradient(43deg, #74ebd5, #9face6);',
+      gradientGreen: 'linear-gradient(135deg, #80ffea 0%, #8aff80 100%);',
+      gradientYellow: 'linear-gradient(135deg, #ffff80 0%, #ff80bf 100%);',
       gray50: '#f5f7fa',
       gray100: '#27272B',
       gray200: '#1B1B1E',

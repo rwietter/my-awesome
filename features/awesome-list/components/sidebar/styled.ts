@@ -6,7 +6,7 @@ export const SidebarContainer = styled('aside', {
   fontFamily: 'Poppins',
   width: '5px',
   height: '100%',
-  position: 'fixed',
+  position: 'absolute',
   top: '0',
   left: '0',
   transition: 'width 0.3s ease',

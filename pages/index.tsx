@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
-import { getSession } from 'next-auth/react';
-import { Background } from '../components/background';
+import { Homepage } from '../features/homepage';
 
-const Home: NextPage = () => <Background />;
+const Home: NextPage = () => <Homepage />;
 export default Home;
