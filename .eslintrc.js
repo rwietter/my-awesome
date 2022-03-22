@@ -26,6 +26,7 @@ module.exports = {
     'no-tabs': 'off',
     'eact/jsx-props-no-spreading': 'off',
     'jsx-quotes': ['error', 'prefer-double'],
+    'no-console': 'off',
     'react/function-component-definition': 'off',
     'react/no-unused-prop-types': 'off',
     'no-shadow': 'off',
