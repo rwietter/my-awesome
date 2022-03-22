@@ -10,21 +10,23 @@ export const Container = styled('div', {
   minHeight: '100vh',
   width: '100%',
   padding: '7rem 1.5rem 0 7rem',
-  transition: 'padding 0.5s ease',
+  transition: '$transitonTheme',
 
   '&.active': {
-    transition: 'padding 0.5s ease',
+    transition: '$transitonTheme',
     paddingLeft: '350px',
   },
 });
 
 export const Section = styled('section', {
   color: '$gray50',
+  transition: '$transitonTheme',
 });
 
 export const SectionHeader = styled('div', {
   color: '$gray50',
   display: 'flex',
+  transition: '$transitonTheme',
   justifyContent: 'space-between',
   alignItems: 'center',
 });
@@ -32,6 +34,7 @@ export const SectionHeader = styled('div', {
 export const Separator = styled('div', {
   background: '$separator',
   minHeight: '1px',
+  transition: '$transitonTheme',
   width: '100%',
 });
 
@@ -43,6 +46,7 @@ export const PageTitle = styled('h1', {
 export const PageDescription = styled('p', {
   fontSize: '$10',
   color: '$secondary',
+  transition: '$transitonTheme',
   margin: 0,
   fontWeight: 700,
   background: '$highlight145',
@@ -57,6 +61,7 @@ export const PageIndice = styled('h1', {
   fontFamily: '$primary',
   textAlign: 'center',
   textGradient: '$highlight30',
+  transition: '$transitonTheme',
 });
 
 export const PageIndiceRef = styled('li', {
@@ -64,7 +69,7 @@ export const PageIndiceRef = styled('li', {
   fontSize: '$5',
   fontFamily: '$secondary',
   padding: '0.2rem 0',
-  transition: 'all 0.2s ease',
+  transition: '$transitonTheme',
   '&:hover': {
     color: '$primary',
   },
@@ -76,6 +81,7 @@ export const PageContent = styled('main', {
   padding: '2rem 1rem 1rem 2rem',
   marginTop: '1rem',
   borderRadius: '0.5rem',
+  transition: '$transitonTheme',
   fontFamily: '$primary',
   minHeight: '100vh',
 });

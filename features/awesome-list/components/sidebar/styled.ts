@@ -9,7 +9,7 @@ export const SidebarContainer = styled('aside', {
   position: 'absolute',
   top: '0',
   left: '0',
-  transition: 'width 0.3s ease',
+  transition: '$transitonThemeWidth',
   padding: '5.5rem 2rem 0 0.2rem',
 
   '&.active': {
