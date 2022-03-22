@@ -22,6 +22,7 @@ const ContainerCSS = styled('header', {
   justifyContent: 'space-between',
   alignItems: 'center',
   boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)',
+  transition: '$transitonTheme',
 
   '@media (min-width: 720px)': {
     padding: '0.5rem',

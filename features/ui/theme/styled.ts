@@ -37,6 +37,10 @@ const {
       google: '#ea4335',
     },
     space: {},
+    transitions: {
+      transitonTheme: 'color 350ms ease 0s, background 350ms ease 0s',
+      transitonThemeWidth: 'width 350ms ease 0s, color 350ms ease 0s, background 350ms ease 0s',
+    },
     fonts: {
       primary: `'Roboto', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;`,

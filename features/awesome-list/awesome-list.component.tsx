@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 import * as S from './styled';
-import { Toastfy } from '@/features/ui/toastfy';
 import { useFetchAwesome, useDeleteAwesome } from './hooks';
 import { useAwesomeListStore } from './store';
 import { MarkdownRender } from './awesome-md.component';
 import { sideNavigationEffect } from './hooks/useNavigationQuery';
-import { Sidebar, useSidebarStore } from './components/sidebar';
+import { Sidebar } from './components/sidebar';
 import Header from '@/components/header';
+import { AlertDialog } from '../ui/alert-dialog';
+import { handleError } from '@/helpers/handler-notify';
 
 const AwesomeList = () => {
   const { awesomeName, awesomeTitleId } = useAwesomeListStore();
-  const { isNavigationOpen } = useSidebarStore();
   const [fontSize, setFontSize] = useState<
 		'increment' | 'decrement' | 'normal'
 	>('normal');
-  const { useNavigationQuery } = sideNavigationEffect();
 
   const {
     content, isOk, title, titleId,
@@ -23,7 +22,14 @@ const AwesomeList = () => {
     id: awesomeTitleId,
   });
 
-  useEffect(useNavigationQuery, [isNavigationOpen]);
+  const handleDeleteAwesome = () => {
+    if (!titleId || !title) {
+      return handleError({
+        response: { data: { message: 'Não há nada a excluir' } },
+      });
+    }
+    useDeleteAwesome(titleId, title);
+  };
 
   const handleIncrementFontSize = () => setFontSize('increment');
 
@@ -39,16 +45,32 @@ const AwesomeList = () => {
 						Your Awesome {title && `of ${title}`}
 					</S.PageDescription>
 					<S.PageContainer>
-						<S.IconDelete size={20} onClick={() => useDeleteAwesome(titleId, title)} />
-						<S.IconEdit size={20} />
-						<S.IncrementFontSize size={20} onClick={handleIncrementFontSize} />
-						<S.DecrementFontSize size={20} onClick={handleDecrementFontSize} />
+						{title && titleId && (
+							<>
+								<AlertDialog handle={handleDeleteAwesome}>
+									<S.IconDelete size={20} />
+								</AlertDialog>
+								<S.IconEdit size={20} />
+								<S.IncrementFontSize
+									size={20}
+									onClick={handleIncrementFontSize}
+								/>
+								<S.DecrementFontSize
+									size={20}
+									onClick={handleDecrementFontSize}
+								/>
+							</>
+						)}
 					</S.PageContainer>
 				</S.SectionHeader>
 
 				<S.PageContent>
 					<S.Section>
-						<MarkdownRender content={content} isOk={isOk} fontSize={fontSize} />
+						<MarkdownRender
+							content={content}
+							isOk={isOk}
+							fontSize={fontSize}
+						/>
 					</S.Section>
 				</S.PageContent>
 			</S.Container>

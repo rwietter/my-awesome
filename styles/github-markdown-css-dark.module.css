@@ -9,6 +9,11 @@
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
+  transition: color 150ms ease 0s, background 350ms ease 0s !important;
+}
+
+.markdown-body table, .markdown-body tr, .markdown-body th, .markdown-body td, .markdown-body tbody, .markdown-body thead {
+  transition: border 150ms ease 0s, color 150ms ease 0s, background 200ms ease 0s;
 }
 
 .markdown-body .octicon {

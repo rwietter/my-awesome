@@ -3,10 +3,8 @@ import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { useState } from 'react';
 import * as CSS from './styled';
 import { SidebarLinks } from './sidebar-links.component';
-import { useSidebarStore } from './store/store';
 
 const Sidebar = () => {
-  const { isNavigationOpen, setNavigationStatus } = useSidebarStore();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -14,7 +12,6 @@ const Sidebar = () => {
     if (side === null) return;
 
     side.classList.toggle('active');
-    // setNavigationStatus();
     setIsOpen((state) => !state);
   };
 
