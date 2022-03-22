@@ -4,11 +4,6 @@ import { Prisma } from '@/api/db';
 import { withAuth } from '@/api/middlewares/';
 import { delRedis } from '@/services/redis/redis-config';
 
-type Title = {
-  id: string;
-  title: string;
-};
-
 const createAwesome = async (
   req: ExtendedApiRequest,
   res: ExtendedApiResponse,

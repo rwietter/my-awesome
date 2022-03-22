@@ -118,7 +118,7 @@ const handler = async (
         });
       }
 
-      setRedis(`awesome-${user_id}-${titleContent?.title}`, JSON.stringify(titleContent));
+      await setRedis(`awesome-${user_id}-${titleContent?.title}`, JSON.stringify(titleContent));
 
       return res.status(200).json({
         message: `Success to get awesome ${titleContent.title ?? ''}`,

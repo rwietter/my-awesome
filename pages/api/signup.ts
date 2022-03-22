@@ -37,7 +37,6 @@ const signup = async (
         message: errorMsg.ERR_EMAIL_ALREADY_EXISTS,
       });
     }
-    console.log('🚀 ~ file: signup.ts ~ line 35 ~ response?.email === email', response?.email === email);
 
     const data = await Prisma.user.create({
       data: { email, password, name },
