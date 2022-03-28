@@ -10,6 +10,9 @@ const nextConfig = {
     SECRET_JWT_KEY: process.env.SECRET_JWT_KEY,
     REDIS_URL: process.env.REDIS_URL,
   },
+  images: {
+    domains: ['avatars.githubusercontent.com', 'picsum.photos'],
+  },
 };
 
 module.exports = nextConfig;

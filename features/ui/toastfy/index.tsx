@@ -1,6 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { randomUUID } from 'crypto';
 import { v4 as uuidV4 } from 'uuid';
 import { ToastfyCSS } from './styled';
 

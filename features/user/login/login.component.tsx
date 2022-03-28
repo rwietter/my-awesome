@@ -70,6 +70,14 @@ function Login() {
     })();
   }, []);
 
+  const oauthSignIn = async (provider: string) => {
+    try {
+      signInOAuth(provider, { callbackUrl: `${window.location.origin}/home` });
+    } catch (error) {
+      // Handle error
+    }
+  };
+
   return (
 		<S.Wrapper>
 			<PublicHeader />
@@ -136,9 +144,7 @@ function Login() {
 									type={id}
 									name={name}
 									key={name}
-									onClick={() => signInOAuth(id, {
-									    callbackUrl: `${window.location.origin}/home`,
-									  })}
+									onClick={() => oauthSignIn(id)}
 								/>
 						  );
 						})}
