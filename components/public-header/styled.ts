@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { styled } from '@/features/ui/theme';
+import Image from 'next/image'
+import { styled } from '@/features/ui/theme'
 
 export const Header = styled('header', {
   position: 'fixed',
@@ -11,20 +11,20 @@ export const Header = styled('header', {
   padding: '2rem 1rem',
 
   span: {
-    display: 'none !important',
+    display: 'none !important'
   },
 
   '@bp2': {
     padding: '2rem',
 
     span: {
-      display: 'block !important',
-    },
-  },
+      display: 'block !important'
+    }
+  }
 
-});
+})
 
-export const HeaderLogo = styled(Image, {});
+export const HeaderLogo = styled(Image, {})
 
 export const NavLinks = styled('nav', {
   display: 'inline-block',
@@ -58,24 +58,24 @@ export const NavLinks = styled('nav', {
         width: '25px',
         background: 'rgb(255, 255, 255)',
         color: '#FFF',
-        transition: 'opacity .3s ease-in-out',
-      },
+        transition: 'opacity .3s ease-in-out'
+      }
     },
     '@bp2': {
-      padding: '1.5rem 2rem 1rem 2rem',
-    },
+      padding: '1.5rem 2rem 1rem 2rem'
+    }
   },
   'a:nth-child(2)': {
-    margin: '0',
+    margin: '0'
   },
   '@media (min-width: 240px)': {
     'a:nth-child(2)': {
-      margin: '0 2rem',
-    },
+      margin: '0 2rem'
+    }
   },
   '@bp3': {
     'a:nth-child(2)': {
-      margin: '0 3rem',
-    },
-  },
-});
+      margin: '0 3rem'
+    }
+  }
+})

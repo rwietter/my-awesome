@@ -1,5 +1,6 @@
-import type { NextPage } from 'next';
-import { Homepage } from '../features/homepage';
+import type { NextPage } from 'next'
+import { Homepage } from '../features/homepage'
 
-const Home: NextPage = () => <Homepage />;
-export default Home;
+const Home: NextPage = () => <Homepage />
+
+export default Home

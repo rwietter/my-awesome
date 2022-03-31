@@ -1,6 +1,6 @@
-import { motion as m } from 'framer-motion';
-import Link from 'next/link';
-import { styled } from '@/features/ui/theme';
+import { motion as m } from 'framer-motion'
+import Link from 'next/link'
+import { styled } from '@/features/ui/theme'
 
 export const MenuContainer = styled(m.div, {
   display: 'flex',
@@ -17,10 +17,10 @@ export const MenuContainer = styled(m.div, {
     color: '$gray50',
     cursor: 'pointer',
     '&:focus': {
-      outline: '$gray200 solid 1px',
-    },
-  },
-});
+      outline: '$gray200 solid 1px'
+    }
+  }
+})
 
 export const MenuOption = styled('div', {
   display: 'flex',
@@ -30,9 +30,9 @@ export const MenuOption = styled('div', {
   padding: '1rem',
   span: {
     fontSize: '1.5rem',
-    fontFamily: '$secondary',
-  },
-});
+    fontFamily: '$secondary'
+  }
+})
 
 export const UnderlineAnimation = styled(m.div, {
   position: 'absolute',
@@ -41,8 +41,8 @@ export const UnderlineAnimation = styled(m.div, {
   right: '0',
   height: '3px',
   zIndex: 19,
-  background: '$highlight30',
-});
+  background: '$highlight30'
+})
 
 export const ProfileItem = styled('div', {
   display: 'flex',
@@ -61,13 +61,13 @@ export const ProfileItem = styled('div', {
     fontSize: '$5',
     fontFamily: '$secondary',
     fontWeight: 600,
-    color: '$gray50 !important',
+    color: '$gray50 !important'
   },
 
   img: {
-    borderRadius: '50%',
-  },
-});
+    borderRadius: '50%'
+  }
+})
 
 export const SubItemsContainerCSS = styled(m.div, {
   top: 45,
@@ -79,9 +79,9 @@ export const SubItemsContainerCSS = styled(m.div, {
   width: '100%',
   padding: '1.5rem 1.3rem',
   '&:nth-child(2)': {
-    transform: 'translateX(-40px) !important',
-  },
-});
+    transform: 'translateX(-40px) !important'
+  }
+})
 
 export const SubItemCSS = styled(m.div, {
   fontSize: '1.5rem',
@@ -92,9 +92,9 @@ export const SubItemCSS = styled(m.div, {
     fontFamily: '$primary',
     fontSize: '1.4rem',
     fontWeight: 400,
-    lineHeight: '1.3',
-  },
-});
+    lineHeight: '1.3'
+  }
+})
 
 export const SubItemText = styled('div', {
   maxWidth: '23rem',
@@ -105,7 +105,7 @@ export const SubItemText = styled('div', {
   '.title': {
     marginLeft: '1rem',
     fontSize: '$5',
-    fontFamily: '$secondary',
+    fontFamily: '$secondary'
   },
   color: '$gray50',
   transition: '$transitonTheme',
@@ -113,15 +113,15 @@ export const SubItemText = styled('div', {
   padding: '1.5rem 0',
 
   '&[data-profile="true"]': {
-    padding: '0',
+    padding: '0'
   },
 
   '&:hover': {
-    color: '$secondary',
+    color: '$secondary'
   },
 
   '&:nth-child(1)': {
-    marginBottom: '1.5rem',
-  },
+    marginBottom: '1.5rem'
+  }
 
-});
+})

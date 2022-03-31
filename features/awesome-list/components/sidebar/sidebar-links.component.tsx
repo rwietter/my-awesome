@@ -1,39 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import { adapter } from '@/services/api';
-import { Toastfy } from '@/features/ui/toastfy';
-import * as CSS from './styled';
-import { awesomeListActions } from '@/features/awesome-list';
-import { AwesomeLink } from './types';
+import { adapter } from '@/services/api'
+import { Toastfy } from '@/features/ui/toastfy'
+import * as CSS from './styled'
+import { awesomeListActions } from '@/features/awesome-list'
+import { AwesomeLink } from './types'
 
 export function SidebarLinks() {
-  const [pageLinks, setPageLinks] = useState([]); // Estado global para remap on exclude
-  const { setAwesomeRef } = awesomeListActions();
+  const [pageLinks, setPageLinks] = useState([]) // Estado global para remap on exclude
+  const { setAwesomeRef } = awesomeListActions()
 
   useEffect(() => {
     const fetchTitle = async () => {
       try {
-        const response = await adapter.get('/sidebarpages');
+        const response = await adapter.get('/sidebarpages')
 
         if (response.data.error || response.data.status !== 200) {
-          throw response;
+          throw response
         }
 
-        const data = response?.data?.content;
-        const [title] = data.title;
+        const data = response?.data?.content
+        const [title] = data.title
 
-        setPageLinks(data?.title);
-        setAwesomeRef({ awesomeName: title.title });
+        setPageLinks(data?.title)
+        setAwesomeRef({ awesomeName: title.title })
       } catch (error) {
         // handleError(error);
       }
-    };
-    fetchTitle();
-  }, []);
+    }
+    fetchTitle()
+  }, [])
 
   const handleClick = (label: string, id: string) => {
-    setAwesomeRef({ awesomeName: label, awesomeTitleId: id });
-  };
+    setAwesomeRef({ awesomeName: label, awesomeTitleId: id })
+  }
 
   return (
 		<CSS.SidebarLinksContainer>
@@ -50,5 +50,5 @@ export function SidebarLinks() {
 			)}
 			<Toastfy />
 		</CSS.SidebarLinksContainer>
-  );
+  )
 }

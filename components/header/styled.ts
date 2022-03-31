@@ -1,14 +1,14 @@
-import { VscDebugBreakpointLog } from 'react-icons/vsc';
-import { AiOutlineMore } from 'react-icons/ai';
-import { styled } from '@/features/ui/theme';
+import { VscDebugBreakpointLog } from 'react-icons/vsc'
+import { AiOutlineMore } from 'react-icons/ai'
+import { styled } from '@/features/ui/theme'
 
 const HexagonIcon = styled(VscDebugBreakpointLog, {
-  color: '$gray50',
-});
+  color: '$gray50'
+})
 
 const SeparatorIcon = styled(AiOutlineMore, {
-  color: '$gray50',
-});
+  color: '$gray50'
+})
 
 const ContainerCSS = styled('header', {
   background: '$gray100',
@@ -25,9 +25,9 @@ const ContainerCSS = styled('header', {
   transition: '$transitonTheme',
 
   '@media (min-width: 720px)': {
-    padding: '0.5rem',
-  },
-});
+    padding: '0.5rem'
+  }
+})
 
 const NavCSS = styled('nav', {
   width: 'fit-content',
@@ -43,14 +43,14 @@ const NavCSS = styled('nav', {
     textGradient: '$highlight30',
 
     '@media (min-width: 720px)': {
-      fontSize: '$5',
-    },
+      fontSize: '$5'
+    }
   },
 
   'a[data-type="logout"]': {
-    cursor: 'pointer',
-  },
-});
+    cursor: 'pointer'
+  }
+})
 
 const TitleCSS = styled('div', {
   width: 'fit-content',
@@ -65,10 +65,10 @@ const TitleCSS = styled('div', {
 
   '@media (min-width: 720px)': {
     padding: '0 0.5rem 0 2rem',
-    fontSize: '$5',
-  },
-});
+    fontSize: '$5'
+  }
+})
 
 export {
-  ContainerCSS, NavCSS, TitleCSS, HexagonIcon, SeparatorIcon,
-};
+  ContainerCSS, NavCSS, TitleCSS, HexagonIcon, SeparatorIcon
+}

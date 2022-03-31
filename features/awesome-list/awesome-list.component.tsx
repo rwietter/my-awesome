@@ -1,39 +1,40 @@
-import { useEffect, useState } from 'react';
-import * as S from './styled';
-import { useFetchAwesome, useDeleteAwesome } from './hooks';
-import { useAwesomeListStore } from './store';
-import { MarkdownRender } from './awesome-md.component';
-import { sideNavigationEffect } from './hooks/useNavigationQuery';
-import { Sidebar } from './components/sidebar';
-import Header from '@/components/header';
-import { AlertDialog } from '../ui/alert-dialog';
-import { handleError } from '@/helpers/handler-notify';
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+import * as S from './styled'
+import { useFetchAwesome, useDeleteAwesome } from './hooks'
+import { useAwesomeListStore } from './store'
+import { handleError } from '@/helpers/handler-notify'
+
+const Header = dynamic(() => import('@/components/header'))
+const AlertDialog = dynamic(() => import('@/features/ui/alert-dialog'))
+const Sidebar = dynamic(() => import('./components/sidebar'))
+const MarkdownRender = dynamic(() => import('./awesome-md.component'), { ssr: false, loading: () => <p>...</p> })
 
 const AwesomeList = () => {
-  const { awesomeName, awesomeTitleId } = useAwesomeListStore();
+  const { awesomeName, awesomeTitleId } = useAwesomeListStore()
   const [fontSize, setFontSize] = useState<
 		'increment' | 'decrement' | 'normal'
-	>('normal');
+	>('normal')
 
   const {
-    content, isOk, title, titleId,
+    content, isOk, title, titleId
   } = useFetchAwesome({
     awesomeName,
-    id: awesomeTitleId,
-  });
+    id: awesomeTitleId
+  })
 
   const handleDeleteAwesome = () => {
     if (!titleId || !title) {
       return handleError({
-        response: { data: { message: 'Não há nada a excluir' } },
-      });
+        response: { data: { message: 'Não há nada a excluir' } }
+      })
     }
-    useDeleteAwesome(titleId, title);
-  };
+    useDeleteAwesome(titleId, title)
+  }
 
-  const handleIncrementFontSize = () => setFontSize('increment');
+  const handleIncrementFontSize = () => setFontSize('increment')
 
-  const handleDecrementFontSize = () => setFontSize('decrement');
+  const handleDecrementFontSize = () => setFontSize('decrement')
 
   return (
 		<>
@@ -75,7 +76,7 @@ const AwesomeList = () => {
 				</S.PageContent>
 			</S.Container>
 		</>
-  );
-};
+  )
+}
 
-export { AwesomeList };
+export { AwesomeList }

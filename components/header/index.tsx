@@ -1,30 +1,30 @@
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import { VscRocket } from 'react-icons/vsc';
-import { signOut, useSession } from 'next-auth/react';
-import { HiOutlineLogout } from 'react-icons/hi';
-import { useCallback } from 'react';
-import { TextCSS } from '@/features/ui';
+import { VscRocket } from 'react-icons/vsc'
+import { signOut, useSession } from 'next-auth/react'
+import { HiOutlineLogout } from 'react-icons/hi'
+import { useCallback } from 'react'
+import dynamic from 'next/dynamic'
+import { TextCSS } from '@/features/ui'
 
-import { Switch } from '@/features/ui/switch';
+import { Switch } from '@/features/ui/switch'
 import {
   ContainerCSS,
   NavCSS,
-  TitleCSS,
-} from './styled';
-import { MenuItem, SubItem } from './components/menu';
+  TitleCSS
+} from './styled'
+
+const MenuItem = dynamic(() => import('./components/menu'))
+const SubItem = dynamic(() => import('./components/sub-item'))
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   const handleLogout = useCallback(() => {
     signOut({
       callbackUrl: `${window.location.origin}/auth/signin`,
-      redirect: true,
-    });
-  }, [signOut]);
+      redirect: true
+    })
+  }, [signOut])
 
   return (
 		<ContainerCSS>
@@ -35,8 +35,6 @@ const Header = () => {
 				</TextCSS>
 			</TitleCSS>
 			<NavCSS>
-				{/* <Link href="/home">Home</Link> */}
-				{/* <Link href="/create-awesome">Create list</Link> */}
 				<MenuItem option="Options">
 					<SubItem
 						title="Home"
@@ -81,7 +79,7 @@ const Header = () => {
 				<Switch />
 			</NavCSS>
 		</ContainerCSS>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

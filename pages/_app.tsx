@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
-import '../styles/globals.css';
-import 'react-markdown-editor-lite/lib/index.css';
+import '../styles/globals.css'
+import 'react-markdown-editor-lite/lib/index.css'
 
-import { AppProps } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
-import { Session } from 'next-auth';
-import HeadContent from '@/components/head';
-import Config from './_config';
-import '../styles/syntax-nord.css';
-// import '../styles/syntax-material-light.css';
+import { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
+import { Session } from 'next-auth'
+import HeadContent from '@/components/head'
+import Config from './_config'
+import '../styles/syntax-nord.css'
 
 interface MyAppProps extends AppProps {
 	session: Session;
@@ -17,7 +16,7 @@ interface MyAppProps extends AppProps {
 
 const MyApp = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { session, ...pageProps }
 }: MyAppProps) => (
 		<SessionProvider session={session}>
 			<Config>
@@ -25,6 +24,6 @@ const MyApp = ({
 				<Component {...pageProps} />
 			</Config>
 		</SessionProvider>
-);
+)
 
-export default MyApp;
+export default MyApp

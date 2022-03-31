@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify';
-import { handleError } from '@/helpers/handler-notify';
+import { toast } from 'react-toastify'
+import { handleError } from '@/helpers/handler-notify'
 
 type ErrorTypes = {
   [key: string]: string;
@@ -28,15 +28,15 @@ const possibleErrors: ErrorTypes = {
   CredentialsSignin:
     'Sign in failed. Check the details you provided are correct.',
   DeleteAwesome: 'Is not possible to delete this awesome. Try again later.',
-  default: 'Unable to sign in.',
-};
+  default: 'Unable to sign in.'
+}
 
 export const ErrorMessage = ({ error }: Props) => {
-  const errorMessage = error && (possibleErrors[error as string] ?? possibleErrors.default);
+  const errorMessage = error && (possibleErrors[error as string] ?? possibleErrors.default)
 
   return toast.error(errorMessage, {
     position: 'bottom-center',
     autoClose: 3000,
-    draggable: true,
-  });
-};
+    draggable: true
+  })
+}

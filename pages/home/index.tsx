@@ -1,6 +1,6 @@
-import { AwesomeList } from '@/features/awesome-list';
-import { withProtectRoute } from '@/hoc/auth-hoc';
+import { AwesomeList } from '@/features/awesome-list'
+import { withProtectRoute } from '@/hoc/auth-hoc'
 
-const HomePage = () => <AwesomeList />;
+const HomePage = () => <AwesomeList />
 
-export default withProtectRoute(HomePage);
+export default withProtectRoute(HomePage)

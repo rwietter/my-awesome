@@ -1,5 +1,5 @@
-import { SignUp } from '@/features/user';
+import { SignUp } from '@/features/user'
 
-export const SignUpPage = () => <SignUp />;
+export const SignUpPage = () => <SignUp />
 
-export default SignUpPage;
+export default SignUpPage

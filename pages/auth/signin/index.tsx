@@ -1,5 +1,5 @@
-import { Login } from '@/features/user';
+import { Login } from '@/features/user'
 
-const signin = () => <Login />;
+const signin = () => <Login />
 
-export default signin;
+export default signin

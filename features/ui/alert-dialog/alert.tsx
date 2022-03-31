@@ -1,16 +1,16 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react'
 import {
-  Action, Cancel, Portal, Root, Trigger,
-} from '@radix-ui/react-alert-dialog';
+  Action, Cancel, Portal, Root, Trigger
+} from '@radix-ui/react-alert-dialog'
 import {
   Button,
   Flex,
   StyledContent,
   StyledDescription,
   StyledOverlay,
-  StyledTitle,
-} from './styled';
-import { useThemeStore } from '../theme';
+  StyledTitle
+} from './styled'
+import { useThemeStore } from '../theme'
 
 interface ContentProps {
 	children: ReactNode;
@@ -21,20 +21,20 @@ interface AlertProps {
 }
 
 function Content({ children, ...props }: ContentProps) {
-  const { theme } = useThemeStore();
+  const { theme } = useThemeStore()
   return (
 		<Portal>
 			<StyledOverlay />
 			<StyledContent {...props} theme={theme}>{children}</StyledContent>
 		</Portal>
-  );
+  )
 }
 
-const AlertDialogWapper = Root;
-const AlertDialogContent = Content;
+const AlertDialogWapper = Root
+const AlertDialogContent = Content
 
 const AlertDialog: FC<AlertProps> = ({ handle, children }) => {
-  const { theme } = useThemeStore();
+  const { theme } = useThemeStore()
   return (
     <AlertDialogWapper>
 		<Trigger asChild>{children}</Trigger>
@@ -64,7 +64,7 @@ const AlertDialog: FC<AlertProps> = ({ handle, children }) => {
 			</Flex>
 		</AlertDialogContent>
     </AlertDialogWapper>
-  );
-};
+  )
+}
 
-export { AlertDialog };
+export { AlertDialog }

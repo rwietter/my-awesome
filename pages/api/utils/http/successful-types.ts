@@ -1,11 +1,11 @@
-import { SuccessfulMessage } from './types';
+import { SuccessfulMessage } from './types'
 
-const SUCCESS_SIGNIN = 'SUCCESS_SIGNIN';
-const SUCCESS_SIGNUP = 'SUCCESS_SIGNUP';
+const SUCCESS_SIGNIN = 'SUCCESS_SIGNIN'
+const SUCCESS_SIGNUP = 'SUCCESS_SIGNUP'
 
 export const success: SuccessfulMessage<string> = {
   SUCCESS_SIGNIN: 'Successful sign-in',
-  SUCCESS_SIGNUP: 'Successful sign-up',
-};
+  SUCCESS_SIGNUP: 'Successful sign-up'
+}
 
-export { SUCCESS_SIGNIN, SUCCESS_SIGNUP };
+export { SUCCESS_SIGNIN, SUCCESS_SIGNUP }

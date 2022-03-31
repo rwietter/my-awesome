@@ -1,4 +1,4 @@
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary } from 'react-error-boundary'
 
 export function ErrorFallback({ error, resetErrorBoundary }: any) {
   return (
@@ -7,5 +7,5 @@ export function ErrorFallback({ error, resetErrorBoundary }: any) {
       <pre>{error.message}</pre>
       <button onClick={resetErrorBoundary} type="button">Try again</button>
     </div>
-  );
+  )
 }

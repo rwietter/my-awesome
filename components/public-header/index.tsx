@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { IoLanguage } from 'react-icons/io5';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import LogoImg from '../../public/logoipsum.svg';
-import * as CSS from './styled';
+import React, { useEffect, useState } from 'react'
+import { IoLanguage } from 'react-icons/io5'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import LogoImg from '../../public/logoipsum.svg'
+import * as CSS from './styled'
 
 const PublicHeader: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  const [isAuthPath, setIsAuthPath] = useState({ isSignIn: false, isSignUp: false });
-  const router = useRouter();
+  const [isVisible, setIsVisible] = useState(true)
+  const [isAuthPath, setIsAuthPath] = useState({ isSignIn: false, isSignUp: false })
+  const router = useRouter()
 
   useEffect(() => {
     if (router.pathname.startsWith('/auth/')) {
-      setIsVisible(false);
+      setIsVisible(false)
     }
     if (router.pathname === '/auth/signin') {
-      setIsAuthPath({ isSignIn: false, isSignUp: true });
+      setIsAuthPath({ isSignIn: false, isSignUp: true })
     } else if (router.pathname === '/auth/signup') {
-      setIsAuthPath({ isSignIn: true, isSignUp: false });
+      setIsAuthPath({ isSignIn: true, isSignUp: false })
     }
-  }, []);
+  }, [])
 
   return (
 		<CSS.Header>
@@ -42,7 +42,7 @@ const PublicHeader: React.FC = () => {
 				<IoLanguage size={25} color="#FFF" />
 			</div>
 		</CSS.Header>
-  );
-};
+  )
+}
 
-export { PublicHeader };
+export { PublicHeader }

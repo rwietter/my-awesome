@@ -1,8 +1,10 @@
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import { VscZoomIn, VscZoomOut } from 'react-icons/vsc';
-import ReactMarkdown from 'react-markdown';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { styled } from '@/features/ui/theme';
+import dynamic from 'next/dynamic'
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
+import { VscZoomIn, VscZoomOut } from 'react-icons/vsc'
+import { styled } from '@/features/ui/theme'
+
+const ReactMarkdown = dynamic<any>(() => import('react-markdown'))
+const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter'))
 
 export const Container = styled('div', {
   background: '$background',
@@ -14,34 +16,34 @@ export const Container = styled('div', {
 
   '&.active': {
     transition: '$transitonTheme',
-    paddingLeft: '350px',
-  },
-});
+    paddingLeft: '350px'
+  }
+})
 
 export const Section = styled('section', {
   color: '$gray50',
-  transition: '$transitonTheme',
-});
+  transition: '$transitonTheme'
+})
 
 export const SectionHeader = styled('div', {
   color: '$gray50',
   display: 'flex',
   transition: '$transitonTheme',
   justifyContent: 'space-between',
-  alignItems: 'center',
-});
+  alignItems: 'center'
+})
 
 export const Separator = styled('div', {
   background: '$separator',
   minHeight: '1px',
   transition: '$transitonTheme',
-  width: '100%',
-});
+  width: '100%'
+})
 
 export const PageTitle = styled('h1', {
   fontWeight: 900,
-  fontSize: '$5',
-});
+  fontSize: '$5'
+})
 
 export const PageDescription = styled('p', {
   fontSize: '$10',
@@ -51,8 +53,8 @@ export const PageDescription = styled('p', {
   fontWeight: 700,
   background: '$highlight145',
   '-webkit-background-clip': 'text',
-  '-webkit-text-fill-color': 'transparent',
-});
+  '-webkit-text-fill-color': 'transparent'
+})
 
 export const PageIndice = styled('h1', {
   fontWeight: 800,
@@ -61,8 +63,8 @@ export const PageIndice = styled('h1', {
   fontFamily: '$primary',
   textAlign: 'center',
   textGradient: '$highlight30',
-  transition: '$transitonTheme',
-});
+  transition: '$transitonTheme'
+})
 
 export const PageIndiceRef = styled('li', {
   fontWeight: 400,
@@ -71,9 +73,9 @@ export const PageIndiceRef = styled('li', {
   padding: '0.2rem 0',
   transition: '$transitonTheme',
   '&:hover': {
-    color: '$primary',
-  },
-});
+    color: '$primary'
+  }
+})
 
 export const PageContent = styled('main', {
   background: '$bgMd',
@@ -83,8 +85,8 @@ export const PageContent = styled('main', {
   borderRadius: '0.5rem',
   transition: '$transitonTheme',
   fontFamily: '$primary',
-  minHeight: '100vh',
-});
+  minHeight: '100vh'
+})
 
 export const PageContainer = styled('div', {
   display: 'flex',
@@ -92,9 +94,9 @@ export const PageContainer = styled('div', {
   alignItems: 'center',
 
   '& svg + svg': {
-    marginLeft: '2rem',
-  },
-});
+    marginLeft: '2rem'
+  }
+})
 
 export const IconDelete = styled(AiOutlineDelete, {
   cursor: 'pointer',
@@ -102,9 +104,9 @@ export const IconDelete = styled(AiOutlineDelete, {
   transition: 'color 0.2s, transform 0.4s ease',
   '&:hover': {
     color: '$danger',
-    transform: 'scale(1.1)',
-  },
-});
+    transform: 'scale(1.1)'
+  }
+})
 
 export const IconEdit = styled(AiOutlineEdit, {
   cursor: 'pointer',
@@ -112,27 +114,27 @@ export const IconEdit = styled(AiOutlineEdit, {
   transition: 'color 0.2s, transform 0.4s ease',
   '&:hover': {
     color: '$green',
-    transform: 'scale(1.1)',
-  },
-});
+    transform: 'scale(1.1)'
+  }
+})
 
 export const IncrementFontSize = styled(VscZoomIn, {
   cursor: 'pointer',
   color: '$gray50',
   transition: 'color 0.2s ease',
   '&:hover': {
-    color: '$twitter',
-  },
-});
+    color: '$twitter'
+  }
+})
 
 export const DecrementFontSize = styled(VscZoomOut, {
   cursor: 'pointer',
   color: '$gray50',
   transition: 'color 0.2s ease',
   '&:hover': {
-    color: '$secondary',
-  },
-});
+    color: '$secondary'
+  }
+})
 
 export const ReactMarkdownCSS = styled(ReactMarkdown, {
   fontSize: '$5',
@@ -141,18 +143,18 @@ export const ReactMarkdownCSS = styled(ReactMarkdown, {
   variants: {
     fontSize: {
       increment: {
-        fontSize: '$6',
+        fontSize: '$6'
       },
       decrement: {
-        fontSize: '$4',
+        fontSize: '$4'
       },
       normal: {
-        fontSize: '$5',
-      },
-    },
-  },
-});
+        fontSize: '$5'
+      }
+    }
+  }
+})
 
 export const HighlighterCSS = styled(SyntaxHighlighter, {
-  background: '#1B1B1E !important',
-});
+  background: '#1B1B1E !important'
+})

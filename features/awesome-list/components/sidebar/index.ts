@@ -1,5 +1,4 @@
-import Sidebar from './sidebar.component';
+import Sidebar from './sidebar.component'
 
-export { SidebarLinks } from './sidebar-links.component';
-
-export { Sidebar };
+export { SidebarLinks } from './sidebar-links.component'
+export default Sidebar

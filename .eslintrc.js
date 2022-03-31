@@ -3,16 +3,16 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
   extends: ['plugin:react/recommended', 'airbnb'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 'latest',
-    sourceType: 'module',
+    sourceType: 'module'
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
@@ -22,6 +22,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'consistent-return': 'off',
     'import/prefer-default-export': 'off',
+    'comma-dangle': ['error', 'never'],
     camelcase: 'off',
     'no-tabs': 'off',
     'eact/jsx-props-no-spreading': 'off',
@@ -35,8 +36,13 @@ module.exports = {
     'react/jsx-indent': 'off',
     'react/jsx-indent-props': [2, 'tab'],
     'react/jsx-one-expression-per-line': 'off',
+    semi: ['error', 'never'],
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-restricted-exports': 'off',
     'no-use-before-define': 'off',
-  },
-};
+    'no-magic-numbers': ['off', {
+      ignoreArrayIndexes: true, detectObjects: true, enforceConst: true, ignore: ['1n'], ignoreDefaultValues: true
+    }]
+  }
+}

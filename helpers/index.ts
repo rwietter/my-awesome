@@ -1,1 +1,1 @@
-export * from './handler-notify';
+export * from './handler-notify'

@@ -1,57 +1,55 @@
-import { IsOk } from 'types';
-import { useState, useEffect } from 'react';
-import { setCookie } from 'nookies';
-import { adapter } from '@/services/api';
-import { handleError } from '@/helpers/handler-notify';
+import { IsOk } from 'types'
+import { useState, useEffect } from 'react'
+import { adapter } from '@/services/api'
 import {
   FechListProps,
   UseFetchAwesomeReturnProps,
-  ContentState,
-} from './types';
+  ContentState
+} from './types'
 
 export const useFetchAwesome = ({
   awesomeName = '',
-  id = '',
+  id = ''
 }: FechListProps): UseFetchAwesomeReturnProps => {
-  const [isOk, setIsOk] = useState<IsOk>({ isLoading: true, isError: false });
+  const [isOk, setIsOk] = useState<IsOk>({ isLoading: true, isError: false })
   const [state, setState] = useState<ContentState>({
     title: '',
     content: '',
-    titleId: '',
-  });
+    titleId: ''
+  })
 
   const fetchData = async () => {
     try {
       const response = await adapter.get('/page', {
-        params: { page: awesomeName, pageId: id },
-      });
+        params: { page: awesomeName, pageId: id }
+      })
 
       if (response?.data?.status !== 200 || response?.data?.error) {
-        throw response;
+        throw response
       }
 
-      const { content, title, titleId } = response.data;
+      const { content, title, titleId } = response.data
 
       if (!content || !title || !titleId) {
-        throw response;
+        throw response
       }
 
-      const parsedContent = JSON.parse(content);
+      const parsedContent = JSON.parse(content)
 
       setState({
         content: parsedContent,
         title,
-        titleId,
-      });
-      setIsOk({ isLoading: false, isError: false });
+        titleId
+      })
+      setIsOk({ isLoading: false, isError: false })
     } catch (error) {
-      setIsOk({ isLoading: false, isError: true });
+      setIsOk({ isLoading: false, isError: true })
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, [awesomeName]);
+    fetchData()
+  }, [awesomeName])
 
-  return { ...state, isOk };
-};
+  return { ...state, isOk }
+}

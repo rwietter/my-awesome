@@ -1,5 +1,5 @@
-import { HttpStatus } from './types';
+import { HttpStatus } from './types'
 
 export const httpStatus: HttpStatus = {
-  ok: 200,
-};
+  ok: 200
+}
