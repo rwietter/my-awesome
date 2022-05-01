@@ -1,5 +1,7 @@
 # 🗄️ Project Structure
 
+- [Speed up your Next.js application with Redis](https://blog.upstash.com/nextjs-caching-with-redis)
+
 A maior parte do código fica na pasta `src` e se parece com isso:
 
 ```sh
